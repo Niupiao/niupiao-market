@@ -1,0 +1,18 @@
+<h1>Items</h1>
+
+<table>
+    <% Item.all.each do |item| %>
+    <tr>
+        <td>
+            <%= item.name %>
+        </td>
+        <td>
+            <%= item.price %>
+        </td>
+        <td>
+            <%= item.tags %>
+        </td>
+        <% end%>
+    </tr>
+    
+</table>
