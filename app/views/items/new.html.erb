@@ -1,0 +1,15 @@
+<%= form_for @item do |f| %>
+    <h3>Add Item</h3>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    
+    <%= f.label :price %>
+    <%= f.number_field :price %>
+    
+    <h3>Enter tags seperated by commas</h3>
+    <%= f.label :tags %>
+    <%= f.text_field :tags %>
+    
+    <%= f.submit 'Create Item' %>
+<% end %>
+    
