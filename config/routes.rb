@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  
-  
-  
-  root 'items#new'
- 
   resources :items
+  
+  root 'items#index'
 end
