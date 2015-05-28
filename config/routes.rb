@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
+  root 'static_pages#home'
+
+  get 'about' => 'static_pages#about'
+
+  get 'items' => 'static_pages#items'
   
-  root 'items#new'
- 
-=======
->>>>>>> 0a0ec278122b64d41007af48b4b0312611cce16f
+  get 'items/new'
+
   resources :items
   
-  root 'items#index'
 end
