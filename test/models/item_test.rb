@@ -1,7 +1,11 @@
 require 'test_helper'
 
 class ItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  def setup
+    @name = 'product'
+    @price = 12.20
+    @tags = "great, amazing"
+  end
+  
+  
 end
