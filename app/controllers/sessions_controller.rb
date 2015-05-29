@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
             session[:user_id] = user.id
             redirect_to items_path
         else
+            flash[:danger] = 'Invalid email/password combination'
             render 'new'
-            flash.keep[:notice] = 'Invalid email/password combination'
         end
     end
     
