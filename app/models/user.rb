@@ -10,5 +10,5 @@ class User < ActiveRecord::Base
     validates :password, length: {minimum: 6}, presence: true
     
     has_secure_password
-    has_one cart
+    #has_one cart
 end
