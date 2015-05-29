@@ -8,6 +8,11 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <% flash.each do |key, message| %>
+      <div id="flash-<%= key %>" class="alert alert-<%= key %> fade in">
+        <%= message %>
+      </div>
+    <% end %>
     <%= render "layouts/header" %>
     <%= link_to "Sign Up", new_user_path %>
     <div class="container">

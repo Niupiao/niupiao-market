@@ -8,8 +8,8 @@ class SessionsController < ApplicationController
         if user && user.authenticate(params[:session][:password])
            render users_path
         else
+            flash[:danger] = 'Invalid email/password combination'
             render 'new'
-            flash.keep[:notice] = 'Invalid email/password combination'
         end
     end
     
