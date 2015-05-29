@@ -6,7 +6,7 @@
             Owner
         </td>   
         <td>
-            Name
+            Item Name
         </td>
         <td>
             Price
@@ -20,7 +20,7 @@
         <% Item.all.each do |item| %>
     <tr>
         <td>
-            <%= item.owner %>
+            <%= item.user.name %>
         </td>
         <td>
             <%= item.name %>
