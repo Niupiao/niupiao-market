@@ -1,0 +1,37 @@
+mn:
+  errors:
+    # Default format to use in full error messages.
+    format: "%{attribute} %{message}"
+    
+  # The actual messages that will show up in place of %{message}
+  # If the content in the quotation marks is in english, it needs to 
+  #   be translated.
+  messages:
+    model_invalid: "Validation failed: %{errors}"
+    inclusion: "is not included in the list"
+    exclusion: "is reserved"
+    invalid: "is invalid"
+    confirmation: "doesn't match %{attribute}"
+    accepted: "must be accepted"
+    empty: "can't be empty"
+    blank: "can't be blank"
+    present: "must be blank"
+    too_long:
+      one: "is too long (maximum is 1 character)"
+      other: "is too long (maximum is %{count} characters)"
+    too_short:
+      one: "is too short (minimum is 1 character)"
+      other: "is too short (minium is %{count} characters)"
+    wrong_length:
+      one: "is the wrong length (should be 1 character)"
+      other: "is the wrong length (should be %{count} characters)"
+    not_a_number: "is not a number"
+    not_an_integer: "must be an integer"
+    greater_than: "must be greater than %{count}"
+    greater_than_or_equal_to: "must be greater than or equal to %{count}"
+    equal_to: "must be equal to %{count}"
+    less_than: "must be less than %{count}"
+    less_than_or_equal_to: "must be less than or equal to %{count}"
+    other_than: "must be other than %{count}"
+    odd: "must be odd"
+    even: "must be even"
