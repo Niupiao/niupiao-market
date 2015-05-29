@@ -1,11 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  owner: 0
   name: MyString 
   price: 0
-  tags: MyText
+  quantity: 0
+  desc: MyString
 
 two:
+  owner: 0
   name: MyString
   price: 0
-  tags: MyText
+  quantity: 0
+  desc: MyString
