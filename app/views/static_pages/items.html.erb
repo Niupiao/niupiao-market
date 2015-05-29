@@ -2,8 +2,27 @@
 <h1>Items</h1>
 
 <table>
-    <% Item.all.each do |item| %>
     <tr>
+        <td>
+            Owner
+        </td>   
+        <td>
+            Item Name
+        </td>
+        <td>
+            Price
+        </td>
+        <td>
+            Quantity
+        </td>
+        <td>
+            Description
+        </td>
+        <% Item.all.each do |item| %>
+    <tr>
+        <td>
+            <%= User.find(@item.user_id).name %>
+        </td>
         <td>
             <%= item.name %>
         </td>
@@ -11,7 +30,10 @@
             <%= item.price %>
         </td>
         <td>
-            <%= item.tags %>
+            <%= item.quantity %>
+        </td>
+        <td>
+            <%= item.desc %>
         </td>
         <% end%>
     </tr>

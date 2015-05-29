@@ -1,9 +1,16 @@
-<h1>Item: <%= @item.id %></h1>
-
-    <%= @item.name %>
+<h1>Item id: <%= @item.id %></h1>
     <br>
     
-    $<%= @item.price %>
+    Owner: <%= User.find(@item.user_id).name %>
     <br>
     
-    <%= @item.tags %>
+    Item name: <%= @item.name %>
+    <br>
+    
+    Price: $<%= @item.price %>
+    <br>
+    
+    Quantity: <%= @item.quantity %>
+    <br>
+    
+    Description: <%= @item.desc %>

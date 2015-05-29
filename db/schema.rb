@@ -14,11 +14,10 @@
 ActiveRecord::Schema.define(version: 20150529161857) do
 
   create_table "items", force: true do |t|
-    t.string   "name"
-    t.float    "price"
-    t.text     "tags"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string  "name"
+    t.float   "price"
+    t.integer "quantity"
+    t.string  "desc"
   end
 
   create_table "users", force: true do |t|
@@ -30,5 +29,7 @@ ActiveRecord::Schema.define(version: 20150529161857) do
     t.string   "password_digest"
     t.string   "address"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end
