@@ -1,8 +1,8 @@
 module ApplicationHelper
     
-    #returns full title on per-page basis
+  #returns full title on per-page basis
   def full_title(page_title = '')
-    base_title = "NiuPiao Marketplace"
+    base_title = "#Dev"
     if page_title.empty?
       base_title
     else

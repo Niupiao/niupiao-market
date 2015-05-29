@@ -6,10 +6,6 @@ class StaticPagesController < ApplicationController
   end
 
   def items
-    
-    def index
-      @items = Item.all
-    end
-    
   end
+
 end
