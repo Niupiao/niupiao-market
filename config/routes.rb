@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  # Need to set up routes to both English and Mongolian 
+  # TODO: Need to set up "home page" routes for both English and 
+  #    Mongolian versions.
   root 'static_pages#home'
 
   get 'about' => 'static_pages#about'
@@ -13,5 +14,5 @@ Rails.application.routes.draw do
     resources :items
     resources :users
   end
-  
+
 end
