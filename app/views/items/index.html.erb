@@ -1,0 +1,40 @@
+<h1>Items</h1>
+
+<table>
+    <tr>
+        <td>
+            Owner
+        </td>
+        <td>
+            Item Name
+        </td>
+        <td>
+            Price
+        </td>
+        <td>
+            Quantity
+        </td>
+        <td>
+            Description
+        </td>
+        </tr>
+        <% Item.all.each do |item| %>
+            <tr>
+                <td>
+                    <%= User.find(usesr_id).name %>
+                </td>
+                <td>
+                    <%= item.name %>
+                </td>
+                <td>
+                    <%= item.price %>
+                </td>
+                <td>
+                    <%= item.quantity %>
+                </td>
+                <td>
+                    <%= item.description %>
+                </td>
+            </tr>
+            <% end %>
+</table>

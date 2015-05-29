@@ -1,7 +1,7 @@
 <h1>Item id: <%= @item.id %></h1>
     <br>
     
-    Owner: <%= @item.owner.name %>
+    Owner: <%= User.find(@item.user_id).name %>
     <br>
     
     Item name: <%= @item.name %>
