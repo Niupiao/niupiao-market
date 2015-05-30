@@ -1,10 +1,6 @@
 <% provide(:title, "New Item") %>
 <%= form_for @item do |f| %>
     <h3>Add Item</h3>
-    
-    
-    <% @item.user = params[:session][:user_id]) %>
-    
     <%= f.label :name %>
     <%= f.text_field :name %>
     
