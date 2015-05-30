@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   
   get 'logout' => 'sessions#destroy'
   
+  get 'cart' => 'sessions#show_cart'
+  
+  post 'add_to_cart' => 'sessions#add_to_cart'
+  
   scope "(/:locale)", locale: /en|mn/ do
     resources :items
     resources :users

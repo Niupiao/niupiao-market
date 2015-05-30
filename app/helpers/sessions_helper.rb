@@ -12,4 +12,22 @@ module SessionsHelper
     def logged_in?
         !current_user.nil?
     end
+    
+    #creates an empty cart
+    def create_empty_cart
+        session[:cart] = []
+    end
+    
+    def add_to_cart(item_id)
+        session[:cart] << Item.find(item_id)
+    end
+    
+    def show_cart
+        #session[:cart]
+    end
+    
+    def clear_cart
+        #TODO make sure no memory leaks
+       session[:cart] = [] 
+    end
 end
