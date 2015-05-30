@@ -3,7 +3,7 @@
 <table>
     <tr>
         <td>
-            Owner
+            Seller
         </td>
         <td>
             Item Name
@@ -21,7 +21,7 @@
         <% Item.all.each do |item| %>
             <tr>
                 <td>
-                    <%= User.find(usesr_id).name %>
+                    <%= item.user.name %>
                 </td>
                 <td>
                     <%= item.name %>
@@ -33,7 +33,7 @@
                     <%= item.quantity %>
                 </td>
                 <td>
-                    <%= item.description %>
+                    <%= item.desc %>
                 </td>
             </tr>
             <% end %>

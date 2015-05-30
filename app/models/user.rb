@@ -1,5 +1,4 @@
 class User < ActiveRecord::Base
-    
     before_save{self.email = email.downcase}
     validates :first_name, presence: true
     validates :last_name, presence: true
@@ -10,5 +9,6 @@ class User < ActiveRecord::Base
     validates :password, length: {minimum: 6}, presence: true
     
     has_secure_password
+    has_many :items, dependent: :destroy
     #has_one cart
 end
