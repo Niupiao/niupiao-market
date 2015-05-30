@@ -18,8 +18,8 @@ module SessionsHelper
         session[:cart] = []
     end
     
-    def add_to_cart(item_id)
-        session[:cart] << Item.find(item_id)
+    def add_to_cart
+        session[:cart] << Item.find(params[:format])
     end
     
     def show_cart
