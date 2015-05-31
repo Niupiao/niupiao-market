@@ -1,10 +1,8 @@
 <h1>Item id: <%= @item.id %></h1>
     <br>
     <% if @item.user %>
-    Owner: <%= @item.user.first_name %> <%= @item.user.last_name %>
+        Seller: <%= @item.user.first_name %> <%= @item.user.last_name %>
     <% end %>
-    
-    Seller: <%= @item.user.name %>
     <br>
     
     Item name: <%= @item.name %>
