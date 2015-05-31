@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   
   get 'cart' => 'sessions#show_cart'
   
-  post 'add_to_cart' => 'sessions#add_to_cart'
+  post 'cart' => 'sessions#add_to_cart'
+  
+  post 'delete_from_cart' => 'sessions#remove_from_cart'
   
   scope "(/:locale)", locale: /en|mn/ do
     resources :items

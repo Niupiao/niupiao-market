@@ -13,21 +13,29 @@ module SessionsHelper
         !current_user.nil?
     end
     
-    #creates an empty cart
     def create_empty_cart
-        session[:cart] = []
+        session[:cart] = {}
     end
     
     def add_to_cart
-        session[:cart] << Item.find(params[:format])
+        if session[:cart].include?(params[:format])
+            session[:cart][params[:format]]+=1
+        else
+            session[:cart][params[:format]] = 1
+        end
+        redirect_to cart_path
+    end
+    
+    def remove_from_cart
+        session[:cart].delete(params[:format])
+        redirect_to cart_path
     end
     
     def show_cart
-        #session[:cart]
     end
     
     def clear_cart
         #TODO make sure no memory leaks
-       session[:cart] = [] 
+       session[:cart] = []
     end
 end
