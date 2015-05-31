@@ -1,7 +1,7 @@
 Cart:&nbsp;<%= session[:cart] %> <br>
-<% if session[:cart] %>
 <% session[:cart].each do |item_id, quantity|%>
     <% item = Item.find_by(id: item_id) %>
+    <% if item %>
     <%= item.name %>
     <%= item.price %>
     <%= quantity %>

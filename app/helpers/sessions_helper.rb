@@ -13,10 +13,6 @@ module SessionsHelper
         !current_user.nil?
     end
     
-    def create_empty_cart
-        session[:cart] = {}
-    end
-    
     def add_to_cart
         if session[:cart].nil?
             session[:cart] = {}
