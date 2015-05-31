@@ -21,6 +21,9 @@
         <% Item.all.each do |item| %>
             <tr>
                 <td>
+                    <% if item.user %>
+                        <%= item.user.first_name %> <%= item.user.last_name %>
+                    <% end %>
                     <%= item.user.name %>
                 </td>
                 <td>
@@ -34,6 +37,9 @@
                 </td>
                 <td>
                     <%= item.desc %>
+                </td>
+                <td>
+                    <%= button_to "Add to Cart", cart_path(item) %>
                 </td>
             </tr>
             <% end %>
