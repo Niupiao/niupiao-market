@@ -1,6 +1,36 @@
 <% provide(:title, "Home") %>
-
-<h3>Welcome to your favorite marketplace</h3>
-
-<%= link_to "items", items_path %>
-<%= link_to "new item", new_item_path %>
+<div class="center jumbotron" style="margin-top:15px">
+    <h3 style="margin-bottom:30px">
+        Welcome to your favorite marketplace!</h3>
+    <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
+</div>
+<body>
+    <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
+        <tr ALIGN="Center">
+            <td>Owner</td>
+            <td>Item Name</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Description</td>
+        </tr>
+        <% Item.all.each do |item| %>
+            <tr>
+                <td>
+                    <%= User.find(usesr_id).name %>
+                </td>
+                <td>
+                    <%= item.name %>
+                </td>
+                <td>
+                    <%= item.price %>
+                </td>
+                <td>
+                    <%= item.quantity %>
+                </td>
+                <td>
+                    <%= item.description %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+</body>
