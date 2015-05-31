@@ -1,9 +1,15 @@
-<h1>Item: <%= @item.id %></h1>
-
-    <%= @item.name %>
+<h1>Item id: <%= @item.id %></h1>
+    <br>
+    Seller: <%= @item.user.first_name %> <%= @item.user.last_name %>
     <br>
     
-    $<%= @item.price %>
+    Item name: <%= @item.name %>
     <br>
     
-    <%= @item.tags %>
+    Price: $<%= @item.price %>
+    <br>
+    
+    Quantity: <%= @item.quantity %>
+    <br>
+    
+    Description: <%= @item.desc %>

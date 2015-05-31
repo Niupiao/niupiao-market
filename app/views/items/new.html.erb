@@ -7,9 +7,12 @@
     <%= f.label :price %>
     <%= f.number_field :price %>
     
-    <h3>Enter tags seperated by commas</h3>
-    <%= f.label :tags %>
-    <%= f.text_field :tags %>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+    
+    <h3>Enter a description</h3>
+    <%= f.label :desc %>
+    <%= f.text_field :desc %>
     
     <%= f.submit 'Create Item' %>
 <% end %>
