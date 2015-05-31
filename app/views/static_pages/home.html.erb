@@ -12,11 +12,12 @@
             <td>Price</td>
             <td>Quantity</td>
             <td>Description</td>
+            <td> </td>
         </tr>
         <% Item.all.each do |item| %>
             <tr>
                 <td>
-                    <%= User.find(usesr_id).name %>
+                    <%= item.user.first_name %> <%= item.user.last_name %>
                 </td>
                 <td>
                     <%= item.name %>
@@ -28,7 +29,10 @@
                     <%= item.quantity %>
                 </td>
                 <td>
-                    <%= item.description %>
+                    <%= item.desc %>
+                </td>
+                <td>
+                    <%= button_to "Add to Cart", cart_path(item) %>
                 </td>
             </tr>
         <% end %>
