@@ -1,11 +1,10 @@
 class ItemsController < ApplicationController
-    
     def new
         @item = Item.new
     end
     
     def create
-        @item = Item.new(item_params)
+        @item = current_user.items.new(item_params)
         if @item.save
             redirect_to @item
         else
@@ -17,14 +16,17 @@ class ItemsController < ApplicationController
     end
     
     def show
-        @item = Item.find(params[:id])
+        if Item.exists?(params[:id])
+           @item = Item.find(params[:id])
+        else
+           redirect_to items_path
+        end
     end
     
     private
     
     def item_params
-        params.require(:item).permit(:owner,
-                                      :name,
+        params.require(:item).permit( :name,
                                       :price,
                                       :quantity,
                                       :desc
