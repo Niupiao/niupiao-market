@@ -3,6 +3,8 @@
     <% if @item.user %>
     Owner: <%= @item.user.first_name %> <%= @item.user.last_name %>
     <% end %>
+    
+    Seller: <%= @item.user.name %>
     <br>
     
     Item name: <%= @item.name %>

@@ -3,7 +3,7 @@
 <table>
     <tr>
         <td>
-            Owner
+            Seller
         </td>
         <td>
             Item Name
@@ -24,6 +24,8 @@
                     <% if item.user %>
                         <%= item.user.first_name %> <%= item.user.last_name %>
                     <% end %>
+                    <%= item.user.name %>
+                </td>
                 <td>
                     <%= item.name %>
                 </td>

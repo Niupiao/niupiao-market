@@ -17,14 +17,17 @@ class ItemsController < ApplicationController
     end
     
     def show
-        @item = Item.find(params[:id])
+        if Item.exists?(params[:id])
+           @item = Item.find(params[:id])
+        else
+           redirect_to items_path
+        end
     end
     
     private
     
     def item_params
-        params.require(:item).permit(:user,
-                                      :name,
+        params.require(:item).permit( :name,
                                       :price,
                                       :quantity,
                                       :desc

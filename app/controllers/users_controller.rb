@@ -15,7 +15,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if User.exists?(params[:id])
+      @user = User.find(params[id])
+    else
+      redirect_to users_path
+    end
   end
 
   def index
