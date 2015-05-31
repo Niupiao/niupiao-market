@@ -4,8 +4,7 @@ class ItemsController < ApplicationController
     end
     
     def create
-        @item = Item.new(item_params)
-        @item[:user_id] = session[:user_id]
+        @item = current_user.items.new(item_params)
         if @item.save
             redirect_to @item
         else

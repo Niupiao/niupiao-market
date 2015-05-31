@@ -21,10 +21,7 @@
         <% Item.all.each do |item| %>
             <tr>
                 <td>
-                    <% if item.user %>
-                        <%= item.user.first_name %> <%= item.user.last_name %>
-                    <% end %>
-                    <%= item.user.name %>
+                    <%= item.user.first_name %> <%= item.user.last_name %>
                 </td>
                 <td>
                     <%= item.name %>
