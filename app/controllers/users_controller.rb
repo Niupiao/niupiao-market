@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def show
     if User.exists?(params[:id])
-      @user = User.find(params[id])
+      @user = User.find(params[:id])
     else
       redirect_to users_path
     end

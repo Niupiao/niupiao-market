@@ -25,12 +25,10 @@ ActiveRecord::Schema.define(version: 20150530170429) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "password_digest"
     t.string   "address"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end
