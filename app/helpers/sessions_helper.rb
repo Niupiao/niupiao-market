@@ -34,7 +34,6 @@ module SessionsHelper
     end
     
     def clear_cart
-        #TODO make sure no memory leaks
-       session[:cart] = []
+       session[:cart].clear
     end
 end
