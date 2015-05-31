@@ -18,6 +18,9 @@ module SessionsHelper
     end
     
     def add_to_cart
+        if session[:cart].nil?
+            session[:cart] = {}
+        end
         if session[:cart].include?(params[:format])
             session[:cart][params[:format]]+=1
         else
