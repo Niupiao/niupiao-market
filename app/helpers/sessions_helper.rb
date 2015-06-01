@@ -15,17 +15,30 @@ module SessionsHelper
     end
     
     def add_to_cart
-        if session[:cart].nil?
+        if session[:cart].nil? # If cart doesn't exist, instantiate the cart.
             session[:cart] = {}
         end
         
         item_id = params[:format]
+        quantity_available = Item.find_by(id: item_id).quantity
+        quantity_bought = 1 # Replace with a param in the future.
         if session[:cart].include?(item_id)
-            session[:cart][item_id]+=1
+            if session[:cart][item_id] + quantity_bought <= quantity_available
+                session[:cart][item_id] += quantity_bought
+                redirect_to cart_path
+            else
+                flash[:danger] = "Can't check out more of this item."
+                redirect_to root_path  # Hideously ugly temporary solution.
+            end
         else
-            session[:cart][item_id] = 1
+            if quantity_bought <= quantity_available
+                session[:cart][item_id] = quantity_bought
+                redirect_to cart_path
+            else
+                flash[:danger] = "Can't check out more of this item."
+                redirect_to root_path  # Hideously ugly temporary solution.
+            end
         end
-        redirect_to cart_path
     end
     
     def remove_from_cart
