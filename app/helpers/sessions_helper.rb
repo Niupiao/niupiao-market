@@ -18,10 +18,12 @@ module SessionsHelper
         if session[:cart].nil?
             session[:cart] = {}
         end
-        if session[:cart].include?(params[:format])
-            session[:cart][params[:format]]+=1
+        
+        item_id = params[:format]
+        if session[:cart].include?(item_id)
+            session[:cart][item_id]+=1
         else
-            session[:cart][params[:format]] = 1
+            session[:cart][item_id] = 1
         end
         redirect_to cart_path
     end
