@@ -39,8 +39,7 @@ module SessionsHelper
     end
     
     def log_out
-        user = User.find_by(id: session[:user_id])
-        user.update_attribute(:cart, hto_s(session[:cart]))
+        current_user.update_attribute(:cart, hto_s(session[:cart]))
         clear_cart
         session.delete(:user_id)
         @current_user = nil
@@ -59,7 +58,6 @@ module SessionsHelper
     
     #reverse hto_s
     def sto_h(shash)
-        debugger
         hash = Hash[shash.split(",").map { 
             |str| [str.split[0],str.split[1].to_i]}]
         return hash
