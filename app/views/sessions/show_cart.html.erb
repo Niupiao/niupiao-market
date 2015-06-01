@@ -6,6 +6,7 @@ Cart:&nbsp;<%= session[:cart] %> <br>
     <%= item.name %>
     <%= item.price %>
     <%= quantity %>
+    <%= button_to "Remove from cart", delete_from_cart_path(item) %>
 <% end %>
 <% end %>
 <% end %>
