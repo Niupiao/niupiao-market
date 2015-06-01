@@ -1,22 +1,12 @@
 <h1>Items</h1>
-
-<table>
-    <tr>
-        <td>
-            Seller
-        </td>
-        <td>
-            Item Name
-        </td>
-        <td>
-            Price
-        </td>
-        <td>
-            Quantity
-        </td>
-        <td>
-            Description
-        </td>
+  <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
+        <tr ALIGN="Center">
+            <td>Owner</td>
+            <td>Item Name</td>
+            <td>Price</td>
+            <td>Quantity</td>
+            <td>Description</td>
+            <td> </td>
         </tr>
         <% Item.all.each do |item| %>
             <tr>
@@ -39,5 +29,5 @@
                     <%= button_to "Add to Cart", cart_path(item) %>
                 </td>
             </tr>
-            <% end %>
-</table>
+        <% end %>
+    </table>
