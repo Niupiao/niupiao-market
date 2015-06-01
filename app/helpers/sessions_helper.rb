@@ -59,7 +59,9 @@ module SessionsHelper
     
     #reverse hto_s
     def sto_h(shash)
-        hash = Hash[shash.split(",").map { |str| str.split}]
+        debugger
+        hash = Hash[shash.split(",").map { 
+            |str| [str.split[0],str.split[1].to_i]}]
         return hash
     end
         
