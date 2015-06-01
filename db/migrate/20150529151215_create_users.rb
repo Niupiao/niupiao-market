@@ -6,6 +6,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :email, unique: true
       t.string :password_digest
       t.string :address
+      t.string :cart
+      
       t.timestamps
     end
   end
