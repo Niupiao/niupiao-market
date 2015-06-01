@@ -1,5 +1,6 @@
 <% if session[:cart] %>
     <% clear_cart %>
+<% end %>
 Cart:&nbsp;<%= session[:cart] %> <br>
 <% if session[:cart] %>
     <% session[:cart].each do |item_id, quantity|%>
