@@ -4,11 +4,16 @@ class ItemsController < ApplicationController
     end
     
     def create
-        @item = current_user.items.new(item_params)
-        if @item.save
-            redirect_to @item
+        if current_user
+            @item = current_user.items.new(item_params)
+            if @item.save
+                redirect_to @item
+            else
+                render 'new'
+            end
         else
-            render 'new'
+            flash[:danger] = "You need to be logged in"
+            redirect_to login_path
         end
     end
     

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class UserItemFlowTest < ActionDispatch::IntegrationTest
+  include SessionsHelper
   
   def setup
     @user = User.new(first_name:"apoorva",last_name:"lal",
@@ -20,13 +21,12 @@ class UserItemFlowTest < ActionDispatch::IntegrationTest
   
   test "user able to sign up using valid email and password" do
     get new_user_path
-    assert_difference 'User.count',1 do
+    assert_difference 'User.count', 1 do
       post_via_redirect users_path, user: {first_name:"foo", last_name:"bar",email:"foo@bar.com",
                         password:"foobar", password_confirmation:"foobar"}
     end
     assert_template root_path
   end
-  
   
   
 end
