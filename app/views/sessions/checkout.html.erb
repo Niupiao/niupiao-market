@@ -1,14 +1,3 @@
-<% if session[:cart] %>
-    <% clear_cart %>
-<% end %>
-Cart:&nbsp;<%= session[:cart] %> <br>
-<% if session[:cart] %>
-    <% session[:cart].each do |item_id, quantity|%>
-        <% item = Item.find_by(id: item_id) %>
-        <% if item %>
-            <%= item.name %>
-            <%= item.price %>
-            <%= quantity %>
-        <% end %>
-    <% end %>
-<% end %>
+<h1>Congratulations!</h1>
+
+You've bought 
