@@ -2,10 +2,10 @@ class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
       t.references :user
-      t.string :name
+      t.text :name
       t.float :price
       t.integer :quantity
-      t.string :desc
+      t.text :desc
     end
   end
 end
