@@ -1,11 +1,13 @@
 <h1>Cart</h1>
- <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
-        <tr ALIGN="Center">
-            <td>Item Seller</td>
-            <td>Item Name</td>
-            <td>Price</td>
-            <td>Quantity</td>
+ <table class="table table-striped">
+     <thead>
+         <tr>
+            <th>Item Seller</th>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
         </tr>
+    </thead>
         <% if session[:cart] %>
             <% session[:cart].each do |item_id, quantity| %>
             <% item = Item.find_by(id: item_id) %>
@@ -27,7 +29,7 @@
         <% end %>
         <tr>
             <td>
-                Order Total:
+                Order Total: 
             </td>
             <td>
             </td>
