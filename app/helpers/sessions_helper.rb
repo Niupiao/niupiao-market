@@ -24,11 +24,11 @@ module SessionsHelper
         
         if quantity_in_cart + quantity_bought <= quantity_available
             session[:cart][item_id] = quantity_bought + quantity_in_cart
-            redirect_to cart_path
+            flash[:success] = "Successfully added item to cart!"            
         else
             flash[:danger] = "Can't check out more of this item."
-            redirect_to root_path
         end
+        redirect_to root_path
     end
     
     def remove_from_cart

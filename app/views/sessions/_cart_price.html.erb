@@ -1,0 +1,15 @@
+<% total_price = 0 %>
+<% total_quantity = 0 %>
+<% session[:cart].each do |item_id, quantity| %>
+    <% if item_exists?(item_id) %>
+        <% item = Item.find(item_id) %>
+        <% total_quantity += quantity %>
+        <% total_price += (item.price * quantity) %>
+    <% end %>
+<% end %>
+<td>
+    <%=total_price%> 
+</td>
+<td>
+   <%=total_quantity%>
+</td>

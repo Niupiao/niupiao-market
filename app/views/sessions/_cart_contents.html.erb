@@ -1,0 +1,31 @@
+<% if session[:cart] %>
+    <% num_removed = 0 %>
+    <% session[:cart].each do |item_id, quantity| %>
+        <% if item_exists?(item_id) %>
+            <% item = Item.find_by(id: item_id) %>
+                <tr ALIGN = "Center">
+                    <td>
+                        <%= item.user.first_name %> <%= item.user.last_name %>
+                    </td>
+                    <td>
+                        <%= item.name %>
+                    </td>
+                    <td>
+                        <%= item.price %>
+                    </td>
+                    <td>
+                        <%= quantity %>
+                    </td>
+                </tr>
+        <% else %>
+            <% session[:cart].delete(item_id) %>
+            <% num_removed += 1 %>
+        <% end %>
+    <% end %>
+    <% if num_removed == 1 %>
+        <% flash.now[:danger] = "1 item in your cart is no longer available and has been removed" %>
+    <% end %>
+    <% if num_removed > 1 %>
+        <% flash.now[:danger] = "#{num_removed} items in your cart are no longer available and have been removed" %>
+    <% end %>
+<% end %>
