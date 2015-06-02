@@ -3,7 +3,7 @@ module SessionsHelper
     # Logs in the given user.
     def log_in(user)
         session[:user_id] = user.id
-        if !user.cart.empty? 
+        if user.cart && !user.cart.empty? 
             session[:cart] = JSON.parse(user.cart) 
         end
     end
