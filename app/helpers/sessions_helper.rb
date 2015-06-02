@@ -3,7 +3,9 @@ module SessionsHelper
     # Logs in the given user.
     def log_in(user)
         session[:user_id] = user.id
-        session[:cart] = sto_h(user.cart) if user.cart
+        if !user.cart.empty? 
+            session[:cart] = JSON.parse(user.cart) 
+        end
     end
     
     def current_user
@@ -39,28 +41,10 @@ module SessionsHelper
     end
     
     def log_out
-        current_user.update_attribute(:cart, hto_s(session[:cart]))
+        current_user.update_attribute(:cart, session[:cart].to_json)
         clear_cart
         session.delete(:user_id)
         @current_user = nil
-    end
-    
-    private
-        
-    #converts hashs to string    
-    def hto_s(hash)
-        shash = ""
-        hash.each do |id, quantity|
-            shash += id + " " + quantity.to_s + ","
-        end
-        return shash
-    end
-    
-    #reverse hto_s
-    def sto_h(shash)
-        hash = Hash[shash.split(",").map { 
-            |str| [str.split[0],str.split[1].to_i]}]
-        return hash
     end
         
 end
