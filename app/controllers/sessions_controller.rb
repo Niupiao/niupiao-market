@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
     def new
+        if !session[:cart]
+            session[:cart] = {}
+        end
     end
 
     def create
