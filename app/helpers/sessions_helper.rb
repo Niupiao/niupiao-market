@@ -3,6 +3,9 @@ module SessionsHelper
     # Logs in the given user.
     def log_in(user)
         session[:user_id] = user.id
+        if user.cart && !user.cart.empty? 
+            session[:cart] = JSON.parse(user.cart) 
+        end
     end
     
     def current_user
@@ -14,15 +17,19 @@ module SessionsHelper
     end
     
     def add_to_cart
-        if session[:cart].nil?
-            session[:cart] = {}
-        end
-        if session[:cart].include?(params[:format])
-            session[:cart][params[:format]]+=1
+        
+        item_id = params[:format]
+        quantity_available = Item.find_by(id: item_id).quantity
+        quantity_bought = 1 # Replace with a param in the future.
+        quantity_in_cart = session[:cart][item_id].to_i
+        
+        if quantity_in_cart + quantity_bought <= quantity_available
+            session[:cart][item_id] = quantity_bought + quantity_in_cart
+            redirect_to cart_path
         else
-            session[:cart][params[:format]] = 1
+            flash[:danger] = "Can't check out more of this item."
+            redirect_to root_path
         end
-        redirect_to cart_path
     end
     
     def remove_from_cart
@@ -38,7 +45,10 @@ module SessionsHelper
     end
     
     def log_out
+        current_user.update_attribute(:cart, session[:cart].to_json)
+        clear_cart
         session.delete(:user_id)
         @current_user = nil
     end
+        
 end
