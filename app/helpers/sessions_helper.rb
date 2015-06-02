@@ -22,22 +22,14 @@ module SessionsHelper
         item_id = params[:format]
         quantity_available = Item.find_by(id: item_id).quantity
         quantity_bought = 1 # Replace with a param in the future.
-        if session[:cart].include?(item_id)
-            if session[:cart][item_id] + quantity_bought <= quantity_available
-                session[:cart][item_id] += quantity_bought
-                redirect_to cart_path
-            else
-                flash[:danger] = "Can't check out more of this item."
-                redirect_to root_path  # Hideously ugly temporary solution.
-            end
+        quantity_in_cart = session[:cart][item_id].to_i
+        
+        if quantity_in_cart + quantity_bought <= quantity_available
+            session[:cart][item_id] = quantity_bought + quantity_in_cart
+            redirect_to cart_path
         else
-            if quantity_bought <= quantity_available
-                session[:cart][item_id] = quantity_bought
-                redirect_to cart_path
-            else
-                flash[:danger] = "Can't check out more of this item."
-                redirect_to root_path  # Hideously ugly temporary solution.
-            end
+            flash[:danger] = "Can't check out more of this item."
+            redirect_to root_path
         end
     end
     
