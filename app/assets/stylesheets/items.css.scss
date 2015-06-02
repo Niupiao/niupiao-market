@@ -1,3 +1,29 @@
 // Place all the styles related to the Items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* shop */
+.caption {
+    height: 130px;
+    overflow: hidden;
+    h4 {
+    white-space: nowrap;
+}
+}
+
+.ratings {
+    padding-right: 10px;
+    padding-left: 10px;
+    color: #d17581;
+}
+
+.thumbnail {
+    padding: 0;
+    img {
+        width:100%;
+    }
+    .caption-full {
+        padding:0px;
+        color:#333;
+    }
+}
+
