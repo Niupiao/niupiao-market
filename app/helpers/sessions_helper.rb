@@ -17,9 +17,6 @@ module SessionsHelper
     end
     
     def add_to_cart
-        if session[:cart].nil? # If cart doesn't exist, instantiate the cart.
-            session[:cart] = {}
-        end
         
         item_id = params[:format]
         quantity_available = Item.find_by(id: item_id).quantity
