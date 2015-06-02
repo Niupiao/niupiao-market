@@ -11,9 +11,7 @@ module ApplicationHelper
   end
   
   def item_exists?(item_id)
-    debugger
-    item = Item.find_by(id: item_id)
-    !!item
+    !!Item.find_by(id: item_id)
   end
   
   def user_exists?(user_id)
