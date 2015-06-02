@@ -11,7 +11,6 @@ module ApplicationHelper
   end
   
   def item_exists?(item_id)
-    debugger
     item = Item.find_by(id: item_id)
     !!item
   end
