@@ -8,7 +8,7 @@ class UsersController < ApplicationController
    @user = User.new(user_params)
    @user.cart = {}  # Sets user's cart to be non-nil.
     if @user.save
-      flash[:success] = "Welcome to the NiuPiao Market!"
+      flash[:success] = "You have successfully registered!"
       log_in @user
       redirect_to @user
     else
