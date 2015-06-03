@@ -5,3 +5,15 @@
     <br>
     <%= @user.email %>
     
+    <table>
+        <% Item.where(user: @user).find_each do |item| %>
+            <tr>
+                <td>
+                    <%= item.name %>
+                </td>
+                <td>
+                     <%= link_to "Remove Item", remove_item_path(id: item.id) %>
+                </td>
+            </tr>
+        <% end %>
+    </table>

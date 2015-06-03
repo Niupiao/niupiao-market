@@ -28,6 +28,13 @@ class ItemsController < ApplicationController
         end
     end
     
+    def remove_item
+        if Item.exists?(params[:id])
+            Item.delete(params[:id]) 
+            redirect_to @current_user
+        end
+    end
+    
     private
     
     def item_params
