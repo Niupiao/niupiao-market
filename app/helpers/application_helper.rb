@@ -10,4 +10,11 @@ module ApplicationHelper
     end
   end
   
+  def item_exists?(item_id)
+    !!Item.find_by(id: item_id)
+  end
+  
+  def user_exists?(user_id)
+    !!User.find_by?(id: user_id)
+  end
 end

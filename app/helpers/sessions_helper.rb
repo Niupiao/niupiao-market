@@ -13,11 +13,10 @@ module SessionsHelper
     end
     
     def logged_in?
-        !current_user.nil?
+        !!current_user
     end
     
     def add_to_cart
-        
         item_id = params[:format]
         quantity_available = Item.find_by(id: item_id).quantity
         quantity_bought = 1 # Replace with a param in the future.
