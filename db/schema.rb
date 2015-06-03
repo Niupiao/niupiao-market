@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150603160730) do
+ActiveRecord::Schema.define(version: 20150603161633) do
 
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20150603160730) do
     t.integer "quantity"
     t.text    "desc"
     t.boolean "persists"
+    t.date    "expires"
+    t.string  "type"
   end
 
 # Could not dump table "users" because of following NoMethodError
