@@ -8,45 +8,15 @@
             <th>Quantity</th>
         </tr>
     </thead>
-        <% if session[:cart] %>
-            <% session[:cart].each do |item_id, quantity| %>
-            <% item = Item.find_by(id: item_id) %>
-                <tr>
-                    <td>
-                        <%= item.user.first_name %> <%= item.user.last_name %>
-                    </td>
-                    <td>
-                        <%= item.name %>
-                    </td>
-                    <td>
-                        <%= item.price %>
-                    </td>
-                    <td>
-                        <%= quantity %>
-                    </td>
-                </tr>
-            <% end %>
-        <% end %>
-        <tr>
+        <%= render 'sessions/cart_contents' %>
+        <tr ALIGN = "Center">
             <td>
                 Order Total: 
             </td>
             <td>
             </td>
             <% if session[:cart] %>
-                <% total_price = 0 %>
-                <% total_quantity = 0 %>
-                <% session[:cart].each do |item_id, quantity| %>
-                    <% item = Item.find(item_id) %>
-                    <% total_quantity += quantity %>
-                    <% total_price += (item.price * quantity) %>
-                <% end %>
-                <td>
-                    <%=total_price%> 
-                </td>
-                <td>
-                   <%=total_quantity%>
-                </td>
+                <%= render 'sessions/cart_price' %>
             <% end %>
         </tr>
     </table>

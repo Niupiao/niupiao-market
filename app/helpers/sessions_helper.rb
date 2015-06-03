@@ -13,11 +13,10 @@ module SessionsHelper
     end
     
     def logged_in?
-        !current_user.nil?
+        !!current_user
     end
     
     def add_to_cart
-        
         item_id = params[:format]
         quantity_available = Item.find_by(id: item_id).quantity
         quantity_bought = 1 # Replace with a param in the future.
@@ -25,11 +24,11 @@ module SessionsHelper
         
         if quantity_in_cart + quantity_bought <= quantity_available
             session[:cart][item_id] = quantity_bought + quantity_in_cart
-            redirect_to cart_path
+            flash[:success] = "Successfully added item to cart!"            
         else
             flash[:danger] = "Can't check out more of this item."
-            redirect_to root_path
         end
+        redirect_to root_path
     end
     
     def remove_from_cart
