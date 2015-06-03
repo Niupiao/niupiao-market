@@ -14,3 +14,30 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+.DS_Store
+*~
+*.rbc
+capybara-*.html
+.rspec
+/log
+/tmp
+/db/*.sqlite3
+/public/system
+/coverage/
+/spec/tmp
+**.orig
+rerun.txt
+pickle-email-*.html
+
+**/.sass-cache
+**/.sass-cache/*
+*.css.map
+
+#Ignore Cloud9 residue
+.c9/
+/ .c9/
+\RackMultipart*
+
+#Ignore Spring file.
+spring/
