@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   
   def create
    @user = User.new(user_params)
+   @user.cart = {}  # Sets user's cart to be non-nil.
     if @user.save
       flash[:success] = "Welcome to the NiuPiao Market!"
       log_in @user
