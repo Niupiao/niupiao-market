@@ -28,7 +28,7 @@
                     <%= item.desc %>
                 </td>
                 <td>
-                    <%= button_to "Add to Cart", cart_path(item) %>
+                    <%= button_to "Add to Cart", cart_path(item_id: item) %>
                 </td>
             </tr>
         <% end %>
