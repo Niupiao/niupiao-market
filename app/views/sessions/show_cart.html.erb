@@ -1,11 +1,24 @@
-Cart:&nbsp;<%= session[:cart] %> <br>
-<% if session[:cart] %>
-<% session[:cart].each do |item_id, quantity|%>
-    <% item = Item.find_by(id: item_id) %>
-    <% if item %>
-    <%= item.name %>
-    <%= item.price %>
-    <%= quantity %>
-<% end %>
-<% end %>
-<% end %>
+<h1>Cart</h1>
+ <table class="table table-striped">
+     <thead>
+         <tr>
+            <th>Item Seller</th>
+            <th>Item Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+        <%= render 'sessions/cart_contents' %>
+        <tr ALIGN = "Center">
+            <td>
+                Order Total: 
+            </td>
+            <td>
+            </td>
+            <% if session[:cart] %>
+                <%= render 'sessions/cart_price' %>
+            <% end %>
+        </tr>
+    </table>
+    <br>
+    <%= link_to "Checkout", checkout_path, class: "btn pull-right btn-primary" %>
