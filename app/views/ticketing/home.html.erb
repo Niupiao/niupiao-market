@@ -1,0 +1,43 @@
+<% provide(:title, "Ticketing") %>
+<div class="center jumbotron" style="margin-top:15px">
+    <h3 style="margin-bottom:30px">
+        Welcome to Ticketing!</h3>
+        <% if current_user == nil%>
+             <%= link_to "Sign up now!", new_user_path, class: "btn btn-lg btn-primary" %>
+        <%end%>
+</div>
+<body>
+    <div class="row">
+        <% Item.all.each do |item| %>
+        <div class="col-sm-3 col-lg-3 col-md-3">
+            <div class="thumbnail">
+                <img src="http://placehold.it/320x250" alt="">
+                <div class="caption">
+                    <h4 class="pull-right">
+                        <%= item.price %>
+                    </h4>
+                    <h4><a href="#"><%= item.name %></a></h4>
+                    <small>Sold by <% if item.user %>
+                    <%= item.user.first_name %><%= item.user.last_name %>
+                    <% end %> | <em><%= item.quantity %> left</em></small> 
+                        <p>
+                        <%= button_to "Add to Cart", cart_path(item), class: "btn btn-default" %>
+                        </p>
+                </div>
+                <!--
+                <div class="ratings">
+                    <p class="pull-right">X Reviews</p>
+                    <p>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                        <span class="glyphicon glyphicon-star"></span>
+                    </p>
+                </div>
+                -->
+            </div>
+        </div>
+        <% end %>
+    </div>
+</body>
