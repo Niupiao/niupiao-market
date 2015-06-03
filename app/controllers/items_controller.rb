@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
         end
     end
     
-    def remove_item
+    def destroy
         if Item.exists?(params[:id])
             Item.delete(params[:id])
         end

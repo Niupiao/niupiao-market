@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   post 'delete_from_cart' => 'sessions#remove_from_cart'
   get 'purchase' => 'sessions#purchase_cart'
   get 'checkout' => 'sessions#checkout'
-  get 'remove_item' => 'items#remove_item'
+  get 'remove_item' => 'items#destroy'
   scope "(/:locale)", locale: /en|mn/ do
     resources :items
     resources :users
