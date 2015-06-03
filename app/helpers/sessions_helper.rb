@@ -19,7 +19,7 @@ module SessionsHelper
     def add_to_cart
         item_id = params[:format]
         quantity_available = Item.find_by(id: item_id).quantity
-        quantity_bought = 1 # Replace with a param in the future.
+        quantity_bought = params[:quantity].to_i
         quantity_in_cart = session[:cart][item_id].to_i
         
         if quantity_in_cart + quantity_bought <= quantity_available
