@@ -30,9 +30,9 @@ class ItemsController < ApplicationController
     
     def remove_item
         if Item.exists?(params[:id])
-            Item.delete(params[:id]) 
-            redirect_to @current_user
+            Item.delete(params[:id])
         end
+        redirect_to current_user
     end
     
     private
