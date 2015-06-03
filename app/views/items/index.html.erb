@@ -28,7 +28,10 @@
                     <%= item.desc %>
                 </td>
                 <td>
-                    <%= button_to "Add to Cart", cart_path(item_id: item) %>
+                    <%= form_tag(cart_path(item)) do %>
+                        <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, 1) %>
+                        <%= submit_tag("Add to cart") %>
+                    <% end %>
                 </td>
             </tr>
         <% end %>
