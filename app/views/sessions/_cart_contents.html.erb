@@ -14,7 +14,9 @@
                         <%= item.price %>
                     </td>
                     <td>
-                        <%= quantity %>
+                        <%= form_tag do %>
+                            <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, quantity) %>
+                    <% end %>
                     </td>
                 </tr>
         <% else %>
