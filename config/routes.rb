@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   
+  get 'search' => 'items#search'
+  
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'

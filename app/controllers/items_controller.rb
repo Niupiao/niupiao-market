@@ -28,6 +28,16 @@ class ItemsController < ApplicationController
         end
     end
     
+    def search
+        @search = []
+       search_term = params[:search_term]
+       if search_term
+           Item.where(name: search_term).find_each do |item|
+             @search += [item]
+            end
+       end
+    end
+    
     def destroy
         if Item.exists?(params[:id])
             Item.delete(params[:id])
