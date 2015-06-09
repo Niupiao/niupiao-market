@@ -17,6 +17,9 @@ module SessionsHelper
     end
     
     def add_to_cart
+        if !session[:cart]
+            session[:cart] = {}
+        end
         item_id = params[:item_id]
         quantity_available = Item.find_by(id: item_id).quantity
         quantity_bought = params[:quantity].to_i
@@ -48,5 +51,9 @@ module SessionsHelper
         clear_cart
         session.delete(:user_id)
         @current_user = nil
+    end
+    
+    def update_cart
+        debugger
     end
 end

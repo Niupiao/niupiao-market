@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'cart' => 'sessions#show_cart'
   post 'cart' => 'sessions#add_to_cart'
   post 'delete_from_cart' => 'sessions#remove_from_cart'
+  post 'update_cart' => 'sessions#update_cart'
   get 'purchase' => 'sessions#purchase_cart'
   get 'checkout' => 'sessions#checkout'
   get 'remove_item' => 'items#destroy'
