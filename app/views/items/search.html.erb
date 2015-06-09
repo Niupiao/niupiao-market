@@ -1,15 +1,15 @@
-<% provide(:title, "Items") %>
-<h1>Items</h1>
-  <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
+<h1>Search Results</h1>
+<% if @search.count > 0 %>
+ <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
         <tr ALIGN="Center">
             <td>Owner</td>
             <td>Item Name</td>
             <td>Price</td>
             <td>Quantity</td>
             <td>Description</td>
-            <td> </td>
+            <td></td>
         </tr>
-        <% Item.all.each do |item| %>
+        <% @search.each do |item| %>
             <tr>
                 <td>
                     <% if item.user %>
@@ -29,8 +29,12 @@
                     <%= item.desc %>
                 </td>
                 <td>
-                    <%= button_to "Add to Cart", cart_path(item_id: item) %>
+                    <%= button_to "Add to Cart", cart_path(item) %>
                 </td>
             </tr>
         <% end %>
     </table>
+<% else %>
+    <h3>No results found</h3>
+<% end %>
+
