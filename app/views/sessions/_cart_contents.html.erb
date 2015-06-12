@@ -14,8 +14,8 @@
                         <%= item.price %>
                     </td>
                     <td><%= form_for :session, url: update_cart_path(item_id: item_id), html: { method: 'post'} do |f| %>
-                            <%= f.select :quantity_updated, options_for_select((1..item.quantity).to_a, quantity), {} ,
-                                                            {id: "quantity_select"} %>
+                            <%= f.select :quantity_updated, options_for_select((1..item.quantity).to_a, quantity), {},
+                                                            { class: "quantity_select", id: "quantity_select_#{item_id}" } %>
                         <% end %>
                     </td>
                 </tr>

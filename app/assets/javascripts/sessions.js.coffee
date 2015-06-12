@@ -3,10 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-    $("#quantity_select").change ->
+    $(".quantity_select").change ->
         $.ajax "update_cart",
             method: "POST",
-            data: {quantityUpdated: $("#quantity_select option:selected").val()},
+            data: {quantityUpdated: $(".quantity_select").val(), id: $('.quantity_select').attr('id').substring(1,5) },
             dataType: "script",
             error: (jqXHR, textStatus, errorThrown) ->
                 console.log("AJAX error: #{textStatus}")
