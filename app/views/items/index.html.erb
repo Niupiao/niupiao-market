@@ -4,6 +4,7 @@
 <% params[:order] ||= 'id'%>
 <% params[:direction] ||= 'DESC' %>
 <h1>Items</h1>
+<<<<<<< HEAD
 <%= form_tag(items_path(order: 'id'), method: :get) do %>
   <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
   <%= submit_tag("Sort by newest", class: "btn btn-default") %>
@@ -17,6 +18,8 @@
   <%= submit_tag("Sort by alphabetical", class: "btn btn-default") %>
 <% end %>
 
+=======
+>>>>>>> Update categories
   <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
     <tr ALIGN="Center">
       <td>Owner</td>
