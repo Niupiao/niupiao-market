@@ -55,5 +55,9 @@ module SessionsHelper
     
     def update_cart
         debugger
+        session[:cart][id] = params[:quantity_updated]
+        respond_to do |format|
+            format.js
+        end
     end
 end
