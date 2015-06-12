@@ -1,5 +1,8 @@
 class Item < ActiveRecord::Base
     belongs_to :user
+    belongs_to :category
+    
+    acts_as_taggable_on :tags
     validates_presence_of :name
     validates_presence_of :price
     validates :price, numericality: { greater_than_or_equal_to: 0 }
