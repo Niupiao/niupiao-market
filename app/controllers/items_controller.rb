@@ -1,11 +1,13 @@
 class ItemsController < ApplicationController
     def new
         @item = Item.new
+        @categories = Category.all.map { |c| [c.name, c.id] }
     end
     
     def create
         if current_user
             @item = current_user.items.new(item_params)
+            @item.category_id = params[:category_id]
             if @item.save
                 redirect_to @item
             else

@@ -16,6 +16,7 @@
   <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
   <%= submit_tag("Sort by alphabetical", class: "btn btn-default") %>
 <% end %>
+
   <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
     <tr ALIGN="Center">
       <td>Owner</td>
@@ -23,13 +24,14 @@
       <td>Price</td>
       <td>Quantity</td>
       <td>Description</td>
+      <td>Category</td>
       <td> </td>
     </tr>
       <% Item.limit(params[:page_size].to_i)
              .offset(params[:page_size].to_i * (params[:page].to_i - 1))
              .order("#{params[:order]} #{params[:direction]}")
              .all.each do |item| %>
-    <tr>
+    <tr ALIGN="CENTER">
       <td>
         <% if item.user %>
           <%= item.user.first_name %> <%= item.user.last_name %>
@@ -46,6 +48,9 @@
       </td>
       <td>
         <%= item.desc %>
+      </td>
+      <td>
+      <%= link_to Category.find(item.category_id).name, category_path(item.category_id) %>
       </td>
       <td>
         <%= button_to "Add to Cart", cart_path(item_id: item) %>

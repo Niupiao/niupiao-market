@@ -1,5 +1,8 @@
 class Item < ActiveRecord::Base
     belongs_to :user
+    belongs_to :category
+    
+    acts_as_taggable_on :tags
     validates_presence_of :name
     validates :type, inclusion: { in: %w(regular clothing ticketing),
     message: "%{value} is not a valid type" }

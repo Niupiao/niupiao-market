@@ -23,6 +23,10 @@
         <%= f.label :desc %>
         <%= f.text_field :desc %>
         
+        <%= f.label :tag %>
+        <%= select_tag(:category_id, options_for_select(@categories), 
+            :prompt => "Select Category") %>
+        
         <%= f.submit 'Create Item' %>
         <% end %>        
     </div>
