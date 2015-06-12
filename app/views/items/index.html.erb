@@ -7,10 +7,11 @@
             <td>Price</td>
             <td>Quantity</td>
             <td>Description</td>
+            <td>Category</td>
             <td> </td>
         </tr>
         <% Item.all.each do |item| %>
-            <tr>
+            <tr ALIGN="CENTER">
                 <td>
                     <% if item.user %>
                         <%= item.user.first_name %> <%= item.user.last_name %>
@@ -27,6 +28,8 @@
                 </td>
                 <td>
                     <%= item.desc %>
+                </td>
+                <td><%= link_to Category.find(item.category_id).name, category_path(item.category_id) %>
                 </td>
                 <td>
                     <%= button_to "Add to Cart", cart_path(item_id: item) %>
