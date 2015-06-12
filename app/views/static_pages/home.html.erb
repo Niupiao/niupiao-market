@@ -30,7 +30,7 @@
                         <p>
                         <%= form_tag(cart_path(item)) do %>
                             <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, 1) %>
-                            <%= submit_tag("Add to cart") %>
+                            <%= submit_tag("Add to cart", class: "btn btn-default") %>
                         <% end %>
                         </p>
                 </div>
