@@ -13,10 +13,10 @@
                     <td>
                         <%= item.price %>
                     </td>
-                    <td>
-                        <%= form_tag do %>
-                            <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, quantity) %>
-                    <% end %>
+                    <td><%= form_for :session, url: update_cart_path(item_id: item_id), html: { method: 'post'} do |f| %>
+                            <%= f.select :quantity_updated, options_for_select((1..item.quantity).to_a, quantity), {} ,
+                                                            {id: "quantity_select"} %>
+                        <% end %>
                     </td>
                 </tr>
         <% else %>

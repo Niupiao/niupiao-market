@@ -22,7 +22,7 @@
                     <% end %> | <em><%= item.quantity %> left</em></small> 
                         <p>
                         <%= form_tag(cart_path(item_id: item.id)) do %>
-                            <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, 1) %>
+                            <%= select_tag "quantity_#{item.id}", options_for_select((1..item.quantity).to_a, 1) %>
                             <%= submit_tag("Add to cart", class: "btn btn-default") %>
                         <% end %>
                         </p>
