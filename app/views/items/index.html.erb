@@ -4,7 +4,6 @@
 <% params[:order] ||= 'id'%>
 <% params[:direction] ||= 'DESC' %>
 <h1>Items</h1>
-<<<<<<< HEAD
 <%= form_tag(items_path(order: 'id'), method: :get) do %>
   <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
   <%= submit_tag("Sort by newest", class: "btn btn-default") %>
@@ -17,9 +16,6 @@
   <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
   <%= submit_tag("Sort by alphabetical", class: "btn btn-default") %>
 <% end %>
-
-=======
->>>>>>> Update categories
   <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
     <tr ALIGN="Center">
       <td>Owner</td>
@@ -38,26 +34,28 @@
       <td>
         <% if item.user %>
           <%= item.user.first_name %> <%= item.user.last_name %>
-        <% end %>
-      </td>
-      <td>
-        <%= item.name %>
-      </td>
-      <td>
-        <%= item.price %>
-      </td>
-      <td>
-        <%= item.quantity %>
-      </td>
-      <td>
-        <%= item.desc %>
-      </td>
-      <td>
-      <%= link_to Category.find(item.category_id).name, category_path(item.category_id) %>
-      </td>
-      <td>
-        <%= button_to "Add to Cart", cart_path(item_id: item) %>
-      </td>
-    </tr>
-  <% end %>
+                <td>
+                    <% if item.user %>
+                        <%= item.user.first_name %> <%= item.user.last_name %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= item.name %>
+                </td>
+                <td>
+                    <%= item.price %>
+                </td>
+                <td>
+                    <%= item.quantity %>
+                </td>
+                <td>
+                    <%= item.desc %>
+                </td>
+                <td><%= link_to Category.find(item.category_id).name, category_path(item.category_id) %>
+                </td>
+                <td>
+                    <%= button_to "Add to Cart", cart_path(item_id: item) %>
+                </td>
+            </tr>
+        <%= end %>
 </table>
