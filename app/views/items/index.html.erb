@@ -51,11 +51,12 @@
                 <td>
                     <%= item.desc %>
                 </td>
-                <td><%= link_to Category.find(item.category_id).name, category_path(item.category_id) %>
+                <td>
+                    <%= link_to Category.find(item.category_id).name, category_path(item.category_id) %>
                 </td>
                 <td>
                     <%= button_to "Add to Cart", cart_path(item_id: item) %>
                 </td>
             </tr>
-        <%= end %>
+        <% end %>
 </table>
