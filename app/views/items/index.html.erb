@@ -1,36 +1,55 @@
 <% provide(:title, "Items") %>
+<% params[:page_size] ||= '10' %>
+<% params[:page] ||= '1' %>
+<% params[:order] ||= 'id'%>
+<% params[:direction] ||= 'DESC' %>
 <h1>Items</h1>
+<%= form_tag(items_path(order: 'id'), method: :get) do %>
+  <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
+  <%= submit_tag("Sort by newest", class: "btn btn-default") %>
+<% end %>
+<%= form_tag(items_path(order: 'price'), method: :get) do %>
+  <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
+  <%= submit_tag("Sort by price", class: "btn btn-default") %>
+<% end %>
+<%= form_tag(items_path(order: 'name'), method: :get) do %>
+  <%= select_tag 'direction', options_for_select(%w(ASC DESC)) %>
+  <%= submit_tag("Sort by alphabetical", class: "btn btn-default") %>
+<% end %>
   <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
-        <tr ALIGN="Center">
-            <td>Owner</td>
-            <td>Item Name</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Description</td>
-            <td> </td>
-        </tr>
-        <% Item.all.each do |item| %>
-            <tr>
-                <td>
-                    <% if item.user %>
-                        <%= item.user.first_name %> <%= item.user.last_name %>
-                    <% end %>
-                </td>
-                <td>
-                    <%= item.name %>
-                </td>
-                <td>
-                    <%= item.price %>
-                </td>
-                <td>
-                    <%= item.quantity %>
-                </td>
-                <td>
-                    <%= item.desc %>
-                </td>
-                <td>
-                    <%= button_to "Add to Cart", cart_path(item_id: item) %>
-                </td>
-            </tr>
+    <tr ALIGN="Center">
+      <td>Owner</td>
+      <td>Item Name</td>
+      <td>Price</td>
+      <td>Quantity</td>
+      <td>Description</td>
+      <td> </td>
+    </tr>
+      <% Item.limit(params[:page_size].to_i)
+             .offset(params[:page_size].to_i * (params[:page].to_i - 1))
+             .order("#{params[:order]} #{params[:direction]}")
+             .all.each do |item| %>
+    <tr>
+      <td>
+        <% if item.user %>
+          <%= item.user.first_name %> <%= item.user.last_name %>
         <% end %>
-    </table>
+      </td>
+      <td>
+        <%= item.name %>
+      </td>
+      <td>
+        <%= item.price %>
+      </td>
+      <td>
+        <%= item.quantity %>
+      </td>
+      <td>
+        <%= item.desc %>
+      </td>
+      <td>
+        <%= button_to "Add to Cart", cart_path(item_id: item) %>
+      </td>
+    </tr>
+  <% end %>
+</table>
