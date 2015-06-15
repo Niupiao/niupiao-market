@@ -45,6 +45,13 @@ class ItemsController < ApplicationController
         redirect_to current_user
     end
     
+    def comment
+      @item = Item.find(params[:item_id])
+      @comment = @item.comments.build(user_id: current_user.id, body: params[:comment][:body], rating: params[:comment][:rating])
+      @comment.save
+      redirect_to @item
+    end
+    
     private
     
     def item_params

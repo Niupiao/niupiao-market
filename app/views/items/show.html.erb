@@ -1,16 +1,40 @@
-<% provide(:title, @item.name %>
+<% provide(:title, @item.name) %>
 <h1>Item id: <%= @item.id %></h1>
-    <br>
-    Seller: <%= @item.user.first_name %> <%= @item.user.last_name %>
-    <br>
+<br>
+Seller: <%= @item.user.first_name %> <%= @item.user.last_name %>
+<br>
     
-    Item name: <%= @item.name %>
-    <br>
+Item name: <%= @item.name %>
+<br>
     
-    Price: $<%= @item.price %>
-    <br>
+Price: $<%= @item.price %>
+<br>
     
-    Quantity: <%= @item.quantity %>
-    <br>
+Quantity: <%= @item.quantity %>
+<br>
     
-    Description: <%= @item.desc %>
+Description: <%= @item.desc %>
+<br>
+<br>
+
+Comments: 
+<br>
+<% Comment.where(item: @item).find_each do |comment| %>
+  <%= comment.rating %> Stars: <%= comment.body %>
+  <br>
+<% end %>
+
+
+<% @comment = Comment.new %>
+<%= form_for @comment, :url => comment_path(item_id: @item.id) do |f| %>
+  <h3>Add a Comment</h3>
+  <%= f.label :body %>
+  <br>
+  <%= f.text_area :body, size: "22x3" %>
+  <br>
+  <%= f.label :rating %>
+  <br>
+  <%= f.number_field :rating %>
+  <br>
+  <%= f.submit 'Comment' %>
+<% end %>
