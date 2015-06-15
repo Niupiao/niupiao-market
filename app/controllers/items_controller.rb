@@ -34,9 +34,22 @@ class ItemsController < ApplicationController
         @search = []
        search_term = params[:search_term]
        if search_term
-           Item.where(name: search_term).find_each do |item|
-             @search += [item]
-            end
+           search_term = search_term.downcase.gsub(/\s+/m, ' ').strip.split(" ")
+           Item.all.each do |item|
+             search_space = item.name.downcase + " " + item.desc.downcase + " " +
+                              item.user.first_name.downcase + " " + 
+                              item.user.last_name.downcase
+             score = 0
+             target_score = search_term.size / 2
+             search_term.each do |word|
+                 if(search_space.include? word)
+                     score += 1
+                 end
+             end
+             if(score >= target_score)
+               @search += [item]
+             end
+           end
        end
     end
     
