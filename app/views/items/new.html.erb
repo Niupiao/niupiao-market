@@ -13,8 +13,8 @@
         <%= f.label :price %>
         <%= f.number_field :price, :class => 'text_field', :step => 0.01 %>
         <br>
-        <%= f.label :type %>
-        <%= select_tag(:type, options_for_select(%w(General Clothing Beauty))) %>
+        <%= f.label 'Type' %>
+        <%= f.select :item_type, %w(General Clothing Beauty) %>
         <br>
         <%= f.label :quantity %>
         <%= f.number_field :quantity %>
@@ -22,10 +22,6 @@
         <h3>Enter a description</h3>
         <%= f.label :desc %>
         <%= f.text_field :desc %>
-        <br>
-        <%= f.label :category_id %>
-        <%= select_tag(:category_id, options_for_select(@categories), 
-            :prompt => "Select Category") %>
         
         <%= f.submit 'Create Item' %>
         <% end %>        

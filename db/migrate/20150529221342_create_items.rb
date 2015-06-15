@@ -3,7 +3,7 @@ class CreateItems < ActiveRecord::Migration
     create_table :items do |t|
       t.references :user
       t.text :name
-      t.text :type
+      t.text :item_type
       t.float :price
       t.integer :quantity
       t.text :desc
