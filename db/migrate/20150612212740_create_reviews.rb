@@ -1,6 +1,6 @@
-class CreateComments < ActiveRecord::Migration
+class CreateReviews < ActiveRecord::Migration
   def change
-    create_table :comments do |t|
+    create_table :reviews do |t|
       t.references :user
       t.references :item
       t.text :body

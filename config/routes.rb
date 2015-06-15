@@ -24,5 +24,5 @@ Rails.application.routes.draw do
     resources :items
     resources :users
   end
-  post 'comment' => 'items#comment'
+  post 'review' => 'items#comment'
 end

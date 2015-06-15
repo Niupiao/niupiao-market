@@ -17,17 +17,17 @@ Description: <%= @item.desc %>
 <br>
 <br>
 
-Comments: 
+Reviews: 
 <br>
-<% Comment.where(item: @item).find_each do |comment| %>
-  <%= comment.rating %> Stars: <%= comment.body %>
+<% Review.where(item: @item).find_each do |review| %>
+  <%= review.rating %> Stars: <%= review.body %>
   <br>
 <% end %>
 
 
-<% @comment = Comment.new %>
-<%= form_for @comment, :url => comment_path(item_id: @item.id) do |f| %>
-  <h3>Add a Comment</h3>
+<% @review = Review.new %>
+<%= form_for @review, :url => review_path(item_id: @item.id) do |f| %>
+  <h3>Post a Review</h3>
   <%= f.label :body %>
   <br>
   <%= f.text_area :body, size: "22x3" %>
@@ -36,5 +36,5 @@ Comments:
   <br>
   <%= f.number_field :rating %>
   <br>
-  <%= f.submit 'Comment' %>
+  <%= f.submit 'Post' %>
 <% end %>
