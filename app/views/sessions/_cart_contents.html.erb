@@ -24,10 +24,7 @@
             <% num_removed += 1 %>
         <% end %>
     <% end %>
-    <% if num_removed == 1 %>
-        <% flash.now[:danger] = "1 item in your cart is no longer available and has been removed" %>
-    <% end %>
-    <% if num_removed > 1 %>
-        <% flash.now[:danger] = "#{num_removed} items in your cart are no longer available and have been removed" %>
+    <% if num_removed >= 1 %>
+        <% flash.now[:danger] = "#{pluralize(num_removed, "item")} in your cart is no longer available and has been removed" %>
     <% end %>
 <% end %>
