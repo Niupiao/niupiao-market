@@ -28,26 +28,9 @@
         <% end %>
     <% end %>
     <tr>
-        <td>
-            Order Total:
-        </td>
-        <td>
-        </td>
-        <% if session[:cart] %>
-            <% total_price = 0 %>
-            <% total_quantity = 0 %>
-            <% session[:cart].each do |item_id, quantity| %>
-                <% item = Item.find(item_id) %>
-                <% total_quantity += quantity %>
-                <% total_price += (item.price * quantity) %>
-            <% end %>
-            <td>
-                <%=total_price%> 
-            </td>
-            <td>
-               <%=total_quantity%>
-            </td>
-        <% end %>
+        <div class='price'>
+            <%= render "sessions/cart_price" %>
+        </div>
     </tr>
 </table>
 

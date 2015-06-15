@@ -1,0 +1,4 @@
+var current_total = parseFloat($('#total_price').html());
+var current_quantity = parseInt($('#total_quantity').html());
+$('#total_price').html((current_total + <%= params[:total_diff] %>).toFixed(1));
+$('#total_quantity').html(current_quantity + <%= params[:quantity_diff] %>);

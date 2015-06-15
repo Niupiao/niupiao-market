@@ -1,20 +1,40 @@
 <% provide(:title, @item.name) %>
 <h1>Item id: <%= @item.id %></h1>
-    <br>
-    Seller: <%= @item.user.first_name %> <%= @item.user.last_name %>
-    <br>
+<br>
+Seller: <%= @item.user.first_name %> <%= @item.user.last_name %>
+<br>
     
-    Item name: <%= @item.name %>
-    <br>
+Item name: <%= @item.name %>
+<br>
     
-    Price: $<%= @item.price %>
-    <br>
+Price: $<%= @item.price %>
+<br>
     
-    Quantity: <%= @item.quantity %>
-    <br>
-    
-    Description: <%= @item.desc %>
-    <br>
-    
-    Category: <%= link_to Category.find(@item.category_id).name, category_path(@item.category_id) %>
-    
+Quantity: <%= @item.quantity %>
+<br>
+
+Description: <%= @item.desc %>
+<br>
+<br>
+
+Reviews: 
+<br>
+<% Review.where(item: @item).find_each do |review| %>
+  <%= review.rating %> Stars: <%= review.body %>
+  <br>
+<% end %>
+
+
+<% @review = Review.new %>
+<%= form_for @review, :url => review_path(item_id: @item.id) do |f| %>
+  <h3>Post a Review</h3>
+  <%= f.label :body %>
+  <br>
+  <%= f.text_area :body, size: "22x3" %>
+  <br>
+  <%= f.label :rating %>
+  <br>
+  <%= f.number_field :rating %>
+  <br>
+  <%= f.submit 'Post' %>
+<% end %>
