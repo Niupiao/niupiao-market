@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
     belongs_to :user
-    belongs_to :category
+    has_many :reviews, dependent: :destroy
     
     validates_presence_of :name
     validates :type, inclusion: { in: %w(regular clothing ticketing),
