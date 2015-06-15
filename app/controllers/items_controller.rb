@@ -59,8 +59,7 @@ class ItemsController < ApplicationController
                                       :price,
                                       :quantity,
                                       :desc,
-                                      :category_id,
-                                      :category
+                                      :type
                                       )
     end
 end
