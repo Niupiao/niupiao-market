@@ -12,7 +12,10 @@
                 <%= item.user.first_name %><%= item.user.last_name %>
                 <% end %> | <em><%= item.quantity %> left</em></small> 
                     <p>
-                    <%= button_to "Add to Cart", cart_path(item_id: item), class: "btn btn-default" %>
+                    <%= form_tag(cart_path(item_id: item.id)) do %>
+                      <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, 1) %>
+                      <%= submit_tag("Add to cart", class: "btn btn-default") %>
+                    <% end %>
                     </p>
             </div>
             <!--
