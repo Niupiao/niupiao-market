@@ -17,9 +17,12 @@ module SessionsHelper
     end
     
     def add_to_cart
+        if !session[:cart]
+            session[:cart] = {}
+        end
         item_id = params[:item_id]
         quantity_available = Item.find_by(id: item_id).quantity
-        quantity_bought = 1 # Replace with a param in the future.
+        quantity_bought = params[:quantity].to_i
         quantity_in_cart = session[:cart][item_id].to_i
         
         if quantity_in_cart + quantity_bought <= quantity_available
@@ -48,5 +51,17 @@ module SessionsHelper
         clear_cart
         session.delete(:user_id)
         @current_user = nil
+    end
+    
+    def update_cart
+        updated_id = params[:id]
+        quantity_diff = params[:quantity_updated].to_i - session[:cart][updated_id] 
+        total_diff = Item.find(updated_id).price * quantity_diff
+        params[:quantity_diff] = quantity_diff
+        params[:total_diff] = total_diff
+        session[:cart][updated_id] = params[:quantity_updated].to_i
+        respond_to do |format|
+            format.js
+        end
     end
 end

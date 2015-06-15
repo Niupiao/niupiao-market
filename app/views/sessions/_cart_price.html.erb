@@ -7,9 +7,9 @@
         <% total_price += (item.price * quantity) %>
     <% end %>
 <% end %>
-<td>
-    <%=total_price%> 
+<td id="total_price">
+    <%= total_price %> 
 </td>
-<td>
+<td id="total_quantity">
    <%=total_quantity%>
 </td>
