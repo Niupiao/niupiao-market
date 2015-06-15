@@ -9,20 +9,20 @@
         <h3>Add Item</h3>
         <%= f.label :name %>
         <%= f.text_field :name %>
-        
+        <br>
         <%= f.label :price %>
         <%= f.number_field :price, :class => 'text_field', :step => 0.01 %>
-        
+        <br>
         <%= f.label :type %>
-        <%= f.collection_select :type, %w(Clothing Ticketing General) %>
-        
+        <%= select_tag(:type, options_for_select(%w(General Clothing Beauty))) %>
+        <br>
         <%= f.label :quantity %>
         <%= f.number_field :quantity %>
-        
+        <br>        
         <h3>Enter a description</h3>
         <%= f.label :desc %>
         <%= f.text_field :desc %>
-        
+        <br>
         <%= f.label :category_id %>
         <%= select_tag(:category_id, options_for_select(@categories), 
             :prompt => "Select Category") %>
