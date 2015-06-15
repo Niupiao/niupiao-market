@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20150612210138) do
     t.float   "price"
     t.integer "quantity"
     t.text    "desc"
-    t.text    "category"
     t.string  "category_id"
   end
 
