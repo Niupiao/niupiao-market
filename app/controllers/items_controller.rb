@@ -32,9 +32,23 @@ class ItemsController < ApplicationController
         @search = []
        search_term = params[:search_term]
        if search_term
-           Item.where(name: search_term).find_each do |item|
-             @search += [item]
-            end
+           search_term = search_term.downcase.gsub(/\s+/m, ' ').strip.split(" ")
+           Item.all.each do |item|
+             search_space = item.name.downcase + " " + item.desc.downcase + " " +
+                              item.user.first_name.downcase + " " + 
+                              item.user.last_name.downcase
+             score = 0
+             target_score = (search_term.size / 2) + 1 # Score must be at least 1
+             search_term.each do |word|
+                 if(search_space.include? word)
+                     score += 1
+                 end
+             end
+             if(score >= target_score)
+               @search += [item]
+             end
+           end
+           return @search
        end
     end
     
@@ -45,6 +59,13 @@ class ItemsController < ApplicationController
         redirect_to current_user
     end
     
+    def review
+      @item = Item.find(params[:item_id])
+      @review = @item.reviews.build(user_id: current_user.id, body: params[:comment][:body], rating: params[:comment][:rating])
+      @review.save
+      redirect_to @item
+    end
+    
     private
     
     def item_params
@@ -52,7 +73,6 @@ class ItemsController < ApplicationController
                                       :price,
                                       :quantity,
                                       :desc,
-                                      :category
-                                      )
+                                      :item_type)
     end
 end

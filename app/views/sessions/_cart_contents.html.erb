@@ -13,8 +13,10 @@
                     <td>
                         <%= item.price %>
                     </td>
-                    <td>
-                        <%= quantity %>
+                    <td><%= form_for :session, url: update_cart_path(item_id: item_id), html: { method: 'post'} do |f| %>
+                            <%= f.select :quantity_updated, options_for_select((1..item.quantity).to_a, quantity), {},
+                                                            { class: "quantity_select", id: "quantity_select_#{item_id}" } %>
+                        <% end %>
                     </td>
                 </tr>
         <% else %>
@@ -22,10 +24,7 @@
             <% num_removed += 1 %>
         <% end %>
     <% end %>
-    <% if num_removed == 1 %>
-        <% flash.now[:danger] = "1 item in your cart is no longer available and has been removed" %>
-    <% end %>
-    <% if num_removed > 1 %>
-        <% flash.now[:danger] = "#{num_removed} items in your cart are no longer available and have been removed" %>
+    <% if num_removed >= 1 %>
+        <% flash.now[:danger] = "#{pluralize(num_removed, "item")} in your cart is no longer available and has been removed" %>
     <% end %>
 <% end %>
