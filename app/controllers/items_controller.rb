@@ -45,6 +45,13 @@ class ItemsController < ApplicationController
         redirect_to current_user
     end
     
+    def review
+      @item = Item.find(params[:item_id])
+      @review = @item.reviews.build(user_id: current_user.id, body: params[:comment][:body], rating: params[:comment][:rating])
+      @review.save
+      redirect_to @item
+    end
+    
     private
     
     def item_params
@@ -52,7 +59,6 @@ class ItemsController < ApplicationController
                                       :price,
                                       :quantity,
                                       :desc,
-                                      :category
-                                      )
+                                      :item_type)
     end
 end
