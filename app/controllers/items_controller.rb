@@ -40,7 +40,7 @@ class ItemsController < ApplicationController
                               item.user.first_name.downcase + " " + 
                               item.user.last_name.downcase
              score = 0
-             target_score = search_term.size / 2
+             target_score = (search_term.size / 2) + 1 # Score must be at least 1
              search_term.each do |word|
                  if(search_space.include? word)
                      score += 1
@@ -50,6 +50,7 @@ class ItemsController < ApplicationController
                @search += [item]
              end
            end
+           return @search
        end
     end
     
