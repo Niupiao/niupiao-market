@@ -14,3 +14,7 @@
     <br>
     
     Description: <%= @item.desc %>
+    <br>
+    
+    Category: <%= link_to Category.find(@item.category_id).name, category_path(@item.category_id) %>
+    
