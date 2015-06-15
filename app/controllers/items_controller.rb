@@ -61,7 +61,7 @@ class ItemsController < ApplicationController
     
     def review
       @item = Item.find(params[:item_id])
-      @review = @item.reviews.build(user_id: current_user.id, body: params[:comment][:body], rating: params[:comment][:rating])
+      @review = @item.reviews.build(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
       @review.save
       redirect_to @item
     end
