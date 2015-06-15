@@ -25,7 +25,7 @@
                     </h4>
                     <h4><a href="#"><%= item.name %></a></h4>
                     <small>Sold by <% if item.user %>
-                    <%= item.user.first_name %><%= item.user.last_name %>
+                    <%= item.user.first_name %> <%= item.user.last_name %>
                     <% end %> | <em><%= item.quantity %> left</em></small> 
                         <p>
                         <%= button_to "Add to Cart", cart_path(item_id: item), class: "btn btn-default" %>
