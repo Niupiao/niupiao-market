@@ -54,8 +54,12 @@ module SessionsHelper
     end
     
     def update_cart
-        debugger
-        session[:cart][id] = params[:quantity_updated]
+        updated_id = params[:id]
+        quantity_diff = params[:quantity_updated].to_i - session[:cart][updated_id] 
+        total_diff = Item.find(updated_id).price * quantity_diff
+        params[:quantity_diff] = quantity_diff
+        params[:total_diff] = total_diff
+        session[:cart][updated_id] = params[:quantity_updated].to_i
         respond_to do |format|
             format.js
         end

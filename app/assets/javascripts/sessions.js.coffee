@@ -4,12 +4,14 @@
 
 $(document).ready ->
     $(".quantity_select").change ->
+        $elm = $(this);
         $.ajax "update_cart",
             method: "POST",
-            data: {quantityUpdated: $(".quantity_select").val(), id: $('.quantity_select').attr('id').substring(1,5) },
+            data: { quantity_updated: $elm.val(), id: $elm.attr('id').substring(16) },
             dataType: "script",
             error: (jqXHR, textStatus, errorThrown) ->
                 console.log("AJAX error: #{textStatus}")
             success: (data, textStatus, jqXHR) ->
                 console.log("AJAX OK")
+        
             
