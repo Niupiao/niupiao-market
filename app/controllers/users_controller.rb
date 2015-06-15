@@ -23,6 +23,13 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
+  
+  def destroy
+    if User.exists?(params[:id])
+      User.delete(params[:id])
+    end
+    redirect_to root_path
+  end
 
   def index
   end

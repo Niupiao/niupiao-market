@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
   
+  get 'search' => 'items#search'
+  
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   get 'logout' => 'sessions#destroy'
@@ -16,7 +18,8 @@ Rails.application.routes.draw do
   post 'delete_from_cart' => 'sessions#remove_from_cart'
   get 'purchase' => 'sessions#purchase_cart'
   get 'checkout' => 'sessions#checkout'
-  
+  get 'remove_item' => 'items#destroy'
+  get 'delete_user' => 'users#destroy'
   scope "(/:locale)", locale: /en|mn/ do
     resources :items
     resources :users

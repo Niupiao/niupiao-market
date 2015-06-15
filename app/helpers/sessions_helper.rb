@@ -17,7 +17,7 @@ module SessionsHelper
     end
     
     def add_to_cart
-        item_id = params[:format]
+        item_id = params[:item_id]
         quantity_available = Item.find_by(id: item_id).quantity
         quantity_bought = 1 # Replace with a param in the future.
         quantity_in_cart = session[:cart][item_id].to_i
@@ -32,7 +32,7 @@ module SessionsHelper
     end
     
     def remove_from_cart
-        session[:cart].delete(params[:format])
+        session[:cart].delete(params[:item_id])
         redirect_to cart_path
     end
     
