@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  
-  resources :categories
 
   # TODO: Need to set up "home page" routes for both English and 
   #    Mongolian versions.

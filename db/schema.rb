@@ -12,14 +12,22 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20150612212740) do
+
+  create_table "categories", force: :cascade do |t|
+    t.text "name"
+    t.text "desc"
+  end
+
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
     t.text    "name"
-    t.text    "type"
     t.float   "price"
     t.integer "quantity"
     t.text    "desc"
     t.string  "category_id"
+    t.boolean "persists"
+    t.date    "expires"
+    t.string  "type"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -31,15 +39,7 @@ ActiveRecord::Schema.define(version: 20150612212740) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.text     "first_name"
-    t.text     "last_name"
-    t.text     "email"
-    t.text     "password_digest"
-    t.text     "address"
-    t.text     "cart"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+# Could not dump table "users" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
 end
