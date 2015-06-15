@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   
+  resources :categories
+
   # TODO: Need to set up "home page" routes for both English and 
   #    Mongolian versions.
   
   root 'static_pages#home'
 
   get 'about' => 'static_pages#about'
-  
+  get 'items' => 'items#show'
   get 'search' => 'items#search'
   
   get 'login' => 'sessions#new'
