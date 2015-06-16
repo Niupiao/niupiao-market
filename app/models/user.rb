@@ -11,5 +11,6 @@ class User < ActiveRecord::Base
     has_secure_password
     has_many :items, dependent: :destroy
     has_many :reviews, dependent: :destroy
+    has_many :receipts, dependent: :destroy
     #has_one cart
 end
