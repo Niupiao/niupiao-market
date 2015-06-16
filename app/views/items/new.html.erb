@@ -14,7 +14,7 @@
         <%= f.number_field :price, :class => 'text_field', :step => 0.01 %>
         <br>
         <%= f.label 'Type' %>
-        <%= f.select :item_type, %w(General Clothing Beauty) %>
+        <%= f.select :item_type, VALID_ITEM_TYPES %>
         <br>
         <%= f.label :quantity %>
         <%= f.number_field :quantity %>

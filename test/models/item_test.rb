@@ -3,7 +3,7 @@ require 'test_helper'
 class ItemTest < ActiveSupport::TestCase
   def setup
     @name = 'product'
-    @item_type = 'General'
+    @item_type = VALID_ITEM_TYPES.first
     @price = 31.12
     @quantity = 2
     @desc = "great, amazing"
