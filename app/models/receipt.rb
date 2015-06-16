@@ -4,6 +4,8 @@ class Receipt < ActiveRecord::Base
     serialize :item_tags, Array
     
     validates :item_name, presence: true
+    validates :item_quantity, presence: true, numericality: { greater_than: 0,
+                                                              only_integer: true}
     validates :item_type, presence: true, inclusion: { in: VALID_ITEM_TYPES,
                                                        message: "%{value} is not a valid type" }
     validates :seller_name, presence: true

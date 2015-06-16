@@ -24,13 +24,16 @@ ActiveRecord::Schema.define(version: 20150616183237) do
   end
 
   create_table "receipts", force: :cascade do |t|
+    t.integer  "user_id"
     t.text     "item_name"
+    t.integer  "item_quantity"
     t.text     "item_tags"
+    t.text     "item_type"
     t.text     "seller_name"
     t.integer  "seller_id"
     t.float    "charge"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "reviews", force: :cascade do |t|
