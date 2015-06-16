@@ -2,6 +2,8 @@ class Item < ActiveRecord::Base
     belongs_to :user
     has_many :reviews, dependent: :destroy
     
+    serialize :tags, Array
+    
     validates_presence_of :name
     validates :item_type, inclusion: { in: %w(General Clothing Beauty),
     message: "%{value} is not a valid type" }
