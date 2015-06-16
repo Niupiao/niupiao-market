@@ -44,7 +44,7 @@ class ItemsController < ApplicationController
            Item.all.each do |item|
              search_space = item.name.downcase + " " + item.desc.downcase + " " +
                               item.user.first_name.downcase + " " + 
-                              item.user.last_name.downcase
+                              item.user.last_name.downcase + " " + item.tags.join(" ").downcase
              score = 0
              target_score = (search_term.size / 2.0).ceil # Score must be at least 1
              search_term.each do |word|
