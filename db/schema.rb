@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20150612212740) do
     t.integer "user_id"
     t.text    "name"
     t.text    "item_type"
+    t.text    "tags"
     t.float   "price"
     t.integer "quantity"
     t.text    "desc"
