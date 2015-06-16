@@ -5,7 +5,14 @@ class ItemsController < ApplicationController
     
     def create
         if current_user
-            @item = current_user.items.new(item_params)
+            # Modify submitted tags to convert it to an array.
+            modified_params = item_params
+            tags = modified_params[:tags]
+            tags = tags.split(/[\s,']/)
+            tags.reject(&:empty?)
+            modified_params[:tags] = tags
+            
+            @item = current_user.items.new(modified_params)
             if @item.save
                 redirect_to @item
             else
@@ -77,6 +84,7 @@ class ItemsController < ApplicationController
                                       :price,
                                       :quantity,
                                       :desc,
-                                      :item_type)
+                                      :item_type,
+                                      :tags)
     end
 end
