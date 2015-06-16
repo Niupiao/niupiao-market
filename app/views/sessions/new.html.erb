@@ -12,6 +12,10 @@
         <%= f.password_field :password %>
         <%= f.submit 'Log In', class: "btn btn-primary" %>
         <% end %>
+        <br>
+        <%= form_tag("/auth/facebook", method: :get) do %>
+          <%= submit_tag("Sign in with Facebook", class: "btn btn-primary") %>
+        <% end %>
     </div>
 </div>
 

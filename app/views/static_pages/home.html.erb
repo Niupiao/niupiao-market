@@ -1,5 +1,23 @@
 <% provide(:title, "Home") %>
   <%= yield %>
+  
+  <script>
+    window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '1447029515598856',
+      xfbml      : true,
+      version    : 'v2.3'});
+    };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
+  
 <div class="center jumbotron" style="margin-top:15px">
     <h3 style="margin-bottom:30px">
         Welcome to your favorite marketplace!</h3>
@@ -16,8 +34,16 @@
   </div>
 <% end %>
 
-<body>
+
     <div id="search-results">
         <%= render "home_items" %>
     </div>
-</body>
+    <br>
+    <h3>Like us on Facebook!</h3>
+    <div
+      class="fb-like"
+      data-share="true"
+      data-width="450"
+      data-show-faces="true">
+    </div>
+
