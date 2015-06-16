@@ -15,6 +15,9 @@ Quantity: <%= @item.quantity %>
 
 Description: <%= @item.desc %>
 <br>
+
+Tags: <%= @item.tags.each { |tag| tag } %>
+<br>
 <br>
 
 Reviews: 
