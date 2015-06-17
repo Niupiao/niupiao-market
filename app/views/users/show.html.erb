@@ -20,5 +20,10 @@
             <% end %>
         </table>
         <br>
+        <% if current_user.provider.nil? %>
+          <%= form_tag("/auth/facebook", method: :get) do %>
+          <%= submit_tag("Connect through Facebook", class: "btn btn-primary") %>
+        <% end %>
+        <% end %>
         <%= link_to "Delete Account", delete_user_path(id: @user.id) %>
     <% end %>

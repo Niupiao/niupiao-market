@@ -8,6 +8,11 @@ class CreateUsers < ActiveRecord::Migration
       t.text :address
       t.text :cart
       
+      t.text :provider
+      t.text :uid, unique: true
+      t.text :oauth_token
+      t.text :oauth_expires_at
+      
       t.timestamps
     end
   end

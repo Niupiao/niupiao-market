@@ -8,10 +8,6 @@ module SessionsHelper
         end
     end
     
-    def current_user
-        @current_user ||= User.find_by(id: session[:user_id])
-    end
-    
     def logged_in?
         !!current_user
     end
@@ -32,6 +28,10 @@ module SessionsHelper
             flash[:danger] = "Can't check out more of this item."
         end
         redirect_to root_path
+    end
+    
+    def current_user
+        @current_user ||= User.find_by(id: session[:user_id])
     end
     
     def remove_from_cart
