@@ -12,6 +12,17 @@ class ReceiptsController < ApplicationController
         end
     end
     
+    def tracker
+    end
+    
+    def track
+        code = params[:checkin_id]
+        if code
+          @receipt = Receipt.find_by(checkin_code: code)
+          @receipt
+        end
+    end
+    
     private
     def receipts_params
         params.require(:receipt).permit(
