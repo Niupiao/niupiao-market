@@ -12,7 +12,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash.now[:success] = "Information updated"
-    else
     end
     render 'edit'
   end
