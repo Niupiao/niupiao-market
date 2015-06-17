@@ -1,6 +1,6 @@
 <% provide(:title, "Receipts") %>
 
-<h1>Receipts</h1>
+<h1>Purchase Receipts</h1>
 <table class="table table-striped">
   <thead>
     <tr ALIGN = "Center">
@@ -10,9 +10,26 @@
       <th>Charge</th>
     </tr>
   </thead>
-    <% @receipts.each do |receipt|%>
+    <% @receipts_bought.each do |purchase_receipt|%>
       <tr ALIGN = "Center">
-        <%= render partial: "receipt", object: receipt %>
+        <%= render partial: "purchase_receipt", object: purchase_receipt %>
+      </tr>
+    <% end %>
+</table>
+
+<h1>Sale Receipts</h1>
+<table class="table table-striped">
+  <thead>
+    <tr ALIGN = "Center">
+      <th>Item</th>
+      <th>Buyer</th>
+      <th>Quantity</th>
+      <th>Charge</th>
+    </tr>
+  </thead>
+    <% @receipts_sold.each do |sale_receipt|%>
+      <tr ALIGN = "Center">
+        <%= render partial: "sale_receipt", object: sale_receipt %>
       </tr>
     <% end %>
 </table>

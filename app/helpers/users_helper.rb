@@ -1,19 +1,30 @@
 module UsersHelper
+  require 'securerandom'
+  
   #  Creates a receipt for the User for the given item.
-  def get_receipt(user, item, quantity_purchased, total_charge)
-      if user
-          user.receipts.create(
-                               item_name: item.name, 
-                               item_quantity: quantity_purchased,
-                               item_tags: item.tags,
-                               item_type: item.item_type,
-                               seller_name: item.user.first_name + " " + item.user.last_name,
-                               seller_id: item.user.id,
-                               charge: total_charge
-                               )
+  def get_receipt(buyer, seller, item, quantity_purchased, total_charge)
+      if buyer
+        buyer.receipts_buy.create(
+                             item_name: item.name, 
+                             item_quantity: quantity_purchased,
+                             item_tags: item.tags,
+                             item_type: item.item_type,
+                             charge: total_charge,
+                             status: "Order Sent",
+                             seller: seller
+                             )
       else
-        flash[:danger] = "You must be logged in to get a receipt"
-        redirect_to login_path
+        checkin_code = SecureRandom.urlsafe_base64 10
+        seller.receipts_sell.create(
+                              item_name: item.name,
+                              item_quantity: quantity_purchased,
+                              item_tags: item.tags,
+                              item_type: item.item_type,
+                              charge: total_charge,
+                              status: "Order Sent",
+                              checkin_code: checkin_code
+                              )
+        flash.now[:success] = "In order to keep track of your purchase, input this into the Tracker " + checkin_code
       end
   end
 end

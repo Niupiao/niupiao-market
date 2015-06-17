@@ -3,9 +3,9 @@ class ReceiptsController < ApplicationController
     end
     
     def receipts
-        if (params[:user_id])
-            user = User.find_by(id: params[:user_id])
-            @receipts = user.receipts
+        if (logged_in?)
+            @receipts_bought = current_user.receipts_buy
+            @receipts_sold = current_user.receipts_sell
         else
             flash[:danger] = "You must be logged in to view receipts"
             redirect_to login_path
