@@ -10,7 +10,7 @@
       <th>Charge</th>
     </tr>
   </thead>
-    <% @user.receipts.each do |receipt|%>
+    <% @receipts.each do |receipt|%>
       <tr ALIGN = "Center">
         <%= render partial: "receipt", object: receipt %>
       </tr>

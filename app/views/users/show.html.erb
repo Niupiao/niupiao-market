@@ -22,20 +22,3 @@
         <br>
         <%= link_to "Delete Account", delete_user_path(id: @user.id) %>
     <% end %>
-    
-<h1>Receipts</h1>
-<table class="table table-striped">
-  <thead>
-    <tr ALIGN = "Center">
-      <th>Item</th>
-      <th>Seller</th>
-      <th>Quantity</th>
-      <th>Charge</th>
-    </tr>
-  </thead>
-    <% @user.receipts.each do |receipt|%>
-      <tr ALIGN = "Center">
-        <%= render partial: "receipt", object: receipt %>
-      </tr>
-    <% end %>
-</table>

@@ -2,6 +2,16 @@ class ReceiptsController < ApplicationController
     def new
     end
     
+    def receipts
+        if (params[:user_id])
+            user = User.find_by(id: params[:user_id])
+            @receipts = user.receipts
+        else
+            flash[:danger] = "You must be logged in to view receipts"
+            redirect_to login_path
+        end
+    end
+    
     private
     def receipts_params
         params.require(:receipt).permit(
