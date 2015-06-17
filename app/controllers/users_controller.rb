@@ -4,6 +4,19 @@ class UsersController < ApplicationController
     @user = User.new
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash.now[:success] = "Information updated"
+    else
+    end
+    render 'edit'
+  end
+  
   def create
    @user = User.new(user_params)
    @user.cart = {}  # Sets user's cart to be non-nil.
