@@ -22,3 +22,7 @@
         <br>
         <%= link_to "Delete Account", delete_user_path(id: @user.id) %>
     <% end %>
+    
+<br>
+<br>
+<li><%= link_to "Receipts", receipts_path(user_id: current_user.id) %></li>
