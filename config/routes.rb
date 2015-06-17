@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   get 'about' => 'static_pages#about'
+
   get 'search' => 'items#search'
   
   get 'login' => 'sessions#new'
@@ -18,7 +19,6 @@ Rails.application.routes.draw do
   post 'update_cart' => 'sessions#update_cart'
   get 'purchase' => 'sessions#purchase_cart'
   get 'checkout' => 'sessions#checkout'
-  get 'remove_item' => 'items#destroy'
   get 'delete_user' => 'users#destroy'
   scope "(/:locale)", locale: /en|mn/ do
     resources :items

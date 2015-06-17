@@ -5,7 +5,14 @@ class ItemsController < ApplicationController
     
     def create
         if current_user
-            @item = current_user.items.new(item_params)
+            # Modify submitted tags to convert it to an array.
+            modified_params = item_params
+            tags = modified_params[:tags]
+            tags = tags.split(/[\s,']/)
+            tags.reject(&:empty?)
+            modified_params[:tags] = tags
+            
+            @item = current_user.items.new(modified_params)
             if @item.save
                 redirect_to @item
             else
@@ -30,24 +37,28 @@ class ItemsController < ApplicationController
     
     def search
         @search = []
+        scores = []
        search_term = params[:search_term]
        if search_term
            search_term = search_term.downcase.gsub(/\s+/m, ' ').strip.split(" ")
            Item.all.each do |item|
              search_space = item.name.downcase + " " + item.desc.downcase + " " +
                               item.user.first_name.downcase + " " + 
-                              item.user.last_name.downcase
+                              item.user.last_name.downcase + " " + item.tags.join(" ").downcase
              score = 0
-             target_score = (search_term.size / 2) + 1 # Score must be at least 1
+             target_score = (search_term.size / 2.0).ceil # Score must be at least 1
              search_term.each do |word|
                  if(search_space.include? word)
-                     score += 1
+                     score += (search_space.scan(/#{word}/).length)
                  end
              end
              if(score >= target_score)
                @search += [item]
+               scores += [score]
              end
            end
+           p @search.sort_by.with_index{|_,i| scores[i]}
+           @search.reverse!
            return @search
        end
     end
@@ -73,6 +84,7 @@ class ItemsController < ApplicationController
                                       :price,
                                       :quantity,
                                       :desc,
-                                      :item_type)
+                                      :item_type,
+                                      :tags)
     end
 end

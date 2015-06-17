@@ -6,24 +6,29 @@
         <%= render 'shared/item_error_messages' %>
         
         <%= form_for @item do |f| %>
-        <h3>Add Item</h3>
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-        <br>
-        <%= f.label :price %>
-        <%= f.number_field :price, :class => 'text_field', :step => 0.01 %>
-        <br>
-        <%= f.label 'Type' %>
-        <%= f.select :item_type, %w(General Clothing Beauty) %>
-        <br>
-        <%= f.label :quantity %>
-        <%= f.number_field :quantity %>
-        <br>        
-        <h3>Enter a description</h3>
-        <%= f.label :desc %>
-        <%= f.text_field :desc %>
-        
-        <%= f.submit 'Create Item' %>
+            <h3>Add Item</h3>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+            <br>
+            <%= f.label :price %>
+            <%= f.number_field :price, :class => 'text_field', :step => 0.01 %>
+            <br>
+            <%= f.label 'Type' %>
+            <%= f.select :item_type, VALID_ITEM_TYPES %>
+            <br>
+            <%= f.label :quantity %>
+            <%= f.number_field :quantity %>
+            <br>        
+            <h3>Enter a description</h3>
+            <%= f.label :desc %>
+            <%= f.text_field :desc %>
+            
+            <h3>Enter any Tags (Separate by commas)</h3>
+            <%= f.label :tags %>
+            <%= f.text_field :tags %>
+            <br>
+            
+            <%= f.submit 'Create Item' %>
         <% end %>        
     </div>
 </div>
