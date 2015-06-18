@@ -1,9 +1,11 @@
 class ReceiptsController < ApplicationController
+    
     def new
     end
     
     def receipts
-        if (logged_in?)
+        user = User.find_by(id: params[:user_id])
+        if (logged_in? && current_user?(user))
             @receipts_bought = current_user.receipts_buy
             @receipts_sold = current_user.receipts_sell
         else
