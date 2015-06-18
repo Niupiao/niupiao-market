@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
   belongs_to :user
-  has_many :reviews, dependent: :destroy
+  has_many :reviews, as: :reviewable, dependent: :destroy
     
   attr_accessor :VALID_ITEM_TYPES 
   serialize :tags, Array

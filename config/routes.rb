@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     resources :items
     resources :users
   end
-  post 'review' => 'items#review'
+  
+  post 'items_review' => 'items#review'
+  post 'users_review' => 'users#review'
   
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => '/'

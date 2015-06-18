@@ -75,9 +75,13 @@ class ItemsController < ApplicationController
     
   def review
     @item = Item.find(params[:item_id])
-    @review = @item.reviews.build(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
-    @review.save
-    redirect_to @item
+    if Review.find_by(user_id: current_user.id, reviewable: @item)
+      flash.now[:message] = 'You cannot post multiple reviews'
+      redirect_to @item
+    else
+      @review = @item.reviews.create(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
+      redirect_to @item
+    end
   end
     
   private
