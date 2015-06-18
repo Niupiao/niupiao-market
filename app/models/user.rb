@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   has_many :receipts_sell, :class_name => 'Receipt', :foreign_key => 'seller_id'
   has_many :receipts_buy, :class_name => 'Receipt', :foreign_key => 'buyer_id'
+  has_many :reviews, as: :reviewable, dependent: :destroy
 
     def self.from_omniauth(auth, user)
         if user
