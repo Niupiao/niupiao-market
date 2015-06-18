@@ -25,13 +25,12 @@ Rails.application.routes.draw do
   post 'track' => 'receipts#track'
   
   get 'delete_user' => 'users#destroy'
+  get 'storefront' => 'users#storefront'
   get 'receipts' => 'receipts#receipts'
   scope "(/:locale)", locale: /en|mn/ do
     resources :items
     resources :users
   end
-  
-  get 'delete_item' => 'items#destroy'
   
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'

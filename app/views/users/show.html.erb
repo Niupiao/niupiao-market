@@ -14,7 +14,7 @@
                         <%= item.name %>
                     </td>
                     <td>
-                      <%= link_to "Remove Item", delete_item_path(id: item.id) %>
+                      <%= link_to "Remove Item", item_path(id: item.id), :method => :delete %>
                     </td>
                 </tr>
             <% end %>
@@ -30,7 +30,11 @@
     
 <br>
 <br>
+
 <li><%= link_to "Receipts", receipts_path(user_id: current_user.id) %></li>
+<br>
+<li><%= link_to "Store", storefront_path(id: @user.id) %></li>
+<br>
 
 Reviews: 
 <br>

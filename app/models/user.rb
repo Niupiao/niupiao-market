@@ -14,10 +14,6 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :items, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_secure_password
-    
-  has_many :items, dependent: :destroy
-  has_many :reviews, dependent: :destroy
   has_many :receipts_sell, :class_name => 'Receipt', :foreign_key => 'seller_id'
   has_many :receipts_buy, :class_name => 'Receipt', :foreign_key => 'buyer_id'
   has_many :reviews, as: :reviewable, dependent: :destroy
