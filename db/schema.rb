@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612212740) do
+ActiveRecord::Schema.define(version: 20150616183237) do
 
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
@@ -21,6 +21,20 @@ ActiveRecord::Schema.define(version: 20150612212740) do
     t.float   "price"
     t.integer "quantity"
     t.text    "desc"
+  end
+
+  create_table "receipts", force: :cascade do |t|
+    t.integer  "buyer_id"
+    t.integer  "seller_id"
+    t.text     "item_name"
+    t.integer  "item_quantity"
+    t.text     "item_tags"
+    t.text     "item_type"
+    t.string   "status"
+    t.text     "checkin_code"
+    t.float    "charge"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -39,6 +53,10 @@ ActiveRecord::Schema.define(version: 20150612212740) do
     t.text     "password_digest"
     t.text     "address"
     t.text     "cart"
+    t.text     "provider"
+    t.text     "uid"
+    t.text     "oauth_token"
+    t.text     "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,5 +1,6 @@
 <% provide(:title, "Home") %>
   <%= yield %>
+  
 <div class="center jumbotron" style="margin-top:15px">
     <h3 style="margin-bottom:30px">
         Welcome to your favorite marketplace!</h3>
@@ -15,9 +16,14 @@
     <button class="btn" type="submit"><i class="icon-search"></i></button>
   </div>
 <% end %>
-
-<body>
     <div id="search-results">
         <%= render "home_items" %>
     </div>
-</body>
+    <br>
+    <h3>Like us on Facebook!</h3>
+    <div
+      class="fb-like"
+      data-share="true"
+      data-width="450"
+      data-show-faces="true">
+    </div>

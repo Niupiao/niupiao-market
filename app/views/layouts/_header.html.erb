@@ -1,10 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "NiuPiao Marketplace", root_path, id: "logo" %>
+    <%= link_to "Өртөө", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home",   root_path %></li>
         <li><%= link_to "Cart", cart_path %></li>
+        <li><%= link_to "Receipt Tracker", tracker_path%></li>
         <% if logged_in? %>
           <li><%= link_to "Sell Item", new_item_path %></li>
           <li><%= link_to "Logout", logout_path %></li>

@@ -14,11 +14,22 @@
                         <%= item.name %>
                     </td>
                     <td>
-                         <%= link_to "Remove Item", remove_item_path(id: item.id) %>
+                         <%= link_to "Remove Item", item_path(id: item.id), :method => :delete %>
                     </td>
                 </tr>
             <% end %>
         </table>
         <br>
+        <% if current_user.provider.nil? %>
+          <%= form_tag("/auth/facebook", method: :get) do %>
+          <%= submit_tag("Connect through Facebook", class: "btn btn-primary") %>
+        <% end %>
+        <% end %>
         <%= link_to "Delete Account", delete_user_path(id: @user.id) %>
     <% end %>
+    
+<br>
+<br>
+<li><%= link_to "Receipts", receipts_path(user_id: @user.id) %></li>
+<br>
+<li><%= link_to "Store", storefront_path(id: @user.id) %></li>

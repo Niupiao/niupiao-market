@@ -1,14 +1,11 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:destroy]
-  before_action :correct_user,   only: [:destroy]
-  
   def new
     @user = User.new
   end
   
   def create
-   @user = User.new(user_params)
-   @user.cart = {}  # Sets user's cart to be non-nil.
+    @user = User.new(user_params)
+    @user.cart = {}  # Sets user's cart to be non-nil.
     if @user.save
       flash[:success] = "Welcome to the NiuPiao Market!"
       log_in @user
@@ -36,25 +33,23 @@ class UsersController < ApplicationController
   def index
   end
   
-  # Confirms a logged-in user.
-  def logged_in_user
-    unless logged_in?
-      flash[:danger] = "Please log in."
-      redirect_to login_path
-    end
-  end
-  
-  # Confirms the correct user.
-  def correct_user
+  def storefront
     @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
+    @items = @user.items
   end
   
   private
     
-    def user_params
-      params.require(:user).permit(:first_name,:last_name,:email,:password,
-                                    :password_confirmation,:address)
-    end
-    
+  def user_params
+    params.require(:user).permit(:first_name,
+                                  :last_name,
+                                  :email,
+                                  :password,
+                                  :password_confirmation,
+                                  :address,
+                                  :uid,
+                                  :provider,
+                                  :oauth_token,
+                                  :oauth_expires_at)
+  end
 end

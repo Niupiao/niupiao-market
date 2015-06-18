@@ -1,40 +1,39 @@
 <h1>Search Results</h1>
 <% if @search.count > 0 %>
- <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
-        <tr ALIGN="Center">
-            <td>Owner</td>
-            <td>Item Name</td>
-            <td>Price</td>
-            <td>Quantity</td>
-            <td>Description</td>
-            <td></td>
-        </tr>
-        <% @search.each do |item| %>
-            <tr>
-                <td>
-                    <% if item.user %>
-                        <%= item.user.first_name %> <%= item.user.last_name %>
-                    <% end %>
-                </td>
-                <td>
-                    <%= item.name %>
-                </td>
-                <td>
-                    <%= item.price %>
-                </td>
-                <td>
-                    <%= item.quantity %>
-                </td>
-                <td>
-                    <%= item.desc %>
-                </td>
-                <td>
-                    <%= button_to "Add to Cart", cart_path(item) %>
-                </td>
-            </tr>
+  <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
+    <tr ALIGN="Center">
+      <td>Owner</td>
+      <td>Item Name</td>
+      <td>Price</td>
+      <td>Quantity</td>
+      <td>Description</td>
+      <td></td>
+    </tr>
+    <% @search.each do |item| %>
+    <tr>
+      <td>
+        <% if item.user %>
+          <%= item.user.first_name %> <%= item.user.last_name %>
         <% end %>
-    </table>
+      </td>
+      <td>
+        <%= item.name %>
+      </td>
+      <td>
+        <%= item.price %>
+      </td>
+      <td>
+        <%= item.quantity %>
+      </td>
+      <td>
+        <%= item.desc %>
+      </td>
+      <td>
+        <%= button_to "Add to Cart", cart_path(item) %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
 <% else %>
-    <h3>No results found</h3>
+  <h3>No results found</h3>
 <% end %>
-
