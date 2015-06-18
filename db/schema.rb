@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 20150616183237) do
     t.text     "password_digest"
     t.text     "address"
     t.text     "cart"
+    t.text     "provider"
+    t.text     "uid"
+    t.text     "oauth_token"
+    t.text     "oauth_expires_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

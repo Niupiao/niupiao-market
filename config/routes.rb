@@ -6,8 +6,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   get 'about' => 'static_pages#about'
-  get 'items' => 'items#index'
-  get 'remove_item' => 'items#destroy'
+
   get 'search' => 'items#search'
   
   get 'login' => 'sessions#new'
@@ -32,4 +31,8 @@ Rails.application.routes.draw do
     resources :users
   end
   post 'review' => 'items#review'
+  
+  get 'auth/:provider/callback' => 'sessions#create'
+  get 'auth/failure' => '/'
+  get 'signout' => 'sessions#destroy'
 end
