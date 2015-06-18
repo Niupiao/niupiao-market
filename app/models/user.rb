@@ -14,31 +14,37 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :items, dependent: :destroy
   has_many :reviews, dependent: :destroy
+  has_secure_password
     
-  def self.from_omniauth(auth, user)
-    if user
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save
-      return user
-    elsif user = find_by(uid: auth.uid)
-      user.oauth_token = auth.credentials.token
-      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-      user.save
-      return user
-    else
-      random_password = SecureRandom.urlsafe_base64(32, true)
-      User.create(provider: auth.provider, 
-                  uid: auth.uid, 
-                  first_name: auth.info.first_name, 
-                  last_name: auth.info.last_name, 
-                  email: auth.info.email,
-                  password: random_password,
-                  password_confirmation: random_password,
-                  oauth_token: auth.credentials.token,
-                  oauth_expires_at: Time.at(auth.credentials.expires_at)) 
+  has_many :items, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :receipts_sell, :class_name => 'Receipt', :foreign_key => 'seller_id'
+  has_many :receipts_buy, :class_name => 'Receipt', :foreign_key => 'buyer_id'
+
+    def self.from_omniauth(auth, user)
+        if user
+            user.provider = auth.provider
+            user.uid = auth.uid
+            user.oauth_token = auth.credentials.token
+            user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+            user.save
+            return user
+        elsif user = find_by(uid: auth.uid)
+            user.oauth_token = auth.credentials.token
+            user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+            user.save
+            return user
+        else
+            random_password = SecureRandom.urlsafe_base64(32, true)
+            User.create(provider: auth.provider, 
+                        uid: auth.uid, 
+                        first_name: auth.info.first_name, 
+                        last_name: auth.info.last_name, 
+                        email: auth.info.email,
+                        password: random_password,
+                        password_confirmation: random_password,
+                        oauth_token: auth.credentials.token,
+                        oauth_expires_at: Time.at(auth.credentials.expires_at)) 
+        end
     end
-  end
 end

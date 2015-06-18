@@ -1,0 +1,19 @@
+<td>
+    <%= sale_receipt.item_name %>
+</td>
+<td>
+    <% if sale_receipt.buyer%>
+      <%= link_to sale_receipt.buyer.first_name + " " + sale_receipt.buyer.last_name, user_path(sale_receipt.seller.id) %> 
+    <% else %>
+      Anonymous
+    <% end %>
+</td>
+<td>
+    <%= sale_receipt.item_quantity %>
+</td>
+<td>
+    <%= sale_receipt.charge %>
+</td>
+<td>
+    <%= sale_receipt.status %>
+</td>
