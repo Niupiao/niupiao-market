@@ -27,7 +27,7 @@ module SessionsHelper
   
   # If cart is invalid, instantiate empty, valid cart.
   def valid_cart?
-    if (session[:cart].nil? || session[:cart].downcase == "null")
+    if (session[:cart].nil?)
       session[:cart] = {} #Instantiate empty hash.
     end
   end
