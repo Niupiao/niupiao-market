@@ -34,6 +34,11 @@ class UsersController < ApplicationController
   def index
   end
   
+  def storefront
+    @user = User.find(params[:id])
+    @items = @user.items
+  end
+  
   private
     
     def user_params
