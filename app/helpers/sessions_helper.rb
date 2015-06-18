@@ -1,9 +1,12 @@
-module SessionsHelper
+module SessionsHelper 
+  
   #Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
     if user.cart && !user.cart.empty?
-      session[:cart] = JSON.parse(user.cart) 
+      session[:cart] = JSON.parse(user.cart)
+    else
+      session[:cart] = {}
     end
   end
     
@@ -20,6 +23,13 @@ module SessionsHelper
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+  
+  # If cart is invalid, instantiate empty, valid cart.
+  def valid_cart?
+    if (session[:cart].nil? || session[:cart].downcase == "null")
+      session[:cart] = {} #Instantiate empty hash.
+    end
   end
     
   def add_to_cart
