@@ -7,7 +7,7 @@ end
 private
 
 def review_params
-        params.require(:review).permit(:user_id, 
-                                       :body,
-                                       :rating)
+  params.require(:review).permit(:user_id, 
+                                 :body,
+                                 :rating)
 end
