@@ -6,3 +6,5 @@
 @searchPopulate = -> #Incomplete
     searchParams = $('#search-box').val()
     return false
+    
+    

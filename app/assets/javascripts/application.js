@@ -16,4 +16,3 @@
 //= require bootstrap
 //= require_tree .
 //= require facebook_plugin
-
