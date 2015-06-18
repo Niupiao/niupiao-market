@@ -1,0 +1,15 @@
+<td>
+    <%= purchase_receipt.item_name %>
+</td>
+<td>
+    <%= link_to purchase_receipt.seller.first_name + " " + purchase_receipt.seller.last_name, user_path(purchase_receipt.seller.id) %> 
+</td>
+<td>
+    <%= purchase_receipt.item_quantity %>
+</td>
+<td>
+    <%= purchase_receipt.charge %>
+</td>
+<td>
+    <%= purchase_receipt.status %>
+</td>

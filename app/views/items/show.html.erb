@@ -15,26 +15,32 @@ Quantity: <%= @item.quantity %>
 
 Description: <%= @item.desc %>
 <br>
+
+Tags: <%= @item.tags.each { |tag| tag } %>
+<br>
 <br>
 
 Reviews: 
 <br>
-<% Review.where(item: @item).find_each do |review| %>
+<% Review.where(reviewable: @item).find_each do |review| %>
   <%= review.rating %> Stars: <%= review.body %>
+  <br>
+  Written by: <%= review.user.first_name %> <%= review.user.last_name %>
   <br>
 <% end %>
 
-
-<% @review = Review.new %>
-<%= form_for @review, :url => review_path(item_id: @item.id) do |f| %>
-  <h3>Post a Review</h3>
-  <%= f.label :body %>
-  <br>
-  <%= f.text_area :body, size: "22x3" %>
-  <br>
-  <%= f.label :rating %>
-  <br>
-  <%= f.number_field :rating %>
-  <br>
-  <%= f.submit 'Post' %>
+<% if Review.find_by(user: current_user, reviewable: @item).nil? %>
+  <% @review = Review.new %>
+  <%= form_for @review, :url => items_review_path(item_id: @item.id) do |f| %>
+    <h3>Post a Review</h3>
+    <%= f.label :body %>
+    <br>
+    <%= f.text_area :body, size: "22x3" %>
+    <br>
+    <%= f.label :rating %>
+    <br>
+    <%= f.number_field :rating %>
+    <br>
+    <%= f.submit 'Post' %>
+  <% end %>
 <% end %>

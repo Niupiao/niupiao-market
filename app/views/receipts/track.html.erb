@@ -1,0 +1,33 @@
+<% provide(:title, "Tracker") %>
+
+<h1>Receipt</h1>
+<% if @receipt %>
+  <table class="table table-striped">
+    <thead>
+      <tr ALIGN = "Center">
+        <th>Item</th>
+        <th>Seller</th>
+        <th>Quantity</th>
+        <th>Charge</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+      <td>
+        <%= @receipt.item_name %>
+      </td>
+      <td>
+        <%= link_to @receipt.seller.first_name + " " + @receipt.seller.last_name, user_path(@receipt.seller.id) %> 
+      </td>
+      <td>
+        <%= @receipt.item_quantity %>
+      </td>
+      <td>
+        <%= @receipt.charge %>
+      </td>
+      <td>
+        <%= @receipt.status %>
+      </td>
+  </table>
+<% else %>
+  No Receipt Found!
+<% end %>

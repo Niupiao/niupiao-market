@@ -1,0 +1,10 @@
+<% provide(:title, "Tracker") %>
+
+<h1>Welcome to the Tracker</h1>
+<%= form_tag(track_path, class: "navbar-form center") do %>
+  <div class="input-append">
+    <%= text_field_tag :checkin_id, params[:checkin_id], class: "span2 center", 
+                       placeholder: "Enter your Receipt ID"%>
+    <button class="btn" type="submit"><i class="icon-search"></i></button>
+  </div>
+<% end %>

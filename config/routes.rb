@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   root 'static_pages#home'
 
   get 'about' => 'static_pages#about'
-  get 'items' => 'items#show'
+
   get 'search' => 'items#search'
   
   get 'login' => 'sessions#new'
@@ -19,11 +19,23 @@ Rails.application.routes.draw do
   post 'update_cart' => 'sessions#update_cart'
   get 'purchase' => 'sessions#purchase_cart'
   get 'checkout' => 'sessions#checkout'
-  get 'remove_item' => 'items#destroy'
+  
+  get 'tracker' => 'receipts#tracker'
+  get 'track' => 'receipts#track'
+  post 'track' => 'receipts#track'
+  
   get 'delete_user' => 'users#destroy'
+  get 'storefront' => 'users#storefront'
+  get 'receipts' => 'receipts#receipts'
   scope "(/:locale)", locale: /en|mn/ do
     resources :items
     resources :users
   end
-  post 'review' => 'items#review'
+  
+  post 'items_review' => 'items#review'
+  post 'users_review' => 'users#review'
+  
+  get 'auth/:provider/callback' => 'sessions#create'
+  get 'auth/failure' => '/'
+  get 'signout' => 'sessions#destroy'
 end

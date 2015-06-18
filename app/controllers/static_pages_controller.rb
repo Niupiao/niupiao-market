@@ -7,5 +7,4 @@ class StaticPagesController < ApplicationController
 
   def items
   end
-
 end

@@ -4,6 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.references :user
       t.text :name
       t.text :item_type
+      t.text :tags
       t.float :price
       t.integer :quantity
       t.text :desc

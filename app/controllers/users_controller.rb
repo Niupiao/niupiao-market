@@ -1,12 +1,23 @@
 class UsersController < ApplicationController
-  
   def new
     @user = User.new
   end
   
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      flash.now[:success] = "Information updated"
+    end
+    render 'edit'
+  end
+  
   def create
-   @user = User.new(user_params)
-   @user.cart = {}  # Sets user's cart to be non-nil.
+    @user = User.new(user_params)
+    @user.cart = {}  # Sets user's cart to be non-nil.
     if @user.save
       flash[:success] = "Welcome to the NiuPiao Market!"
       log_in @user
@@ -34,11 +45,34 @@ class UsersController < ApplicationController
   def index
   end
   
+  def review
+    @user = User.find(params[:user_id])
+    if Review.find_by(user: current_user, reviewable: @user)
+      flash.now[:message] = 'You cannot post multiple reviews'
+      redirect_to @user
+    else
+      @review = @user.reviews.create(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
+      redirect_to @user
+    end
+  end
+  
+  def storefront
+    @user = User.find(params[:id])
+    @items = @user.items
+  end
+  
   private
     
-    def user_params
-      params.require(:user).permit(:first_name,:last_name,:email,:password,
-                                    :password_confirmation,:address)
-    end
-    
+  def user_params
+    params.require(:user).permit(:first_name,
+                                  :last_name,
+                                  :email,
+                                  :password,
+                                  :password_confirmation,
+                                  :address,
+                                  :uid,
+                                  :provider,
+                                  :oauth_token,
+                                  :oauth_expires_at)
+  end
 end

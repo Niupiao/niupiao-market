@@ -19,44 +19,44 @@
   <table WIDTH="50%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
     <tr ALIGN="Center">
       <td>Owner</td>
-      <td>Item Name</td>
+      <td>Item</td>
+      <td>Type</td>
       <td>Price</td>
       <td>Quantity</td>
       <td>Description</td>
-      <td>Category</td>
-      <td> </td>
+      <td></td>
     </tr>
-      <% Item.limit(params[:page_size].to_i)
-             .offset(params[:page_size].to_i * (params[:page].to_i - 1))
-             .order("#{params[:order]} #{params[:direction]}")
-             .all.each do |item| %>
-    <tr ALIGN="CENTER">
-      <td>
-        <% if item.user %>
-          <%= item.user.first_name %> <%= item.user.last_name %>
-                <td>
-                    <% if item.user %>
-                        <%= item.user.first_name %> <%= item.user.last_name %>
-                    <% end %>
-                </td>
-                <td>
-                    <%= item.name %>
-                </td>
-                <td>
-                    <%= item.price %>
-                </td>
-                <td>
-                    <%= item.quantity %>
-                </td>
-                <td>
-                    <%= item.desc %>
-                </td>
-                <td>
-                    <%= form_tag(cart_path(item_id: item.id)) do %>
-                        <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, 1) %>
-                        <%= submit_tag("Add to cart") %>
-                    <% end %>
-                </td>
-            </tr>
-        <% end %>
-</table>
+    <% Item.limit(params[:page_size].to_i)
+           .offset(params[:page_size].to_i * (params[:page].to_i - 1))
+           .order("#{params[:order]} #{params[:direction]}")
+           .all.each do |item| %>
+      <tr ALIGN="CENTER">
+        <td>
+          <% if item.user %>
+            <%= item.user.first_name %> <%= item.user.last_name %>
+          <% end %>
+        </td>
+        <td>
+          <%= item.name %>
+        </td>
+        <td>
+          <%= item.item_type %>
+        </td>
+        <td>
+          <%= item.price %>
+        </td>
+        <td>
+          <%= item.quantity %>
+        </td>
+        <td>
+          <%= item.desc %>
+        </td>
+        <td>
+          <%= form_tag(cart_path(item_id: item.id)) do %>
+            <%= select_tag "quantity", options_for_select((1..item.quantity).to_a, 1) %>
+            <%= submit_tag("Add to cart") %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
