@@ -40,8 +40,7 @@ class UsersController < ApplicationController
       flash.now[:message] = 'You cannot post multiple reviews'
       redirect_to @user
     else
-      @review = @user.reviews.build(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
-      @review.save
+      @review = @user.reviews.create(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
       redirect_to @user
     end
   end

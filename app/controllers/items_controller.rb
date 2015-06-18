@@ -79,8 +79,7 @@ class ItemsController < ApplicationController
       flash.now[:message] = 'You cannot post multiple reviews'
       redirect_to @item
     else
-      @review = @item.reviews.build(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
-      @review.save
+      @review = @item.reviews.create(user_id: current_user.id, body: params[:review][:body], rating: params[:review][:rating])
       redirect_to @item
     end
   end
