@@ -9,6 +9,7 @@
         <% if logged_in? %>
           <li><%= link_to "Sell Item", new_item_path %></li>
           <li><%= link_to "Logout", logout_path %></li>
+          <li><%= link_to "Edit Account", edit_user_path(current_user) %></li>
           <li><%= link_to current_user.first_name + " " + current_user.last_name, current_user%></li>
         <% else %>
           <li><%= link_to "Login", login_path %></li>
