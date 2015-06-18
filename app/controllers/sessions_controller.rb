@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :valid_cart?, :only => [:remove_from_cart, :clear_cart, :show_cart]
+  
   def new
   end
 
