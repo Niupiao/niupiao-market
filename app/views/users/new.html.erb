@@ -8,18 +8,23 @@
             
             <%= f.label :first_name %>
             <%= f.text_field :first_name, class: 'form_control' %>
-            
+            <br>
+
             <%= f.label :last_name %>
             <%= f.text_field :last_name, class: 'form_control' %>
+            <br>
             
             <%= f.label :email %>
             <%= f.text_field :email, class: 'form_control' %>
+            <br>
             
             <%= f.label :password %>
             <%= f.password_field :password, class: 'form_control' %>
+            <br>
             
             <%= f.label :password_confirmation, "Confirmation" %>
             <%= f.password_field :password_confirmation, class: 'form_control' %>
+            <br>
             
             <%= f.submit "Create my Account", class: "btn btn-primary" %>
         <% end %>
