@@ -19,7 +19,13 @@ Rails.application.routes.draw do
   post 'update_cart' => 'sessions#update_cart'
   get 'purchase' => 'sessions#purchase_cart'
   get 'checkout' => 'sessions#checkout'
+  
+  get 'tracker' => 'receipts#tracker'
+  get 'track' => 'receipts#track'
+  post 'track' => 'receipts#track'
+  
   get 'delete_user' => 'users#destroy'
+  get 'receipts' => 'receipts#receipts'
   scope "(/:locale)", locale: /en|mn/ do
     resources :items
     resources :users

@@ -7,7 +7,13 @@
     </tr>
     <% if session[:cart] %>
         <% session[:cart].each do |item_id, quantity| %>
-        <% item = Item.find_by(id: item_id) %>
+            <% item = Item.find_by(id: item_id) %>
+            <!-- Line below generates receipt for purchasing this item, if possible -->
+            <% if logged_in? %>
+                <% get_receipt(current_user, item.user, item, quantity, quantity * item.price) %>
+            <% else %>
+                <% get_receipt(nil, item.user, item, quantity, quantity * item.price) %>
+            <% end %>
             <tr>
                 <td>
                     <%= item.user.first_name %> <%= item.user.last_name %>
