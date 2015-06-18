@@ -16,10 +16,6 @@ module SessionsHelper
     user == current_user
   end
   
-  def logged_in?
-      !!current_user
-  end
-  
   # Confirms the correct user.
   def correct_user
     @user = User.find(params[:id])
