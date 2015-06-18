@@ -4,6 +4,8 @@ module SessionsHelper
     session[:user_id] = user.id
     if user.cart && !user.cart.empty?
       session[:cart] = JSON.parse(user.cart)
+    else
+      session[:cart] = {}
     end
   end
     
