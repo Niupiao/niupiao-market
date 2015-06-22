@@ -9,6 +9,8 @@ class CreateReceipts < ActiveRecord::Migration
       t.text :item_type
       t.string :status # Order Sent -> Paid For -> In Transit -> Delivered -> Complete
       t.text :checkin_code # Allows non-logged in users to check status of their receipt
+      t.text :seller_availability # Available times seller can drop off item
+      t.text :buyer_availability # Available times buyer can drop off item.
       t.text :delivery_instruction
       t.float :charge
       t.timestamps null: false

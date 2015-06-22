@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616183237) do
+ActiveRecord::Schema.define(version: 20150622165130) do
+
+  create_table "deliverymen", force: :cascade do |t|
+    t.string   "id_code"
+    t.text     "name"
+    t.string   "phone"
+    t.string   "license"
+    t.text     "bank_info"
+    t.float    "amount_owed"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
@@ -32,9 +43,12 @@ ActiveRecord::Schema.define(version: 20150616183237) do
     t.text     "item_type"
     t.string   "status"
     t.text     "checkin_code"
+    t.text     "seller_availability"
+    t.text     "buyer_availability"
+    t.text     "delivery_instruction"
     t.float    "charge"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -54,6 +68,7 @@ ActiveRecord::Schema.define(version: 20150616183237) do
     t.text     "password_digest"
     t.text     "address"
     t.text     "cart"
+    t.string   "phone"
     t.text     "provider"
     t.text     "uid"
     t.text     "oauth_token"

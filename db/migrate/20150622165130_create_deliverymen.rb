@@ -1,6 +1,7 @@
 class CreateDeliverymen < ActiveRecord::Migration
   def change
     create_table :deliverymen do |t|
+      t.string :id_code
       t.text :name
       t.string :phone
       t.string :license
