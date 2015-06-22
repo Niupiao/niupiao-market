@@ -1,7 +1,7 @@
 class CreateDrivers < ActiveRecord::Migration
   def change
     create_table :drivers do |t|
-      t.string :key
+      t.string :key, unique: true
       t.text :name
       t.string :phone
       t.string :license
