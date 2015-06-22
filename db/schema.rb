@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150622165130) do
     t.text     "checkin_code"
     t.text     "seller_availability"
     t.text     "buyer_availability"
+    t.integer  "claimed"
     t.text     "delivery_instruction"
     t.float    "charge"
     t.datetime "created_at",           null: false
