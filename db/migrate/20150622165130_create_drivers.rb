@@ -1,6 +1,6 @@
-class CreateDeliverymen < ActiveRecord::Migration
+class CreateDrivers < ActiveRecord::Migration
   def change
-    create_table :deliverymen do |t|
+    create_table :drivers do |t|
       t.string :id_code
       t.text :name
       t.string :phone
