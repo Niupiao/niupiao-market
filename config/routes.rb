@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     resources :items
     resources :users
   end
+
+  get 'delivery/login' => 'deliveries#login'
   
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'
