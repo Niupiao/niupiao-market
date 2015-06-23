@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   end
 
   get 'delivery/login' => 'deliveries#login'
+  get 'delivery/index' => 'deliveries#index'
   
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'
