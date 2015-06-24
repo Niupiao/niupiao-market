@@ -1,19 +1,14 @@
 <% provide(:title, "Purchase Complete") %>
+
 <table class="table table-striped">
         <td>Item Seller</td>
         <td>Item Name</td>
         <td>Price</td>
         <td>Quantity</td>
     </tr>
-    <% if session[:cart] %>
-        <% session[:cart].each do |item_id, quantity| %>
+    <% if params[:cart_contents] %>
+        <% params[:cart_contents].each do |item_id, quantity| %>
             <% item = Item.find_by(id: item_id) %>
-            <!-- Line below generates receipt for purchasing this item, if possible -->
-            <% if logged_in? %>
-                <% get_receipt(current_user, item.user, item, quantity, quantity * item.price) %>
-            <% else %>
-                <% get_receipt(nil, item.user, item, quantity, quantity * item.price) %>
-            <% end %>
             <tr>
                 <td>
                     <%= item.user.first_name %> <%= item.user.last_name %>
@@ -36,13 +31,13 @@
         </td>
         <td>
         </td>
-        <% if session[:cart] %>
+        <% if params[:cart_contents] %>
             <% total_price = 0 %>
             <% total_quantity = 0 %>
-            <% session[:cart].each do |item_id, quantity| %>
+            <% params[:cart_contents].each do |item_id, quantity| %>
                 <% item = Item.find(item_id) %>
-                <% total_quantity += quantity %>
-                <% total_price += (item.price * quantity) %>
+                <% total_quantity += quantity.to_i %>
+                <% total_price += (item.price * quantity.to_i) %>
             <% end %>
             <td>
                 <%=total_price%> 
@@ -56,4 +51,9 @@
 
 <h1>Items purchased, Congratulations!</h1>
 
-<% purchase_cart %>
+<h2> Check out these items too! </h2>
+<% tags = recommended_search_tags_from_items(params[:cart_contents].keys) %>
+<% items = internal_search(tags) %>
+<%= render "recommended_items_from_purchase", :items => items %>
+
+<% purchase_cart_contents(current_user) %>

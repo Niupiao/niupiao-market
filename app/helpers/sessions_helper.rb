@@ -50,10 +50,13 @@ module SessionsHelper
     redirect_to root_path
   end
   
-  def purchase_cart
+  def purchase_cart_contents(user)
     if session[:cart]
       session[:cart].each do |item_id, quantity_bought|
         item = Item.find_by(id: item_id)
+        
+        # Generates receipt
+        get_receipt(user, item.user, item, quantity_bought, quantity_bought * item.price)
         quantity_remaining = item.quantity - quantity_bought
         if quantity_remaining == 0
           item.destroy
@@ -65,21 +68,46 @@ module SessionsHelper
     end
   end
   
-  def recommended
-    if session[:cart]
-      session[:cart].each do |item_id|
-        search_tags = {}
-        item = Item.find_by(id: item_id)
-        item.tags.each do |tag|
-          if search_tags.has_key?(tag)
-            current_val = search_tags[tag]
-            search_tags[tag] = current_val + 1
-          else
-            search_tags[tag] = 1
-          end
+  # Goes through (at most) 20 most recent receipts and returns top 5 search tags
+  # or however many are available.
+  def recommended_search_tags(id)
+    receipts = Receipt.where(buyer_id: id).order("created_at DESC").limit(20)
+    search_tags = {}
+    receipts.each do |receipt|
+      receipt.item_tags.each do |tag|
+        if search_tags.has_key?(tag)
+          current_val = search_tags[tag]
+          search_tags[tag] = current_val + 1
+        else
+          search_tags[tag] = 1
         end
-        search_tags.sort_by {|k, v| v}.to_h
       end
+    end
+    if search_tags.length >= 4
+      return Hash[search_tags.sort_by { |k,v| v }.reverse![0..3]]
+    else
+      return Hash[search_tags.sort_by { |k, v| v }.reverse!]
+    end
+  end
+  
+  # Assigns search tags based on items passed in.
+  def recommended_search_tags_from_items(item_ids)
+    search_tags = {}
+    item_ids.each do |id|
+      item = Item.find_by(id: id)
+      item.tags.each do |tag|
+        if search_tags.has_key?(tag)
+          current_val = search_tags[tag]
+          search_tags[tag] = current_val + 1
+        else
+          search_tags[tag] = 1
+        end
+      end
+    end
+    if search_tags.length >= 4
+      return Hash[search_tags.sort_by { |k,v| v }.reverse![0..3]]
+    else
+      return Hash[search_tags.sort_by { |k, v| v }.reverse!]
     end
   end
     
