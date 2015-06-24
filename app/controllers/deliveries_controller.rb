@@ -28,8 +28,12 @@ class DeliveriesController < ApplicationController
       format.json do
         if Driver.find_by(key: params[:key])
           if @delivery = Receipt.find_by(id: params[:delivery_id])
-            @delivery.update_attributes(claimed: 1)
-            @delivery.save
+            if !@delivery.claimed
+              @delivery.update_attributes(claimed: 1)
+              @delivery.save
+            else
+              render :json => {error: "Receipt is already claimed"}
+            end
             render :json => @delivery
           else
             render :json => {error: "Receipt does not exist"}
