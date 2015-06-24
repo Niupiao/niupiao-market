@@ -56,15 +56,4 @@
 
 <h1>Items purchased, Congratulations!</h1>
 
-<% if session[:cart] %>
-    <% session[:cart].each do |item_id, quantity_bought| %>
-        <% item = Item.find_by(id: item_id) %>
-        <% quantity_remaining = item.quantity - quantity_bought %>
-        <% if quantity_remaining == 0 %>
-            <% item.destroy %>
-        <% else %>
-            <% item.update_attribute(:quantity, item.quantity - quantity_bought) %>
-        <% end %>
-    <% end %>
-    <% clear_cart %>
-<% end %>
+<% purchase_cart %>

@@ -49,6 +49,39 @@ module SessionsHelper
     end
     redirect_to root_path
   end
+  
+  def purchase_cart
+    if session[:cart]
+      session[:cart].each do |item_id, quantity_bought|
+        item = Item.find_by(id: item_id)
+        quantity_remaining = item.quantity - quantity_bought
+        if quantity_remaining == 0
+          item.destroy
+        else
+          item.update_attribute(:quantity, quantity_remaining)
+        end
+      end
+      clear_cart
+    end
+  end
+  
+  def recommended
+    if session[:cart]
+      session[:cart].each do |item_id|
+        search_tags = {}
+        item = Item.find_by(id: item_id)
+        item.tags.each do |tag|
+          if search_tags.has_key?(tag)
+            current_val = search_tags[tag]
+            search_tags[tag] = current_val + 1
+          else
+            search_tags[tag] = 1
+          end
+        end
+        search_tags.sort_by {|k, v| v}.to_h
+      end
+    end
+  end
     
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
