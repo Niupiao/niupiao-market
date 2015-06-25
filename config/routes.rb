@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   get 'delivery/login' => 'deliveries#login'
   get 'delivery/index' => 'deliveries#index'
+  get 'delivery/claim' => 'deliveries#claim'
   
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'

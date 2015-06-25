@@ -12,7 +12,8 @@ module UsersHelper
                           charge: total_charge,
                           status: "Order Sent",
                           checkin_code: checkin_code,
-                          buyer: buyer
+                          buyer: buyer,
+                          claimed: 0
                           )
     flash.now[:success] = "In order to keep track of your purchase, input this into the Tracker " + checkin_code
   end
