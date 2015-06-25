@@ -54,7 +54,7 @@ class DeliveriesController < ApplicationController
         if @driver = Driver.find_by(key: params[:key])
           if @delivery = Receipt.find_by(id: params[:delivery_id])
               if @delivery.update(status: params[:status])
-                render :json => @delivery.to_delivery
+                render :json => @delivery.status
               else
                 render :json => {error: "Invalid status"}
               end
