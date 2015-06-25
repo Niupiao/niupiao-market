@@ -47,4 +47,24 @@ class DeliveriesController < ApplicationController
       end
     end
   end
+  
+  def update_status
+    respond_to do |format|
+      format.json do
+        if @driver = Driver.find_by(key: params[:key])
+          if @delivery = Receipt.find_by(id: params[:delivery_id])
+              if @delivery.update(status: params[:status])
+                render :json => @delivery.status
+              else
+                render :json => {error: "Invalid status"}
+              end
+          else
+            render :json => {error: "Delivery does not exist"}
+          end
+        else
+          render :json => {error: "Invalid key"}
+        end
+      end
+    end
+  end
 end
