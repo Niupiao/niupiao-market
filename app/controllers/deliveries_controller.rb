@@ -59,7 +59,7 @@ class DeliveriesController < ApplicationController
                 render :json => {error: "Invalid status"}
               end
           else
-            render :json => {error: "Receipt does not exist"}
+            render :json => {error: "Delivery does not exist"}
           end
         else
           render :json => {error: "Invalid key"}
