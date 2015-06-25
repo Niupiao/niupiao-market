@@ -13,8 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20150622165130) do
 
-  create_table "deliverymen", force: :cascade do |t|
-    t.string   "id_code"
+  create_table "drivers", force: :cascade do |t|
+    t.string   "key"
     t.text     "name"
     t.string   "phone"
     t.string   "license"

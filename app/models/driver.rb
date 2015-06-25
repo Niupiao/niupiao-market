@@ -1,4 +1,4 @@
-class Deliveryman < ActiveRecord::Base
+class Driver < ActiveRecord::Base
   
   validates :name, presence: true
   validates :phone, presence: true
