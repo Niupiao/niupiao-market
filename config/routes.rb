@@ -35,7 +35,10 @@ Rails.application.routes.draw do
   get 'delivery/login' => 'deliveries#login'
   get 'delivery/index' => 'deliveries#index'
   get 'delivery/claim' => 'deliveries#claim'
+  patch 'delivery/claim' => 'deliveries#claim'
   get 'delivery/status' => 'deliveries#update_status'
+  patch 'delivery/status' => 'deliveries#update_status'
+  get 'delivery/claimed' => 'deliveries#claimed_deliveries'
   
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'

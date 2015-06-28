@@ -4,4 +4,6 @@ class Driver < ActiveRecord::Base
   validates :phone, presence: true
   validates :bank_info, presence: true
   
+  has_many :deliveries, class_name: 'Receipt'
+  
 end
