@@ -12,6 +12,7 @@ class CreateReceipts < ActiveRecord::Migration
       t.text :seller_availability # Available times seller can drop off item
       t.text :buyer_availability # Available times buyer can drop off item.
       t.integer :claimed # 0 if Unclaimed. 1 if Claimed by a deliveryperson.
+      t.references :driver
       t.text :delivery_instruction
       t.float :charge
       t.timestamps null: false
