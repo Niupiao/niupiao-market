@@ -16,8 +16,13 @@
     <button class="btn" type="submit"><i class="icon-search"></i></button>
   </div>
 <% end %>
+
+<% if logged_in? && !Receipt.where(:buyer_id => current_user.id).blank? %>
+  <%= render "recommended_items" %>
+<% end %>
+
     <div id="search-results">
-        <%= render "home_items" %>
+        <%= render "featured_items" %>
     </div>
     <br>
     <h3>Like us on Facebook!</h3>
