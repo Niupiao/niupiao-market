@@ -9,3 +9,6 @@ item = user.items.create(name: 'Clear-Skin Aloe', price: 10, quantity: 10, desc:
 item = user.items.create(name: 'Marcay Primer', price: 10, quantity: 10, desc: 'Test item', item_type: 'Beauty', tags: ['Marcay', 'Makeup', 'Primer'])
 review = item.reviews.build(user_id: user.id, body: 'Alright', rating: 5)
 review.save
+review = item.reviews.create(user_id: user.id, body: 'Alright', rating: 5)
+
+Driver.create(name: 'Foo Bar', phone: '1234567890', bank_info: '0987654321', key: 'a')

@@ -35,6 +35,12 @@ class ReceiptsController < ApplicationController
                                         :item_type,
                                         :seller_name,
                                         :seller_id,
+                                        :status,
+                                        :seller_availability,
+                                        :buyer_availability,
+                                        :delivery_instruction,
+                                        :claimed,
+                                        :checkin_code,
                                         :charge
                                         )
     end
