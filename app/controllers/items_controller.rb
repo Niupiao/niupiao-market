@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-    
+  
   def new
     @item = Item.new
   end
@@ -60,7 +60,7 @@ class ItemsController < ApplicationController
         end
       end
       
-      p @search.sort_by.with_index{|_,i| scores[i]}
+      @search.sort_by.with_index{|_,i| scores[i]}
       @search.reverse!
       return @search
     end

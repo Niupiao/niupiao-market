@@ -34,4 +34,4 @@
     </tr>
 </table>
 
-<%= link_to "Confirm Payment", purchase_path, class: "btn pull-right btn-primary center" %>
+<%= link_to "Confirm Payment", purchase_path(:cart_contents => session[:cart], :user => current_user), class: "btn pull-right btn-primary center" %>
