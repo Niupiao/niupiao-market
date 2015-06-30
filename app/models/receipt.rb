@@ -24,6 +24,7 @@ class Receipt < ActiveRecord::Base
         seller_availability: seller_availability,
         buyer_availability: buyer_availability,
         claimed: claimed,
+        status: status,
         created_at: created_at,
         delivery_instruction: delivery_instruction,
         charge: charge,
