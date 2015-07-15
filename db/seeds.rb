@@ -13,3 +13,5 @@ review.save
 review = item.reviews.create(user_id: user.id, body: 'Alright', rating: 5)
 
 Driver.create(name: 'Foo Bar', phone: '1234567890', bank_info: '0987654321', key: 'a')
+Driver.create(name: 'Android Test', phone: '1234567890', bank_info: '0987654321', key: 'androidTestDriver')
+
