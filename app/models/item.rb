@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
   
   has_many :reviews, as: :reviewable, dependent: :destroy
   has_many :likers, foreign_key: "user_id", class_name: "User"
+  has_many :comments, dependent: :destroy
   
   attr_accessor :VALID_ITEM_TYPES 
   serialize :tags, Array
