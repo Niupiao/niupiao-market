@@ -1,7 +1,10 @@
 class Item < ActiveRecord::Base
   belongs_to :user
+  belongs_to :subitem, :polymorphic => true
+  
   has_many :reviews, as: :reviewable, dependent: :destroy
-    
+  has_many :likers, foreign_key: "user_id", class_name: "User"
+  
   attr_accessor :VALID_ITEM_TYPES 
   serialize :tags, Array
     
