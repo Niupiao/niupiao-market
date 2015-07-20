@@ -8,6 +8,9 @@ class CreateItems < ActiveRecord::Migration
       t.float :price
       t.integer :quantity
       t.text :desc
+      
+      t.integer :subitem_id
+      t.text :subitem_type
     end
   end
 end
