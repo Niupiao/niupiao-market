@@ -46,4 +46,10 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => '/'
   get 'signout' => 'sessions#destroy'
+  
+  # mobile routes
+  get 'mlogin' => 'mobile#login'
+  get 'mitems' => 'mobile#items'
+  get 'mitem' => 'mobile#item'
+  get 'muser' => 'mobile#user'
 end
