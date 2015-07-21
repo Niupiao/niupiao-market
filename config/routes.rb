@@ -52,4 +52,9 @@ Rails.application.routes.draw do
   get 'mitems' => 'mobile#items'
   get 'mitem' => 'mobile#item'
   get 'muser' => 'mobile#user'
+  get 'mselfreviews' => 'mobile#self_reviews'
+  get 'mupdateaddress' => 'mobile#update_address'
+  get 'mreceipts' => 'mobile#receipts'
+  get 'msalereceipts' => 'mobile#sale_receipts'
+  get 'mpurchasereceipts' => 'mobile#purchase_receipts'
 end
