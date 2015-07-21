@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_many :reviews, as: :reviewable, dependent: :destroy
   has_many :likes, foreign_key: "id", class_name: "Item" # This needs to be redone.
   has_many :comments, dependent: :destroy
-  has_one  :address
+  has_one  :address, dependent: :destroy
 
     def self.from_omniauth(auth, user)
         if user

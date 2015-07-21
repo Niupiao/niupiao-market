@@ -31,6 +31,31 @@ class MobileController < ApplicationController
     end
   end
   
+  def update_address
+    if authenticate
+      city = params[:city]
+      district = params[:district]
+      committee = params[:committee]
+      street = params[:street]
+      door = params[:door]
+      if @user.address
+        @user.address.attributes = {
+                                    city: city, district: district,
+                                    committee: committee, street: street,
+                                    door: door
+                                    }
+        render :json => {success: "Address updated"}
+      else
+        @user.address = Address.create!(
+                                        city: city, district: district,
+                                        committee: committee, street: street,
+                                        door: door
+                                        )
+        render :json => {success: "Address created"}
+      end
+    end
+  end
+  
   def items
     params[:page_size] = 50
     params[:page] ||= '1'

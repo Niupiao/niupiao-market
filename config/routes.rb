@@ -53,4 +53,5 @@ Rails.application.routes.draw do
   get 'mitem' => 'mobile#item'
   get 'muser' => 'mobile#user'
   get 'mselfreviews' => 'mobile#self_reviews'
+  get 'mupdateaddress' => 'mobile#update_address'
 end
