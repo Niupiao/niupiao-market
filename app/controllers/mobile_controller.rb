@@ -56,6 +56,31 @@ class MobileController < ApplicationController
     end
   end
   
+  def receipts
+    if authenticate
+      receipts = Receipt.where("buyer_id = ? OR seller_id = ?", @user.id, @user.id)
+      render :json => receipts
+    else
+      render :json => {error: "No matching account"}
+    end
+  end
+  
+  def purchase_receipts
+    if authenticate
+      render :json => @user.receipts_buy
+    else
+      render :json => {error: "No matching account"}
+    end
+  end
+  
+  def sale_receipts
+    if authenticate
+      render :json => @user.receipts_sell
+    else
+      render :json => {error: "No matching account"}
+    end
+  end
+  
   def items
     params[:page_size] = 50
     params[:page] ||= '1'
