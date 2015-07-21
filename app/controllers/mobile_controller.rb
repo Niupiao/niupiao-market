@@ -7,7 +7,9 @@ class MobileController < ApplicationController
                       name: "#{@user.first_name} #{@user.last_name}",
                       cart: @user.cart,
                       address: @user.address,
-                      phone: @user.phone}
+                      phone: @user.phone,
+                      likes: @user.likes
+      }
     else
       render :json => {error: "Invalid credentials"}
     end
@@ -18,6 +20,14 @@ class MobileController < ApplicationController
       @user.update_attribute(:cart, params[:cart])
     else
       render :json => {error: "Invalid credentials"}
+    end
+  end
+  
+  def self_reviews
+    if authenticate
+      reviews = @user.reviews
+      
+      render :json => reviews
     end
   end
   
