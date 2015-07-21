@@ -1,6 +1,10 @@
-User.create(first_name: 'Ryan', last_name: 'Kwon', email: 'rynkwn@gmail.com', password: 'phoenix', address: "1216 Whitestone Dr., Murphy, TX")
-user = User.create(first_name: 'Foo', last_name: 'Bar', email: 'foo@bar.com', password: 'password', address: "55 Main St, North Adams, MA 01247")
-User.create(first_name: "Person", last_name: "A", email: "per@son.com", password: 'person', address: "67 Main St, North Adams, MA 01247")
+#, address: "1216 Whitestone Dr., Murphy, TX"
+#, address: "55 Main St, North Adams, MA 01247"
+#, address: "67 Main St, North Adams, MA 01247"
+
+User.create(first_name: 'Ryan', last_name: 'Kwon', email: 'rynkwn@gmail.com', password: 'phoenix')
+user = User.create(first_name: 'Foo', last_name: 'Bar', email: 'foo@bar.com', password: 'password')
+User.create(first_name: "Person", last_name: "A", email: "per@son.com", password: 'person')
 user.items.create(name: 'Item', price: 10, quantity: 10, desc: 'Test item', item_type: 'General', tags: ['Great', 'Useful', 'Cheap'])
 user.items.create(name: 'Baby Stroller', price: 10, quantity: 10, desc: 'Test item', item_type: 'General', tags: ['Baby', 'Stroller', 'Cheap'])
 user.items.create(name: 'Baby Food', price: 10, quantity: 10, desc: 'Test item', item_type: 'General', tags: ['Baby', 'Food', 'Healthy'])

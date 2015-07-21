@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150715221124) do
+ActiveRecord::Schema.define(version: 20150721192639) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "city"
+    t.string   "district"
+    t.string   "committee"
+    t.string   "street"
+    t.string   "door"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "categories", force: :cascade do |t|
     t.text     "name"
@@ -92,9 +103,9 @@ ActiveRecord::Schema.define(version: 20150715221124) do
     t.text     "last_name"
     t.text     "email"
     t.text     "password_digest"
-    t.text     "address"
     t.text     "cart"
     t.string   "phone"
+    t.integer  "address_id"
     t.text     "provider"
     t.text     "uid"
     t.text     "oauth_token"

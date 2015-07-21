@@ -7,7 +7,9 @@ class MobileController < ApplicationController
                       name: "#{@user.first_name} #{@user.last_name}",
                       cart: @user.cart,
                       address: @user.address,
-                      phone: @user.phone}
+                      phone: @user.phone,
+                      likes: @user.likes
+      }
     else
       render :json => {error: "Invalid credentials"}
     end
@@ -18,6 +20,64 @@ class MobileController < ApplicationController
       @user.update_attribute(:cart, params[:cart])
     else
       render :json => {error: "Invalid credentials"}
+    end
+  end
+  
+  def self_reviews
+    if authenticate
+      reviews = @user.reviews
+      
+      render :json => reviews
+    end
+  end
+  
+  def update_address
+    if authenticate
+      city = params[:city]
+      district = params[:district]
+      committee = params[:committee]
+      street = params[:street]
+      door = params[:door]
+      if @user.address
+        @user.address.attributes = {
+                                    city: city, district: district,
+                                    committee: committee, street: street,
+                                    door: door
+                                    }
+        render :json => {success: "Address updated"}
+      else
+        @user.address = Address.create!(
+                                        city: city, district: district,
+                                        committee: committee, street: street,
+                                        door: door
+                                        )
+        render :json => {success: "Address created"}
+      end
+    end
+  end
+  
+  def receipts
+    if authenticate
+      receipts = Receipt.where("buyer_id = ? OR seller_id = ?", @user.id, @user.id)
+      render :json => receipts
+    else
+      render :json => {error: "No matching account"}
+    end
+  end
+  
+  def purchase_receipts
+    if authenticate
+      render :json => @user.receipts_buy
+    else
+      render :json => {error: "No matching account"}
+    end
+  end
+  
+  def sale_receipts
+    if authenticate
+      render :json => @user.receipts_sell
+    else
+      render :json => {error: "No matching account"}
     end
   end
   

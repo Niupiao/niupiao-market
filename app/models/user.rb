@@ -13,12 +13,13 @@ class User < ActiveRecord::Base
 
   has_secure_password
   has_many :items, dependent: :destroy
-  has_many :reviews, dependent: :destroy
+  has_many :my_reviews, foreign_key: "user_id", class_name: "Review", dependent: :destroy
   has_many :receipts_sell, :class_name => 'Receipt', :foreign_key => 'seller_id'
   has_many :receipts_buy, :class_name => 'Receipt', :foreign_key => 'buyer_id'
   has_many :reviews, as: :reviewable, dependent: :destroy
-  has_many :likes, foreign_key: "item_id", class_name: "Item"
+  has_many :likes, foreign_key: "id", class_name: "Item" # This needs to be redone.
   has_many :comments, dependent: :destroy
+  has_one  :address, dependent: :destroy
 
     def self.from_omniauth(auth, user)
         if user
