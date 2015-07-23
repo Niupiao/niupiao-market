@@ -52,6 +52,13 @@ Rails.application.routes.draw do
   get 'mitems' => 'mobile#items'
   get 'mitem' => 'mobile#item'
   get 'muser' => 'mobile#user'
+  
+  #payment methods
+  get 'maddpayment' => 'mobile#add_payment_method'
+  get 'mupdatepayment' => 'mobile#update_payment_method'
+  get 'mgetpaymentmethods' => 'mobile#get_payment_methods'
+  get 'mdeletepayment' => 'mobile#remove_payment_method'
+  
   get 'mselfreviews' => 'mobile#self_reviews'
   get 'mupdateaddress' => 'mobile#update_address'
   get 'mreceipts' => 'mobile#receipts'

@@ -23,6 +23,67 @@ class MobileController < ApplicationController
     end
   end
   
+  def add_payment_method
+    if authenticate
+      payment_type = params[:payment_type].downcase
+      if payment_type == "cash"
+        @user.payment_methods.create!(payment_type: payment_type)
+        render :json => {success: "Success"}
+      elsif payment_type == "wire"
+        @user.payment_methods.create!(payment_type: payment_type, bank_account: params[:bank_account])
+        render :json => {success: "Success"}
+      elsif payment_type == "deposit"
+        @user.payment_methods.create!(payment_type: payment_type, bank_account: params[:bank_account])
+        render :json => {success: "Success"}
+      elsif payment_type == "card"
+        card_number = params[:card_number]
+        cvv = params[:cvv]
+        holder = params[:holder]
+        exp_month = params[:exp_month]
+        exp_year = params[:exp_year]
+        email = params[:email]
+        @user.payment_methods.create!(payment_type: payment_type, card_number: card_number, cvv: cvv,
+                                      holder: holder, exp_month: exp_month,
+                                      exp_year: exp_year, email: email)
+        render :json => {success: "Success"}
+      end
+    else
+      no_matching_account
+    end
+  end
+  
+  def remove_payment_method
+    if authenticate
+      pm = PaymentMethod.find_by(id: params[:id])
+      if pm.user_id == @user.id
+        pm.destroy
+        render :json => {success: "Success"}
+      else
+        render :json => "Error, payment method does not belong to user."
+      end
+    else
+      no_matching_account
+    end
+  end
+  
+  def update_payment_method
+    if authenticate
+      pm = PaymentMethod.find_by(id: params[:id])
+      pm.update_attribute(params[:paymentmethod])
+      render :json => {success: "Success"}
+    else
+      no_matching_account
+    end
+  end
+  
+  def get_payment_methods
+    if authenticate
+      render :json => @user.payment_methods
+    else
+      no_matching_account
+    end
+  end
+  
   def self_reviews
     if authenticate
       reviews = @user.reviews
@@ -136,5 +197,13 @@ class MobileController < ApplicationController
     else
       return false
     end
+  end
+  
+  def success
+    render :json => {success: "Success"}
+  end
+  
+  def no_matching_account
+    render :json => {error: "No matching account"}
   end
 end
