@@ -1,5 +1,18 @@
 class MobileController < ApplicationController
   
+  def register
+    first = params[:first_name]
+    last = params[:last_name]
+    email = params[:email]
+    password = params[:password]
+    @user = User.new(first_name: first, last_name: last, email: email, password: password)
+    if @user.save
+      render :json => @user.to_json
+    else
+      error_message(@user.errors.full_messages)
+    end
+  end
+  
   def login
     if authenticate
       render :json => {first_name: @user.first_name, 
