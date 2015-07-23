@@ -48,6 +48,7 @@ Rails.application.routes.draw do
   get 'signout' => 'sessions#destroy'
   
   # mobile routes
+  get 'mregister' => 'mobile#register'
   get 'mlogin' => 'mobile#login'
   get 'mitems' => 'mobile#items'
   get 'mitem' => 'mobile#item'

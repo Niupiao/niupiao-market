@@ -1,5 +1,18 @@
 class MobileController < ApplicationController
   
+  def register
+    first = params[:first_name]
+    last = params[:last_name]
+    email = params[:email]
+    password = params[:password]
+    @user = User.new(first_name: first, last_name: last, email: email, password: password)
+    if @user.save
+      render :json => @user.to_json
+    else
+      error_message(@user.errors.full_messages)
+    end
+  end
+  
   def login
     if authenticate
       render :json => {first_name: @user.first_name, 
@@ -11,7 +24,7 @@ class MobileController < ApplicationController
                       likes: @user.likes
       }
     else
-      render :json => {error: "Invalid credentials"}
+      error_message("Wrong account credentials")
     end
   end
   
@@ -19,7 +32,7 @@ class MobileController < ApplicationController
     if authenticate
       @user.update_attribute(:cart, params[:cart])
     else
-      render :json => {error: "Invalid credentials"}
+      error_message("Wrong account credentials")
     end
   end
   
@@ -28,13 +41,13 @@ class MobileController < ApplicationController
       payment_type = params[:payment_type].downcase
       if payment_type == "cash"
         @user.payment_methods.create!(payment_type: payment_type)
-        render :json => {success: "Success"}
+        success_message("Success")
       elsif payment_type == "wire"
         @user.payment_methods.create!(payment_type: payment_type, bank_account: params[:bank_account])
-        render :json => {success: "Success"}
+        success_message("Success")
       elsif payment_type == "deposit"
         @user.payment_methods.create!(payment_type: payment_type, bank_account: params[:bank_account])
-        render :json => {success: "Success"}
+        success_message("Success")
       elsif payment_type == "card"
         card_number = params[:card_number]
         cvv = params[:cvv]
@@ -45,10 +58,10 @@ class MobileController < ApplicationController
         @user.payment_methods.create!(payment_type: payment_type, card_number: card_number, cvv: cvv,
                                       holder: holder, exp_month: exp_month,
                                       exp_year: exp_year, email: email)
-        render :json => {success: "Success"}
+        success_message("Success")
       end
     else
-      no_matching_account
+      error_message("Wrong account credentials")
     end
   end
   
@@ -57,12 +70,12 @@ class MobileController < ApplicationController
       pm = PaymentMethod.find_by(id: params[:id])
       if pm.user_id == @user.id
         pm.destroy
-        render :json => {success: "Success"}
+        success_message("Success")
       else
-        render :json => "Error, payment method does not belong to user."
+        error_message("Error, payment method does not belong to user")
       end
     else
-      no_matching_account
+      error_message("Wrong account credentials")
     end
   end
   
@@ -72,7 +85,7 @@ class MobileController < ApplicationController
       pm.update_attribute(params[:paymentmethod])
       render :json => {success: "Success"}
     else
-      no_matching_account
+      error_message("Wrong account credentials")
     end
   end
   
@@ -80,7 +93,7 @@ class MobileController < ApplicationController
     if authenticate
       render :json => @user.payment_methods
     else
-      no_matching_account
+      error_message("Wrong account credentials")
     end
   end
   
@@ -105,14 +118,14 @@ class MobileController < ApplicationController
                                     committee: committee, street: street,
                                     door: door
                                     }
-        render :json => {success: "Address updated"}
+        success_message("Address updated")
       else
         @user.address = Address.create!(
                                         city: city, district: district,
                                         committee: committee, street: street,
                                         door: door
                                         )
-        render :json => {success: "Address created"}
+        success_message("Address created")
       end
     end
   end
@@ -122,7 +135,7 @@ class MobileController < ApplicationController
       receipts = Receipt.where("buyer_id = ? OR seller_id = ?", @user.id, @user.id)
       render :json => receipts
     else
-      render :json => {error: "No matching account"}
+      error_message("Wrong account credentials")
     end
   end
   
@@ -130,7 +143,7 @@ class MobileController < ApplicationController
     if authenticate
       render :json => @user.receipts_buy
     else
-      render :json => {error: "No matching account"}
+      error_message("Wrong account credentials")
     end
   end
   
@@ -138,7 +151,7 @@ class MobileController < ApplicationController
     if authenticate
       render :json => @user.receipts_sell
     else
-      render :json => {error: "No matching account"}
+      error_message("Wrong account credentials")
     end
   end
   
@@ -158,7 +171,7 @@ class MobileController < ApplicationController
     if @item = Item.find_by(id: params[:item])
       render :json => @item.to_json(:include => :subitem)
     else
-      render :json => {error: "Item not found"}
+      error_message("Item not found")
     end
   end
   
@@ -168,7 +181,7 @@ class MobileController < ApplicationController
                       last_name: @user.last_name, 
                       name: "#{@user.first_name} #{@user.last_name}"}
     else
-      render :json => {error: "User not found"}
+      error_message("User not found")
     end
   end
   
@@ -199,11 +212,11 @@ class MobileController < ApplicationController
     end
   end
   
-  def success
-    render :json => {success: "Success"}
+  def success_message(msg)
+    render :json => {success: msg}
   end
   
-  def no_matching_account
-    render :json => {error: "No matching account"}
+  def error_message(msg)
+    render :json => {error: msg}
   end
 end
