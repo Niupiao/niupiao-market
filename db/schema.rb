@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721192639) do
+ActiveRecord::Schema.define(version: 20150723015558) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id"
@@ -59,6 +59,20 @@ ActiveRecord::Schema.define(version: 20150721192639) do
     t.text    "desc"
     t.integer "subitem_id"
     t.text    "subitem_type"
+  end
+
+  create_table "payment_methods", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "payment_type"
+    t.text     "bank_account"
+    t.text     "card_number"
+    t.text     "cvv"
+    t.text     "holder"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.text     "email"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "phones", force: :cascade do |t|
