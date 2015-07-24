@@ -1,4 +1,6 @@
 class MobileController < ApplicationController
+  include ::ActionController::Serialization
+  
   
   def register
     first = params[:first_name]
