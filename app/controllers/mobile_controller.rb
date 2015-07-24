@@ -13,6 +13,31 @@ class MobileController < ApplicationController
     end
   end
   
+  def update_user
+    if authenticate
+      first_name = params[:first_name]
+      last_name = params[:last_name]
+      
+      if first_name
+        @user.update_attribute(:first_name, first_name)
+      end
+      if last_name
+        @user.update_attribute(:last_name, last_name)
+      end
+      success_message("Successful update.")
+    else
+      error_message("Wrong account credentials")
+    end
+  end
+  
+  def email_confirmed?
+    if authenticate
+      success_message(@user.email_confirmed?)
+    else
+      error_message("Wrong account credentials")
+    end
+  end
+  
   def login
     if authenticate
       render :json => {first_name: @user.first_name, 

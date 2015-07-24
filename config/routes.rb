@@ -53,6 +53,8 @@ Rails.application.routes.draw do
   get 'mitems' => 'mobile#items'
   get 'mitem' => 'mobile#item'
   get 'muser' => 'mobile#user'
+  get 'mupdateuser' => 'mobile#update_user'
+  get 'misemailconfirmed' => 'mobile#email_confirmed?'
   
   #payment methods
   get 'maddpayment' => 'mobile#add_payment_method'
