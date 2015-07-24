@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(version: 20150723015558) do
     t.text     "uid"
     t.text     "oauth_token"
     t.text     "oauth_expires_at"
+    t.integer  "email_confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
