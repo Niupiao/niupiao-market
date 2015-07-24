@@ -30,6 +30,24 @@ class MobileController < ApplicationController
     end
   end
   
+  def update_phone
+    if authenticate
+      phone = params[:phone]
+      
+      if phone
+        if @user.update_attribute(:phone, phone)
+          success_message("Successful update.")
+        else
+          error_message("User phone unable to be updated")
+        end
+      else
+        error_message("No phone param found")
+      end
+    else
+      error_message("Wrong account credentials")
+    end
+  end
+  
   def email_confirmed?
     if authenticate
       success_message(@user.email_confirmed?)
