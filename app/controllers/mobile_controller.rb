@@ -6,6 +6,7 @@ class MobileController < ApplicationController
     email = params[:email]
     password = params[:password]
     @user = User.new(first_name: first, last_name: last, email: email, password: password)
+    @user.confirm_email
     if @user.save
       render :json => @user.to_json
     else
