@@ -49,6 +49,16 @@ class MobileController < ApplicationController
     end
   end
   
+  def email_confirm
+    if authenticate
+      @user.confirm_email
+      @user.save!
+      success_message(@user.email_confirmed?)
+    else
+      error_message("Wrong account credentials")
+    end
+  end
+  
   def email_confirmed?
     if authenticate
       success_message(@user.email_confirmed?)
