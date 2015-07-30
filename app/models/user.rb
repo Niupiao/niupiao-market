@@ -34,6 +34,19 @@ class User < ActiveRecord::Base
   
   def confirm_email
     self.email_confirmed = 1
+    self.save!
+  end
+  
+  # Generates an auth token.
+  def generate_auth_token
+    self.oauth_token = SecureRandom.urlsafe_base64 50
+    self.oauth_expires_at = generate_expiration_time
+    self.save!
+  end
+  
+  # Generates the expiration (date?)/time. Set for 30 minutes from the present.
+  def generate_expiration_time
+    Time.now + 1800
   end
 
   def self.from_omniauth(auth, user)
