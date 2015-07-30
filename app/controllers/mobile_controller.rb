@@ -1,4 +1,5 @@
 class MobileController < ApplicationController
+  require 'securerandom'
   
   def register
     first = params[:first_name]
@@ -6,6 +7,8 @@ class MobileController < ApplicationController
     email = params[:email]
     password = params[:password]
     @user = User.new(first_name: first, last_name: last, email: email, password: password)
+    @user.generate_auth_token
+    @user.generate_expiration_time
     @user.confirm_email
     if @user.save
       render :json => @user.to_json
@@ -27,7 +30,7 @@ class MobileController < ApplicationController
       end
       success_message("Successful update.")
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -45,17 +48,16 @@ class MobileController < ApplicationController
         error_message("No phone param found")
       end
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
   def email_confirm
     if authenticate
       @user.confirm_email
-      @user.save!
       success_message(@user.email_confirmed?)
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -63,7 +65,7 @@ class MobileController < ApplicationController
     if authenticate
       success_message(@user.email_confirmed?)
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -78,7 +80,7 @@ class MobileController < ApplicationController
                       likes: @user.likes
       }
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -86,7 +88,7 @@ class MobileController < ApplicationController
     if authenticate
       @user.update_attribute(:cart, params[:cart])
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -115,7 +117,7 @@ class MobileController < ApplicationController
         success_message("Success")
       end
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -129,7 +131,7 @@ class MobileController < ApplicationController
         error_message("Error, payment method does not belong to user")
       end
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -256,16 +258,44 @@ class MobileController < ApplicationController
     end
   end
   
-  private
-  def authenticate
-    @user = User.find_by(email: params[:email].downcase)
-    if @user && @user.authenticate(params[:password])
-      return @user
+  def renew_token
+    if authenticate
+      @user.generate_auth_token
+      success_message(@user.oauth_token)
     else
-      return false
+      error_message(@message)
     end
   end
   
+  private
+  def authenticate
+    @user = User.find_by(email: params[:email].downcase)
+    if params[:password]
+      if @user && @user.authenticate(params[:password])
+        return @user
+      else
+        @message = "Wrong account credentials!"
+        return false
+      end
+    else
+      authenticate_with_token
+    end
+  end
+  
+  def authenticate_with_token
+    if @user && @user.oauth_token == params[:oauth_token]
+      if Time.parse(@user.oauth_expires_at) - Time.now >= 0  # Auth token still valid.
+        return @user
+      else
+        @message = "Auth token expired"
+        return false
+      end
+    else
+      @message = "Wrong account credentials!"
+      return false
+    end
+  end
+
   def success_message(msg)
     render :json => {success: msg}
   end
