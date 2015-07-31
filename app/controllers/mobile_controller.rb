@@ -7,8 +7,18 @@ class MobileController < ApplicationController
     email = params[:email]
     password = params[:password]
     @user = User.new(first_name: first, last_name: last, email: email, password: password)
-    @user.generate_auth_token
-    @user.generate_expiration_time
+    auth = params[:oauth_token]
+    expires_at = params[:expires_at]
+    if auth
+      @user.oauth_token = auth
+    else
+      @user.generate_auth_token
+    end
+    if expires_at
+      @user.expires_at = expires_at
+    else
+      @user.generate_expiration_time
+    end
     @user.confirm_email
     if @user.save
       render :json => @user.to_json
@@ -259,11 +269,31 @@ class MobileController < ApplicationController
   end
   
   def renew_token
-    if authenticate
-      @user.generate_auth_token
-      success_message(@user.oauth_token)
+    password = params[:password]
+    old_oauth = params[:old_oauth]
+    oauth_token = params[:oauth_token]
+    expires_at = params[:expires_at]
+    
+    @user = User.find_by(email: params[:email].downcase)
+    if @user
+      if old_oauth == @user.oauth_token || @user.authenticate(password)
+        if oauth_token
+          @user.oauth_token = oauth_token
+        else
+          @user.generate_auth_token
+        end
+        
+        if expires_at
+          @user.expires_at = expires_at
+        else
+          @user.generate_expiration_time
+        end
+        success_message(@user)
+      else
+        error_message("Authentication credentials not correct.")
+      end
     else
-      error_message(@message)
+      error_message("No user found with that email.")
     end
   end
   
