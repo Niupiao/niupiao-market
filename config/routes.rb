@@ -48,28 +48,28 @@ Rails.application.routes.draw do
   get 'signout' => 'sessions#destroy'
   
   # mobile routes
-  get 'mregister' => 'mobile#register'
-  get 'mlogin' => 'mobile#login'
-  get 'mitems' => 'mobile#items'
-  get 'mitem' => 'mobile#item'
-  get 'muser' => 'mobile#user'
-  get 'mupdateuser' => 'mobile#update_user'
-  get 'mupdatephone' => 'mobile#update_phone'
-  get 'mrenewtoken' => 'mobile#renew_token'
+  get 'mobile/register' => 'mobile#register'
+  get 'mobile/login' => 'mobile#login'
+  get 'mobile/items' => 'mobile#items'
+  get 'mobile/item' => 'mobile#item'
+  get 'mobile/user' => 'mobile#user'
+  get 'mobile/updateuser' => 'mobile#update_user'
+  get 'mobile/updatephone' => 'mobile#update_phone'
+  get 'mobile/renewtoken' => 'mobile#renew_token'
   
   # Email routes
-  get 'misemailconfirmed' => 'mobile#email_confirmed?'
-  get 'mconfirmemail' => 'mobile#email_confirm'
+  get 'mobile/isemailconfirmed' => 'mobile#email_confirmed?'
+  get 'mobile/confirmemail' => 'mobile#email_confirm'
   
   # payment methods
-  get 'maddpayment' => 'mobile#add_payment_method'
-  get 'mupdatepayment' => 'mobile#update_payment_method'
-  get 'mgetpaymentmethods' => 'mobile#get_payment_methods'
-  get 'mdeletepayment' => 'mobile#remove_payment_method'
+  get 'mobile/addpayment' => 'mobile#add_payment_method'
+  get 'mobile/updatepayment' => 'mobile#update_payment_method'
+  get 'mobile/getpaymentmethods' => 'mobile#get_payment_methods'
+  get 'mobile/deletepayment' => 'mobile#remove_payment_method'
   
-  get 'mselfreviews' => 'mobile#self_reviews'
-  get 'mupdateaddress' => 'mobile#update_address'
-  get 'mreceipts' => 'mobile#receipts'
-  get 'msalereceipts' => 'mobile#sale_receipts'
-  get 'mpurchasereceipts' => 'mobile#purchase_receipts'
+  get 'mobile/selfreviews' => 'mobile#self_reviews'
+  get 'mobile/updateaddress' => 'mobile#update_address'
+  get 'mobile/receipts' => 'mobile#receipts'
+  get 'mobile/salereceipts' => 'mobile#sale_receipts'
+  get 'mobile/purchasereceipts' => 'mobile#purchase_receipts'
 end
