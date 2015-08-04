@@ -1,6 +1,6 @@
 class MobileController < ApplicationController
+  require 'securerandom'
   include ::ActionController::Serialization
-  
   
   def register
     first = params[:first_name]
@@ -8,10 +8,75 @@ class MobileController < ApplicationController
     email = params[:email]
     password = params[:password]
     @user = User.new(first_name: first, last_name: last, email: email, password: password)
+    auth = params[:oauth_token]
+    expires_at = params[:expires_at]
+    if auth
+      @user.oauth_token = auth
+    else
+      @user.generate_auth_token
+    end
+    if expires_at
+      @user.expires_at = expires_at
+    else
+      @user.generate_expiration_time
+    end
+    @user.confirm_email
     if @user.save
       render :json => @user.to_json
     else
       error_message(@user.errors.full_messages)
+    end
+  end
+  
+  def update_user
+    if authenticate
+      first_name = params[:first_name]
+      last_name = params[:last_name]
+      
+      if first_name
+        @user.update_attribute(:first_name, first_name)
+      end
+      if last_name
+        @user.update_attribute(:last_name, last_name)
+      end
+      success_message("Successful update.")
+    else
+      error_message(@message)
+    end
+  end
+  
+  def update_phone
+    if authenticate
+      phone = params[:phone]
+      
+      if phone
+        if @user.update_attribute(:phone, phone)
+          success_message("Successful update.")
+        else
+          error_message("User phone unable to be updated")
+        end
+      else
+        error_message("No phone param found")
+      end
+    else
+      error_message(@message)
+    end
+  end
+  
+  def email_confirm
+    if authenticate
+      @user.confirm_email
+      success_message(@user.email_confirmed?)
+    else
+      error_message(@message)
+    end
+  end
+  
+  def email_confirmed?
+    if authenticate
+      success_message(@user.email_confirmed?)
+    else
+      error_message(@message)
     end
   end
   
@@ -26,7 +91,7 @@ class MobileController < ApplicationController
                       likes: @user.likes
       }
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -34,7 +99,7 @@ class MobileController < ApplicationController
     if authenticate
       @user.update_attribute(:cart, params[:cart])
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -63,7 +128,7 @@ class MobileController < ApplicationController
         success_message("Success")
       end
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -77,7 +142,7 @@ class MobileController < ApplicationController
         error_message("Error, payment method does not belong to user")
       end
     else
-      error_message("Wrong account credentials")
+      error_message(@message)
     end
   end
   
@@ -206,16 +271,64 @@ class MobileController < ApplicationController
     end
   end
   
-  private
-  def authenticate
+  def renew_token
+    password = params[:password]
+    old_oauth = params[:old_oauth]
+    oauth_token = params[:oauth_token]
+    expires_at = params[:expires_at]
+    
     @user = User.find_by(email: params[:email].downcase)
-    if @user && @user.authenticate(params[:password])
-      return @user
+    if @user
+      if old_oauth == @user.oauth_token || @user.authenticate(password)
+        if oauth_token
+          @user.oauth_token = oauth_token
+        else
+          @user.generate_auth_token
+        end
+        
+        if expires_at
+          @user.expires_at = expires_at
+        else
+          @user.generate_expiration_time
+        end
+        success_message(@user)
+      else
+        error_message("Authentication credentials not correct.")
+      end
     else
-      return false
+      error_message("No user found with that email.")
     end
   end
   
+  private
+  def authenticate
+    @user = User.find_by(email: params[:email].downcase)
+    if params[:password]
+      if @user && @user.authenticate(params[:password])
+        return @user
+      else
+        @message = "Wrong account credentials!"
+        return false
+      end
+    else
+      authenticate_with_token
+    end
+  end
+  
+  def authenticate_with_token
+    if @user && @user.oauth_token == params[:oauth_token]
+      if Time.parse(@user.oauth_expires_at) - Time.now >= 0  # Auth token still valid.
+        return @user
+      else
+        @message = "Auth token expired"
+        return false
+      end
+    else
+      @message = "Wrong account credentials!"
+      return false
+    end
+  end
+
   def success_message(msg)
     render :json => {success: msg}
   end
