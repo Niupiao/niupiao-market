@@ -104,6 +104,8 @@ class MobileController < ApplicationController
       reviews = @user.reviews
       
       render :json => reviews
+    else
+      error_message("Wrong account credentials")
     end
   end
   
