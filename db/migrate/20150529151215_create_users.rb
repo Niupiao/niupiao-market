@@ -15,6 +15,8 @@ class CreateUsers < ActiveRecord::Migration
       t.text :oauth_token
       t.text :oauth_expires_at
       
+      t.integer :email_confirmed
+      
       t.timestamps
     end
   end
