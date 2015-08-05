@@ -19,6 +19,8 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Needed to serialize JSON responses to be a bit less hideous
 gem 'active_model_serializers'
+# Needed to validate phone numbers.
+gem 'phony_rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-turbolinks'
