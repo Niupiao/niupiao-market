@@ -22,6 +22,12 @@ class SessionsController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  def login_superadmin
+    if params[:session]
+      
+    end
+  end
     
   def destroy
       log_out

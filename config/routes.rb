@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   #    Mongolian versions.
   
   root 'static_pages#home'
+  
+  # SuperAdmin routes
+  get 'crunch' => 'super_admins#crunch'  # Fairly dangerous data crunching at its finest.
 
   get 'about' => 'static_pages#about'
 
