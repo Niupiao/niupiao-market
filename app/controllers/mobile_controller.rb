@@ -1,5 +1,6 @@
 class MobileController < ApplicationController
   require 'securerandom'
+  include ::ActionController::Serialization
   
   def register
     first = params[:first_name]
@@ -19,7 +20,7 @@ class MobileController < ApplicationController
     else
       @user.generate_expiration_time
     end
-    @user.confirm_email
+    @user.confirm_email  # remove when email confirmation feature is more fleshed out.
     if @user.save
       render :json => @user.to_json
     else
@@ -27,6 +28,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Updates a user's first or last name.
   def update_user
     if authenticate
       first_name = params[:first_name]
@@ -44,6 +46,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Updates a user's phone number.
   def update_phone
     if authenticate
       phone = params[:phone]
@@ -62,6 +65,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Confirms a user's email. Ideally should also send out an email confirmation.
   def email_confirm
     if authenticate
       @user.confirm_email
@@ -71,6 +75,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns whether or not a user's email is confirmed.
   def email_confirmed?
     if authenticate
       success_message(@user.email_confirmed?)
@@ -79,6 +84,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Logs a user in.
   def login
     if authenticate
       render :json => {first_name: @user.first_name, 
@@ -94,6 +100,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Logs a user out. Right now, this serves to update the user's cart.
   def logout
     if authenticate
       @user.update_attribute(:cart, params[:cart])
@@ -163,11 +170,14 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns all reviews about a certain user, as well as the users who wrote those reviews.
   def self_reviews
     if authenticate
       reviews = @user.reviews
       
       render :json => reviews
+    else
+      error_message("Wrong account credentials")
     end
   end
   
@@ -196,6 +206,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns all receipts associated with a given user, without duplicates.
   def receipts
     if authenticate
       receipts = Receipt.where("buyer_id = ? OR seller_id = ?", @user.id, @user.id)
@@ -205,6 +216,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns all receipts in which the user purchased an item.
   def purchase_receipts
     if authenticate
       render :json => @user.receipts_buy
@@ -213,6 +225,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns all receipts in which the user sold an item.
   def sale_receipts
     if authenticate
       render :json => @user.receipts_sell
@@ -221,6 +234,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns a list of items, including sub details.
   def items
     params[:page_size] = 50
     params[:page] ||= '1'
@@ -233,6 +247,7 @@ class MobileController < ApplicationController
     render :json => @items.to_json(:include => :subitem)
   end
   
+  # Returns a specific item, including subitem.
   def item
     if @item = Item.find_by(id: params[:item])
       render :json => @item.to_json(:include => :subitem)
@@ -241,6 +256,7 @@ class MobileController < ApplicationController
     end
   end
   
+  # Returns some information of a specific user.
   def user
     if @user = User.find_by(id: params[:user])
       render :json => {first_name: @user.first_name, 
@@ -268,6 +284,8 @@ class MobileController < ApplicationController
     end
   end
   
+  # Renews the user's Oauth token. Accepts either the password, or the old oauth token,
+  # regardless of whether or not the old oauth token is expired.
   def renew_token
     password = params[:password]
     old_oauth = params[:old_oauth]
@@ -297,7 +315,9 @@ class MobileController < ApplicationController
     end
   end
   
+  
   private
+  # Authenticates the user using email && (password || oauth token)
   def authenticate
     @user = User.find_by(email: params[:email].downcase)
     if params[:password]
