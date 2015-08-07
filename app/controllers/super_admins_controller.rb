@@ -36,8 +36,11 @@ class SuperAdminsController < ApplicationController
         
       elsif params[:type] == "users"
         if params[:filter] && params[:filter] != ""
-          email = params[:filter]
-          @results = User.where(email: email)
+          filter = params[:filter]
+          @results = User.where(email: filter)
+          if @results.count == 0
+            @results = User.where("first_name like ? OR last_name like ?", filter, filter)
+          end
         else
           @results = User.all
         end
