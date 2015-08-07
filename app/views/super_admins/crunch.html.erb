@@ -9,6 +9,7 @@ TO GET A SPECIFIC TRANSACTION/ORDER: Select "delivery", enter in the order ID in
 If search is left blank, it'll display all non-complete deliveries. <br>
 TO GET A USER'S BASIC INFORMATION: Select "users" and enter in their email. If left
 blank, will display all users. <br>
+TO GET ALL TRANSACTIONS RELATED TO A USER: Select "user transaction" and enter in their email. <br>
 
 <%= render "form_controls" %>
 <% if params[:type] == "not picked up" %>
@@ -21,4 +22,6 @@ blank, will display all users. <br>
   <%= render "delivery" %>
 <% elsif params[:type] == "users" %>
   <%= render "users" %>
+<% elsif params[:type] == "user transaction" %>
+  <%= render "user_transaction" %>
 <% end %>

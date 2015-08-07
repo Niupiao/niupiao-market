@@ -2,7 +2,8 @@
   <div class="input-append">
     
     <%= select_tag "type", options_for_select(["transaction", "not picked up", 
-                                               "drivers", "delivery", "users"]) %>
+                                               "drivers", "delivery", "users",
+                                               "user transaction"]) %>
     <%= text_field_tag :filter, params[:filter], class: "span2 center", 
                        placeholder: "Search"%>
     <button class="btn" type="submit"><i class="icon-search"></i></button>

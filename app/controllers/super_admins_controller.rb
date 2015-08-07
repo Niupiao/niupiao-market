@@ -41,6 +41,15 @@ class SuperAdminsController < ApplicationController
         else
           @results = User.all
         end
+        
+      elsif params[:type] == "user transaction"
+        if params[:filter] && params[:filter] != ""
+          email = params[:filter]
+          user = User.find_by(email: email)
+          @results = Receipt.where("buyer_id = ? OR seller_id = ?", user.id, user.id)
+        else
+          @results = []
+        end
       
       end
     end
