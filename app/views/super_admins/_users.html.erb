@@ -1,0 +1,48 @@
+<% if @results.count > 0 %>
+    <table WIDTH="99%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
+        <tr ALIGN="Center">
+            <td></td>
+            <td>User ID</td>
+            <td>Full Name</td>
+            <td>Email</td>
+            <td>Address</td>
+            <td>Phone</td>
+            <td>Email Confirmed?</td>
+            <td></td>
+        </tr>
+        <% @results.each do |user| %>
+            <tr>
+                <td></td>
+                <td>
+                  <%= user.id %>
+                </td>
+                <td>
+                  <%= user.first_name %> <%= user.last_name %>
+                </td>
+                <td>
+                  <%= user.email %>
+                </td>
+                <td>
+                  <% if user.address %>
+                    <%= user.address.display %>
+                  <% else %>
+                    NA
+                  <% end %>
+                </td>
+                <td>
+                  <%= user.phone %>
+                </td>
+                <td>
+                  <% if user.email_confirmed == 0%>
+                    No
+                  <% else %>
+                    Yes
+                  <% end %>
+                </td>
+                <td></td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <h3>No results found</h3>
+<% end %>
