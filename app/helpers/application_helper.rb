@@ -18,6 +18,7 @@ module ApplicationHelper
     !User.find_by?(id: user_id).nil?
   end
   
+  # Rendering a readable string that displays the difference between two times.
   def time_diff(start_time, end_time)
     seconds_diff = (start_time - end_time).to_i.abs
   

@@ -22,15 +22,22 @@ class SessionsController < ApplicationController
       redirect_to root_path
     end
   end
-  
-  def login_superadmin
-    if params[:session]
-      
-    end
-  end
     
   def destroy
       log_out
       redirect_to root_path
+  end
+  
+  def admin
+    if params[:session]
+      admin = SuperAdmin.find_by(username: params[:session][:username])
+      if admin && admin.authenticate(params[:session][:password])
+        session[:admin] = true
+        redirect_to crunch_path
+      else
+        flash.now[:danger] = 'Wrong credentials.'
+        redirect_to admin_path
+      end
+    end
   end
 end

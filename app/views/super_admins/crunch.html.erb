@@ -5,4 +5,8 @@ find all transactions which aren't complete and which haven't been updated in at
 least X hours.<br>
 
 <%= render "form_controls" %>
-<%= render "deliveries" %>
+<% if params[:type] == "not picked up" %>
+  <%= render "not_picked_up" %>
+<% elsif params[:type] == "transaction" %>
+  <%= render "deliveries" %>
+<% end %>
