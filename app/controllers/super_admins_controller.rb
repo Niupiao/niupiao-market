@@ -52,8 +52,9 @@ class SuperAdminsController < ApplicationController
         end
       
       end
+    else
+      redirect_to admin_path
     end
-    
     # Issue. need to structure the results table based on query type. Lots of partials.
     # Pass in the type of query. 
   end
