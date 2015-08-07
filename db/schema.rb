@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20150806202855) do
   create_table "receipts", force: :cascade do |t|
     t.integer  "buyer_id"
     t.integer  "seller_id"
+    t.integer  "item_id"
     t.text     "item_name"
     t.integer  "item_quantity"
     t.text     "item_tags"

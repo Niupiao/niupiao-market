@@ -3,6 +3,7 @@ class CreateReceipts < ActiveRecord::Migration
     create_table :receipts do |t|
       t.references :buyer
       t.references :seller
+      t.integer :item_id
       t.text :item_name
       t.integer :item_quantity
       t.text :item_tags
