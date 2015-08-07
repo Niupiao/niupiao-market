@@ -2,6 +2,8 @@
 #, address: "55 Main St, North Adams, MA 01247"
 #, address: "67 Main St, North Adams, MA 01247"
 
+SuperAdmin.create(username: "rhk1", password: "phoenix")
+
 u = User.create(first_name: 'Ryan', last_name: 'Kwon', email: 'rynkwn@gmail.com', password: 'phoenix')
 u.generate_auth_token
 user = User.create(first_name: 'Foo', last_name: 'Bar', email: 'foo@bar.com', password: 'password')
