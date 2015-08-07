@@ -6,16 +6,42 @@ class SuperAdminsController < ApplicationController
   def crunch
     # If superadmin is logged in. Then define items. Need to also pass in the kind
     # of query that's passed in.
-    if session[:admin]
+    if session[:admin]  # Future replacement, while using session already needs to be replaced, consider also setting up an expiration timer.
       if params[:type] == "not picked up"
         @results = Receipt.where(status: "Order Sent")
+      
       elsif params[:type] == "transaction"
-        if params[:filter]
+        if params[:filter] && params[:filter] != ""
           h = params[:filter].to_i
           @results = Receipt.where(["status != '%s' and updated_at <= '%s'", "Complete", Time.now - h.hours])
         else
           @results = Receipt.all
         end
+        
+      elsif params[:type] == "drivers"
+        if params[:filter] && params[:filter] != ""
+          id = params[:filter].to_i
+          @results = Driver.where(id: id)
+        else
+          @results = Driver.all
+        end
+        
+      elsif params[:type] == "delivery"
+        if params[:filter] && params[:filter] != ""
+          id = params[:filter].to_i
+          @results = Receipt.where(id: id)
+        else
+          @results = Receipt.where.not(status: "Complete")
+        end
+        
+      elsif params[:type] == "users"
+        if params[:filter] && params[:filter] != ""
+          email = params[:filter]
+          @results = User.where(email: email)
+        else
+          @results = User.all
+        end
+      
       end
     end
     
