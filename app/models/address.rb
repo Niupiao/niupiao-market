@@ -11,4 +11,8 @@ class Address < ActiveRecord::Base
   
   validates :city, presence: true
   validates :street, presence: true
+  
+  def display
+    self.city + ',' + self.district + ',' + self.committee + ',' + self.street + ',' + self.door
+  end
 end

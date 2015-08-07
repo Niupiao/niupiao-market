@@ -26,7 +26,7 @@
                 </td>
                 <td>
                   <% if receipt.seller.address %>
-                    <%= receipt.seller.address.door %>
+                    <%= receipt.seller.address.display %>
                   <% end %>
                 </td>
                 <td>
@@ -43,12 +43,13 @@
                 </td>
                 <td>
                   <% if receipt.buyer.address %>
-                    <%= receipt.buyer.address.door %>
+                    <%= receipt.buyer.address.display %>
                   <% end %>
                 </td>
                 <td>
                   <% if receipt.claimed != 0%>
-                    <%= Driver.find_by(id: receipt.claimed) %>
+                    <% driver =  Driver.find_by(id: receipt.claimed) %>
+                    <%= driver.first_name %> <%= driver.last_name %>
                   <% end %>
                 </td>
                 <td>
