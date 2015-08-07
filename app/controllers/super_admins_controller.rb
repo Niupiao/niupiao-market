@@ -50,7 +50,18 @@ class SuperAdminsController < ApplicationController
         else
           @results = []
         end
+        
+      elsif params[:type].nil?
+        # Handle the case where there's no type params.
       
+      # The failsafe. Someone tries to manually mess with the type params and,
+      # for whatever reason, makes a spelling mistake. This is an /extremely/
+      # weak failsafe. (If they're already logged in, why would they even bother
+      # with personally messing with the url?) Still, it leaves me slightly more
+      # at ease knowing _something_ is in place.
+      else 
+        session[:admin] = false
+        redirect_to admin_path
       end
     else
       redirect_to admin_path
