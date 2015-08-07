@@ -39,7 +39,7 @@ class SuperAdminsController < ApplicationController
           filter = params[:filter]
           @results = User.where(email: filter)
           if @results.count == 0
-            @results = User.where("first_name like ? OR last_name like ?", filter, filter)
+            @results = User.where("first_name || ' ' || last_name LIKE ?", "%#{filter}%")
           end
         else
           @results = User.all
