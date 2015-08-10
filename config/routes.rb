@@ -46,6 +46,11 @@ Rails.application.routes.draw do
   patch 'delivery/status' => 'deliveries#update_status'
   get 'delivery/claimed' => 'deliveries#claimed_deliveries'
   
+  get 'driver/create' => 'drivers#create'
+  get 'driver/edit' => 'drivers#edit'
+  get 'driver/owed' => 'drivers#update_owed'
+  get 'driver/delete' => 'drivers#delete'
+  
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'
   
