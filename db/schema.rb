@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150806202855) do
   create_table "drivers", force: :cascade do |t|
     t.string   "key"
     t.text     "name"
+    t.text     "email"
     t.string   "phone"
     t.string   "license"
     t.text     "bank_info"

@@ -25,3 +25,8 @@ TO GET ALL TRANSACTIONS RELATED TO A USER: Select "user transaction" and enter i
 <% elsif params[:type] == "user transaction" %>
   <%= render "user_transaction" %>
 <% end %>
+<br>
+
+TO UPDATE A DRIVER ACCOUNT AND SEND THEM AN INVOICE, ENTER THEIR ID AND THE AMOUNT THEY HAVE BEEN PAID<br>
+
+<%= render "form_invoice" %>

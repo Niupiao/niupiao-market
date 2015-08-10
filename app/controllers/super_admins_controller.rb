@@ -58,6 +58,16 @@ class SuperAdminsController < ApplicationController
     # Issue. need to structure the results table based on query type. Lots of partials.
     # Pass in the type of query. 
   end
-  
-  
+
+  def pay_driver
+    if session[:admin]
+      driver = Driver.find_by(params[:driver])
+      if driver && params[:amount]
+        UrtuMailer.send_driver_invoice(driver, params[:amount])
+        puts "success"
+      end
+    end
+    redirect_to crunch_path
+  end
+
 end
