@@ -7,7 +7,7 @@ TO GET ALL DRIVERS: Select "drivers". To filter by ID, leave their id number in
 the search. <br>
 TO GET A SPECIFIC TRANSACTION/ORDER: Select "delivery", enter in the order ID in search.
 If search is left blank, it'll display all non-complete deliveries. <br>
-TO GET A USER'S BASIC INFORMATION: Select "users" and enter in their email OR some part of their name. If left
+TO GET A USER'S BASIC INFORMATION: Select "users" and enter in their email. If left
 blank, will display all users. <br>
 TO GET ALL TRANSACTIONS RELATED TO A USER: Select "user transaction" and enter in their email. <br>
 
@@ -25,3 +25,10 @@ TO GET ALL TRANSACTIONS RELATED TO A USER: Select "user transaction" and enter i
 <% elsif params[:type] == "user transaction" %>
   <%= render "user_transaction" %>
 <% end %>
+<br>
+
+TO UPDATE A DRIVER ACCOUNT AND SEND THEM AN INVOICE, ENTER THEIR ID AND THE AMOUNT THEY HAVE BEEN PAID<br>
+
+<br>
+
+<%= render "form_status" %>

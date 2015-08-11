@@ -71,4 +71,16 @@ class SuperAdminsController < ApplicationController
     end
   end
   
+  def update_status
+    if session[:admin]
+      @receipt = Receipt.find_by(id: params[:id])
+      if @receipt && params[:status]
+        @receipt.update(status: params[:status])
+      end
+      redirect_to crunch_path
+    else
+      redirect_to admin_path
+    end
+  end
+  
 end

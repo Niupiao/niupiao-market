@@ -10,7 +10,7 @@ module ReceiptsHelper
                           item_tags: item.tags,
                           item_type: item.item_type,
                           charge: total_charge,
-                          status: "Order Sent",
+                          status: "Unclaimed",
                           checkin_code: checkin_code,
                           buyer: buyer,
                           claimed: 0
