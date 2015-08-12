@@ -82,4 +82,20 @@ class SuperAdminsController < ApplicationController
     redirect_to crunch_path
   end
 
+  def update_driver
+    if session[:admin]
+      driver = Driver.find_by(params[:driver])
+      if driver
+        driver.update(key: params[:key]) if params[:key]
+        driver.udpate(name: params[:name]) if params[:name]
+        driver.update(phone: params[:phone]) if params[:phone]
+        driver.update(license: params[:license]) if params[:license]
+        driver.update(bank_info: params[:bank_info]) if params[:bank_info]
+        driver.update(amount_owed: params[:amount_owed]) if params[:amount_owed]
+      end
+      redirect_to crunch_path
+    else
+      redirect_to admin_path
+    end
+  end
 end

@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   
   # SuperAdmin routes
   get 'crunch' => 'super_admins#crunch'  # Fairly dangerous data crunching at its finest.
-  get 'pay_driver' => 'super_admins#pay_driver'
+  post 'admin/driver/update' => 'super_admins#update_driver'
+  post 'admin/driver/invoice' => 'super_admins#pay_driver'
   get 'admin' => 'super_admins#admin'
   post 'admin' => 'sessions#admin'
 
