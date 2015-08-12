@@ -1,0 +1,8 @@
+<%= form_tag('admin/status', :method => "get", class: "navbar-form center") do %>
+  <div class="input-append">
+    
+    <%= number_field_tag "receipt", params[:receipt], class: "span2 center", placeholder: "Receipt Id" %>
+    <%= select_tag "status", options_for_select(%w(Unclaimed Claimed Scheduled Packaged Delivered Received)) %>
+    <button class="btn" type="submit">Update</button>
+  </div>
+<% end %>

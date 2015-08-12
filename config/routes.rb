@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get 'crunch' => 'super_admins#crunch'  # Fairly dangerous data crunching at its finest.
   get 'admin' => 'super_admins#admin'
   post 'admin' => 'sessions#admin'
+  get 'admin/status' => 'super_admins#update_status'
+  post 'admin/update' => 'super_admins#update_receipt'
 
   get 'about' => 'static_pages#about'
 
