@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 20150806202855) do
     t.text     "uid"
     t.text     "oauth_token"
     t.text     "oauth_expires_at"
+    t.text     "facebook_id"
     t.integer  "email_confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"
