@@ -17,6 +17,7 @@
         </tr>
         <% @results.each do |receipt| %>
             <tr>
+              <%= form_tag("admin/update?receipt=#{receipt.id}", :method => "post", class: "navbar-form center") do %>
                 <td></td>
                 <td>
                   <%= receipt.id %>
@@ -32,13 +33,13 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= receipt.item_name %>
+                  <%= text_field_tag :item_name, params[:item_name], class: "span2 center", value: receipt.item_name%>
                 </td>
                 <td>
-                  <%= receipt.item_quantity %>
+                  <%= text_field_tag :item_quantity, params[:item_quantity], class: "span2 center", value: receipt.item_quantity%>
                 </td>
                 <td>
-                  <%= receipt.charge %>
+                  <%= text_field_tag :charge, params[:charge], class: "span2 center", value: receipt.charge%>
                 </td>
                 <td>
                   <%= receipt.buyer.first_name %> <%= receipt.buyer.last_name %>
@@ -59,12 +60,15 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= receipt.status %>
+                  <%= select_tag "status", options_for_select(%w(Unclaimed Claimed Scheduled Packaged Delivered Received), receipt.status) %>
                 </td>
                 <td>
                   <%= time_diff(Time.now, receipt.updated_at) %>
                 </td>
-                <td></td>
+                <td>
+                      <button class="btn" type="submit">Update</button>
+                      <% end %>
+                </td>
             </tr>
         <% end %>
     </table>

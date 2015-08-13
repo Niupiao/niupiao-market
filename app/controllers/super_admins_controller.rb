@@ -8,7 +8,7 @@ class SuperAdminsController < ApplicationController
     # of query that's passed in.
     if session[:admin]  # Future replacement, while using session already needs to be replaced, consider also setting up an expiration timer.
       if params[:type] == "not picked up"
-        @results = Receipt.where(status: "Order Sent")
+        @results = Receipt.where(status: "Unclaimed")
       
       elsif params[:type] == "transaction"
         if params[:filter] && params[:filter] != ""
@@ -92,6 +92,20 @@ class SuperAdminsController < ApplicationController
         driver.update(license: params[:license]) if params[:license]
         driver.update(bank_info: params[:bank_info]) if params[:bank_info]
         driver.update(amount_owed: params[:amount_owed]) if params[:amount_owed]
+      end
+      redirect_to crunch_path
+    end
+    redirect_to admin_path
+  end
+  
+  def update_receipt
+    if session[:admin]
+      @receipt = Receipt.find_by(id: params[:receipt])
+      if @receipt
+        @receipt.update(item_name: params[:item_name]) if params[:item_name]
+        @receipt.update(item_quantity: params[:item_quantity]) if params[:item_quantity]
+        @receipt.update(charge: params[:charge]) if params[:charge]
+        @receipt.update(status: params[:status]) if params[:status]
       end
       redirect_to crunch_path
     else
