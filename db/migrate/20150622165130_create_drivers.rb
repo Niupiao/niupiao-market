@@ -3,6 +3,7 @@ class CreateDrivers < ActiveRecord::Migration
     create_table :drivers do |t|
       t.string :key, unique: true
       t.text :name
+      t.text :email
       t.string :phone
       t.string :license
       t.text :bank_info

@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   
   # SuperAdmin routes
   get 'crunch' => 'super_admins#crunch'  # Fairly dangerous data crunching at its finest.
+  post 'admin/driver/update' => 'super_admins#update_driver'
+  post 'admin/driver/invoice' => 'super_admins#pay_driver'
   get 'admin' => 'super_admins#admin'
   post 'admin' => 'sessions#admin'
+  get 'admin/status' => 'super_admins#update_status'
+  post 'admin/update' => 'super_admins#update_receipt'
 
   get 'about' => 'static_pages#about'
 
@@ -44,6 +48,11 @@ Rails.application.routes.draw do
   get 'delivery/status' => 'deliveries#update_status'
   patch 'delivery/status' => 'deliveries#update_status'
   get 'delivery/claimed' => 'deliveries#claimed_deliveries'
+  
+  get 'driver/create' => 'drivers#create'
+  get 'driver/edit' => 'drivers#edit'
+  get 'driver/owed' => 'drivers#update_owed'
+  get 'driver/delete' => 'drivers#delete'
   
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'

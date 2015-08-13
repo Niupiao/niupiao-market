@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20150806202855) do
   create_table "drivers", force: :cascade do |t|
     t.string   "key"
     t.text     "name"
+    t.text     "email"
     t.string   "phone"
     t.string   "license"
     t.text     "bank_info"
@@ -132,6 +133,7 @@ ActiveRecord::Schema.define(version: 20150806202855) do
     t.text     "uid"
     t.text     "oauth_token"
     t.text     "oauth_expires_at"
+    t.text     "facebook_id"
     t.integer  "email_confirmed"
     t.datetime "created_at"
     t.datetime "updated_at"

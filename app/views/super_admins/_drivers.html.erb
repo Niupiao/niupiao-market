@@ -9,33 +9,43 @@
             <td>License</td>
             <td>Bank Info</td>
             <td>Amount Owed</td>
-            <td></td>
+            <td>Send Invoice</td>
         </tr>
         <% @results.each do |driver| %>
             <tr>
+              <%= form_tag("admin/driver/update?driver=#{driver.id}", :method => "post", class: "navbar-form center") do %>
                 <td></td>
                 <td>
                   <%= driver.id %>
                 </td>
                 <td>
-                  <%= driver.key %>
+                  <%= text_field_tag "key", params[:key], class: "span2 center", value: driver.key %>
                 </td>
                 <td>
-                  <%= driver.name %>
+                  <%= text_field_tag "name", params[:name], class: "span2 center", value: driver.name %>
                 </td>
                 <td>
-                  <%= driver.phone %>
+                  <%= text_field_tag "phone", params[:phone], class: "span2 center", value: driver.phone %>
                 </td>
                 <td>
-                  <%= driver.license %>
+                  <%= text_field_tag "license", params[:license], class: "span2 center", value: driver.license %>
                 </td>
                 <td>
-                  <%= driver.bank_info %>
+                  <%= text_field_tag "bank_info", params[:bank_info], class: "span2 center", value: driver.bank_info %>
                 </td>
                 <td>
-                  <%= driver.amount_owed %>
+                  <%= text_field_tag "amount_owed", params[:amount_owed], class: "span2 center", value: driver.amount_owed %>
                 </td>
-                <td></td>
+                <td>
+                  <button class="btn" type="submit">Update</button>
+                  <% end %>
+                </td>
+                <td>
+                  <%= form_tag("admin/driver/invoice?driver=#{driver.id}", :method => "post", class: "navbar-form center") do %>
+                  <%= text_field_tag :amount, params[:amount], class: "span2 center", placeholder: "Amount"%>
+                  <button class="btn" type="submit">Send</button>
+                  <% end %>
+                </td>
             </tr>
         <% end %>
     </table>

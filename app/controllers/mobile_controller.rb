@@ -10,6 +10,7 @@ class MobileController < ApplicationController
     @user = User.new(first_name: first, last_name: last, email: email, password: password)
     auth = params[:oauth_token]
     expires_at = params[:expires_at]
+    facebook_id = params[:facebook_id]
     if auth
       @user.oauth_token = auth
     else
@@ -19,6 +20,9 @@ class MobileController < ApplicationController
       @user.expires_at = expires_at
     else
       @user.generate_expiration_time
+    end
+    if facebook_id
+      @user.facebook_id = facebook_id
     end
     @user.confirm_email  # remove when email confirmation feature is more fleshed out.
     if @user.save

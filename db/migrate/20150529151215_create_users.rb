@@ -14,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration
       t.text :uid, unique: true
       t.text :oauth_token
       t.text :oauth_expires_at
+      t.text :facebook_id
       
       t.integer :email_confirmed
       
