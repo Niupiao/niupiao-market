@@ -128,6 +128,7 @@ module SessionsHelper
   end
     
   def log_out
+    valid_cart?
     current_user.update_attribute(:cart, session[:cart].to_json)
     clear_cart
     session.delete(:user_id)
