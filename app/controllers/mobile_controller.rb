@@ -6,11 +6,16 @@ class MobileController < ApplicationController
     first = params[:first_name]
     last = params[:last_name]
     email = params[:email]
+    @user = User.new(first_name: first, last_name: last, email: email)
     password = params[:password]
-    @user = User.new(first_name: first, last_name: last, email: email, password: password)
     auth = params[:oauth_token]
     expires_at = params[:expires_at]
     facebook_id = params[:facebook_id]
+    if password
+      @user.password = password
+    else
+      @user.generate_password # Needed to bypass bcrypts requirements.
+    end
     if auth
       @user.oauth_token = auth
     else
