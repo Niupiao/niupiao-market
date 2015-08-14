@@ -50,6 +50,17 @@ class MobileController < ApplicationController
     end
   end
   
+  def update_facebook_id
+    if authenticate
+      facebook_id = params[:facebook_id]
+      @user.facebook_id = facebook_id
+      @user.save!
+      success_message("Successful update.")
+    else
+      error_message(@message)
+    end
+  end
+  
   # Updates a user's phone number.
   def update_phone
     if authenticate
@@ -332,18 +343,27 @@ class MobileController < ApplicationController
         return false
       end
     else
-      authenticate_with_token
+      authenticate_with_facebook_id
     end
   end
   
-  def authenticate_with_token
-    if @user && @user.oauth_token == params[:oauth_token]
-      if Time.parse(@user.oauth_expires_at) - Time.now >= 0  # Auth token still valid.
-        return @user
-      else
-        @message = "Auth token expired"
-        return false
-      end
+  #def authenticate_with_token
+    #if @user && @user.oauth_token == params[:oauth_token]
+      #if Time.parse(@user.oauth_expires_at) - Time.now >= 0  # Auth token still valid.
+        #return @user
+      #else
+        #@message = "Auth token expired"
+        #return false
+      #end
+    #else
+      #@message = "Wrong account credentials!"
+      #return false
+    #end
+  #end
+  
+  def authenticate_with_facebook_id
+    if @user && @user.facebook_id == params[:facebook_id]
+      return @user
     else
       @message = "Wrong account credentials!"
       return false
