@@ -67,6 +67,8 @@ Rails.application.routes.draw do
   get 'mobile/items' => 'mobile#items'
   get 'mobile/item' => 'mobile#item'
   get 'mobile/user' => 'mobile#user'
+  
+  # Update routes
   get 'mobile/updatefacebookid' => 'mobile#update_facebook_id'
   get 'mobile/updateuser' => 'mobile#update_user'
   get 'mobile/updatephone' => 'mobile#update_phone'

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true,
             format: {with: VALID_EMAIL_REGEX}, 
             uniqueness: {case_sensitive: false}
-  validates :password, length: {minimum: 6}, presence: true, :allow_blank => true, unless: :password_digest
+  validates :password, :allow_blank => true, length: {minimum: 6}, unless: :password_digest
   validates :uid, presence: true, if: :provider
 
   has_secure_password
@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
   def generate_auth_token
     self.oauth_token = SecureRandom.urlsafe_base64 50
     self.oauth_expires_at = generate_expiration_time
+    self.save!
+  end
+  
+  def generate_password
+    self.password = SecureRandom.urlsafe_base64 50
     self.save!
   end
   
