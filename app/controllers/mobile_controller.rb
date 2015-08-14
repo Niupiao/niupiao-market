@@ -52,7 +52,7 @@ class MobileController < ApplicationController
   
   def update_facebook_id
     if authenticate
-      facebook_id = params[:facebook_id]
+      facebook_id = params[:new_facebook_id]
       @user.facebook_id = facebook_id
       @user.save!
       success_message("Successful update.")
