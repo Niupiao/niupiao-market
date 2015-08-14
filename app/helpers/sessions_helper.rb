@@ -33,9 +33,7 @@ module SessionsHelper
   end
     
   def add_to_cart
-    if !session[:cart]
-      session[:cart] = {}
-    end
+    valid_cart?
     item_id = params[:item_id]
     quantity_available = Item.find_by(id: item_id).quantity
     quantity_bought = params[:quantity].to_i
@@ -136,6 +134,7 @@ module SessionsHelper
   end
     
   def update_cart
+    valid_cart?
     updated_id = params[:id]
     quantity_diff = params[:quantity_updated].to_i - session[:cart][updated_id] 
     total_diff = Item.find(updated_id).price * quantity_diff
