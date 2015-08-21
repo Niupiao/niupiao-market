@@ -23,3 +23,20 @@ review.save
 review = item.reviews.create(user_id: user.id, body: 'Alright', rating: 5)
 
 Driver.create(name: 'Foo Bar', phone: '1234567890', bank_info: '0987654321', key: 'a')
+
+
+# Seeding Domain tables.
+Supercategory.create!(name: "Beauty") # 1
+Supercategory.create!(name: "Baby") # 2
+
+Category.create!(name: "Makeup") # 1
+Category.create!(name: "SkinCare") # 2
+Category.create!(name: "Fragrance") # 3 
+Category.create!(name: "BathAndBody") # 4
+Category.create!(name: "Nails") # 5
+Category.create!(name: "Hair") # 6
+Category.create!(name: "BabyAndToddlerClothing") # 7
+Category.create!(name: "Feeding") # 8
+Category.create!(name: "BeddingAndDecor") # 9
+Category.create!(name: "ActivitiesAndToys") # 10 
+Category.create!(name: "HealthAndSafety") # 11

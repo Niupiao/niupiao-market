@@ -9,6 +9,9 @@ class CreateItems < ActiveRecord::Migration
       t.integer :quantity
       t.text :desc
       
+      t.integer :supercategory_id
+      t.integer :category_id
+      
       t.integer :subitem_id
       t.text :subitem_type
     end

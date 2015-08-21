@@ -64,6 +64,7 @@ Rails.application.routes.draw do
   # mobile routes
   get 'mobile/register' => 'mobile#register'
   get 'mobile/login' => 'mobile#login'
+  get 'mobile/sell' => 'mobile#sell'
   get 'mobile/items' => 'mobile#items'
   get 'mobile/item' => 'mobile#item'
   get 'mobile/user' => 'mobile#user'
