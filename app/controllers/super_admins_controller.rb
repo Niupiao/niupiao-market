@@ -112,4 +112,34 @@ class SuperAdminsController < ApplicationController
       redirect_to admin_path
     end
   end
+  
+  def search_items
+    @search = []
+    scores = []
+    search_term = params[:search_term]
+    if search_term
+      search_term = search_term.downcase.gsub(/\s+/m, ' ').strip.split(" ")
+      Item.all.each do |item|
+        search_space = item.name.downcase + " " + item.desc.downcase + " " +
+                       item.user.first_name.downcase + " " + 
+                       item.user.last_name.downcase + " " + item.tags.join(" ").downcase
+        score = 0
+        target_score = (search_term.size / 2.0).ceil # Score must be at least 1
+        search_term.each do |word|
+          if(search_space.include? word)
+            score += (search_space.scan(/#{word}/).length)
+          end
+        end
+        
+        if(score >= target_score)
+          @search += [item]
+          scores += [score]
+        end
+      end
+      
+      @search.sort_by.with_index{|_,i| scores[i]}
+      @search.reverse!
+      return @search
+    end
+  end
 end
