@@ -426,6 +426,7 @@ class MobileController < ApplicationController
         tmp = GroomingHealthcareAndSkincareEssential.create()
         tmp.item = item
       end
+      success_message(item.to_json)
     else
       error_message("Wrong account credentials")
     end
