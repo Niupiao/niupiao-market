@@ -4,6 +4,7 @@ class CreateTreatments < ActiveRecord::Migration
       t.integer :size
       t.integer :count
 
+      t.integer :item_id
       t.timestamps null: false
     end
   end

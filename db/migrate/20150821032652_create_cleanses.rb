@@ -3,6 +3,7 @@ class CreateCleanses < ActiveRecord::Migration
     create_table :cleanses do |t|
       t.integer :size
 
+      t.integer :item_id
       t.timestamps null: false
     end
   end

@@ -31,7 +31,7 @@ class Item < ActiveRecord::Base
   def categorize(table_name)
     makeup = %w(FaceMakeup EyeMakeup Lip ToolsAndBag)
     skincare = %w(Cleanse Moisturize Treatment)
-    fragrance = %w(Women Men)
+    fragrance = %w(Woman Man)
     bathbody = %w(LotionsAndCream ShowerAndBath Suncare)
     nails = %w(NailPolish KitsSet SpecialEffect TreatmentsAndTool)
     hair = %w(StylingProductsAndTool ShampooAndConditioner)

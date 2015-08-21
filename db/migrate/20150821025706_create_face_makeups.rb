@@ -4,7 +4,8 @@ class CreateFaceMakeups < ActiveRecord::Migration
     create_table :face_makeups do |t|
       t.text :color
       t.integer :size
-
+      
+      t.integer :item_id
       t.timestamps null: false
     end
   end
