@@ -271,7 +271,161 @@ class MobileController < ApplicationController
   def sell
     if authenticate
       name = params[:name]
-      
+      tags = params[:tags]
+      price = params[:price]
+      quantity = params[:quantity]
+      desc = params[:desc]
+      subcategory = params[:subcategory]
+      item = Item.create(name: name, tags: tags, price: price, quantity: quantity,
+                      desc: desc)
+      @user.items << item
+      category = item.categorize(subcategory)
+      item.supercategorize(category)
+      if subcategory == "FaceMakeup"
+        tmp = FaceMakeup.create(color: params[:color], size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "EyeMakeup"
+        tmp = EyeMakeup.create(color: params[:color])
+        tmp.item = item
+      elsif subcategory == "Lips"
+        tmp = Lip.create(color: params[:color])
+        tmp.item = item
+      elsif subcategory == "ToolsAndBags"
+        tmp = ToolsAndBag.create()
+        tmp.item = item
+      elsif subcategory == "Cleanse"
+        tmp = Cleanse.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "Moisturize"
+        tmp = Moisturize.create(size: params[:size].to_i, color: params[:color])
+        tmp.item = item
+      elsif subcategory == "Treatments"
+        tmp = Treatment.create(size: params[:size].to_i, count: params[:count])
+        tmp.item = item
+      elsif subcategory == "Women"
+        tmp = Woman.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "Men"
+        tmp = Man.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "LotionsAndCreams"
+        tmp = LotionsAndCream.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "ShowerAndBath"
+        tmp = ShowerAndBath.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "Suncare"
+        tmp = Suncare.create(size: params[:size].to_i, color: params[:color])
+        tmp.item = item
+      elsif subcategory == "NailPolish"
+        tmp = NailPolish.create(size: params[:size].to_i, color: params[:color])
+        tmp.item = item
+      elsif subcategory == "KitsSets"
+        tmp = KitsSet.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "SpecialEffects"
+        tmp = SpecialEffect.create(size: params[:size].to_i, count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "TreatmentsAndTools"
+        tmp = TreatmentsAndTool.create()
+        tmp.item = item
+      elsif subcategory == "StylingProductsAndTools"
+        tmp = StylingProductsAndTool.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "ShampooAndConditioner"
+        tmp = ShampooAndConditioner.create(size: params[:size].to_i)
+        tmp.item = item
+      elsif subcategory == "BoysClothing"
+        tmp = BoysClothing.create(size: params[:size].to_i, style: params[:style])
+        tmp.item = item
+      elsif subcategory == "GirlsClothing"
+        tmp = GirlsClothing.create(size: params[:size].to_i, style: params[:style])
+        tmp.item = item
+      elsif subcategory == "Accessories"
+        tmp = Accessory.create(style: params[:style], count: params[:count])
+        tmp.item = item
+      elsif subcategory == "UnderwearAndSocks"
+        tmp = UnderwearAndSock.create(size: params[:size].to_i, count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "Beverages"
+        tmp = Beverage.create(volume: params[:volume].to_i, count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "Food"
+        tmp = Food.create(volume: params[:volume].to_i, count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "BabyFormula"
+        tmp = BabyFormula.create(volume: params[:volume].to_i, count: params[:count].to_i, age: params[:age])
+        tmp.item = item
+      elsif subcategory == "FeedingAccessories"
+        tmp = FeedingAccessory.create(count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "BoosterSeats"
+        tmp = BoosterSeat.create()
+        tmp.item = item
+      elsif subcategory == "DiaperAccessories"
+        tmp = DiaperAccessory.create(count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "Diapers"
+        tmp = Diaper.create(size: params[:size].to_i, count: params[:count].to_i)
+        tmp.item = item
+      elsif subcategory == "LampAndNightLights"
+        tmp = LampAndNightLight.create()
+        tmp.item = item
+      elsif subcategory == "BeddingSeparates"
+        tmp = BeddingSeparate.create()
+        tmp.item = item
+      elsif subcategory == "BeddingSet"
+        tmp = BeddingSet.create(pieces: params[:pieces].to_i)
+        tmp.item = item
+      elsif subcategory == "WallDecorations"
+        tmp = WallDecoration.create(gender: params[:gender])
+        tmp.item = item
+      elsif subcategory == "BoosterCarSeats"
+        tmp = BoosterCarSeat.create(child_weight: params[:child_weight].to_i)
+        tmp.item = item
+      elsif subcategory == "CarSeatAccessories"
+        tmp = CarSeatAccessory.create()
+        tmp.item = item
+      elsif subcategory == "TravelSets"
+        tmp = TravelSet.create()
+        tmp.item = item
+      elsif subcategory == "Strollers"
+        tmp = Stroller.create(fits: params[:fits].to_i)
+        tmp.item = item
+      elsif subcategory == "BoosterFeedingSeats"
+        tmp = BoosterFeedingSeat.create()
+        tmp.item = item
+      elsif subcategory == "PottySeatsAndStepStools"
+        tmp = PottySeatsAndStepStool.create()
+        tmp.item = item
+      elsif subcategory == "Bikes"
+        tmp = Bike.create()
+        tmp.item = item
+      elsif subcategory == "SleepingToys"
+        tmp = SleepingToy.create()
+        tmp.item = item
+      elsif subcategory == "GymsAndPlaymats"
+        tmp = GymsAndPlaymat.create()
+        tmp.item = item
+      elsif subcategory == "LearningToys"
+        tmp = LearningToy.create(age: params[:age].to_i)
+        tmp.item = item
+      elsif subcategory == "Toys"
+        tmp = Toy.create()
+        tmp.item = item
+      elsif subcategory == "Gates"
+        tmp = Gate.create(age: params[:age].to_i, height: params[:height].to_i)
+        tmp.item = item
+      elsif subcategory == "BabyMonitors"
+        tmp = BabyMonitor.create()
+        tmp.item = item
+      elsif subcategory == "BabyProofingItems"
+        tmp = BabyProofingItem.create()
+        tmp.item = item
+      elsif subcategory == "GroomingHealthcareAndSkincareEssentials"
+        tmp = GroomingHealthcareAndSkincareEssential.create()
+        tmp.item = item
+      end
     else
       error_message("Wrong account credentials")
     end
