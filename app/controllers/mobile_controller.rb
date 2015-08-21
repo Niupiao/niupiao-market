@@ -254,7 +254,27 @@ class MobileController < ApplicationController
     end
   end
   
+  t.references :user
+      t.text :name
+      t.text :item_type
+      t.text :tags
+      t.float :price
+      t.integer :quantity
+      t.text :desc
+      
+      t.integer :supercategory_id
+      t.integer :category_id
+      
+      t.integer :subitem_id
+      t.text :subitem_type
+  
   def sell
+    if authenticate
+      name = params[:name]
+      
+    else
+      error_message("Wrong account credentials")
+    end
   end
   
   # Returns a list of items, including sub details.

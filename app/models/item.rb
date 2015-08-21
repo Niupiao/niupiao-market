@@ -10,8 +10,6 @@ class Item < ActiveRecord::Base
   serialize :tags, Array
     
   validates_presence_of :name
-  validates :item_type, inclusion: { in: VALID_ITEM_TYPES,
-                                     message: "%{value} is not a valid type" }
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   
