@@ -29,19 +29,19 @@ class Item < ActiveRecord::Base
   end
   
   def categorize(table_name)
-    makeup = %w(FaceMakeup EyeMakeup Lips ToolsAndBags)
-    skincare = %w(Cleanse Moisturize Treatments)
+    makeup = %w(FaceMakeup EyeMakeup Lip ToolsAndBag)
+    skincare = %w(Cleanse Moisturize Treatment)
     fragrance = %w(Women Men)
-    bathbody = %w(LotionsAndCreams ShowerAndBath Suncare)
-    nails = %w(NailPolish KitsSets SpecialEffects TreatmentsAndTools)
-    hair = %w(StylingProductsAndTools ShampooAndConditioner Accessories)
-    babytoddlerclothing = %w(BoysClothing GirlsClothing Accessories UnderwearAndSocks)
-    feeding = %w(Beverages Food BabyFormula FeedingAccessories BoosterSeats)
-    diapering = %w(DiaperAccessories Diapers)
-    beddingdecor = %w(LampAndNightLights BeddingSeparates BeddingSet WallDecorations)
-    seating = %w(BoosterCarSeats CarSeatAccessories TravelSets Strollers BoosterFeedingSeats PottySeatsAndStepStools)
-    activitiesandtoys = %w(Bikes SleepingToys GymsAndPlaymats LearningToys Toys)
-    healthandsafety = %w(Gates BabyMonitors BabyProofingItems GroomingHealthcareAndSkincareEssentials)
+    bathbody = %w(LotionsAndCream ShowerAndBath Suncare)
+    nails = %w(NailPolish KitsSet SpecialEffect TreatmentsAndTool)
+    hair = %w(StylingProductsAndTool ShampooAndConditioner)
+    babytoddlerclothing = %w(BoysClothing GirlsClothing Accessory UnderwearAndSock)
+    feeding = %w(Beverage Food BabyFormula FeedingAccessories BoosterSeat)
+    diapering = %w(DiaperAccessories Diaper)
+    beddingdecor = %w(LampAndNightLight BeddingSeparate BeddingSet WallDecoration)
+    seating = %w(BoosterCarSeat CarSeatAccessories TravelSet Stroller BoosterFeedingSeat PottySeatsAndStepStool)
+    activitiesandtoys = %w(Bike SleepingToy GymsAndPlaymat LearningToy Toy)
+    healthandsafety = %w(Gate BabyMonitor BabyProofingItem GroomingHealthcareAndSkincareEssential)
     
     if makeup.include? table_name
       self.category_id = 1
