@@ -258,7 +258,6 @@ class MobileController < ApplicationController
   def sell
     if authenticate
       name = params[:name]
-      tags = params[:tags]
       tags ||= []
       price = params[:price]
       quantity = params[:quantity]
@@ -415,7 +414,7 @@ class MobileController < ApplicationController
         tmp = GroomingHealthcareAndSkincareEssential.create()
         tmp.item = item
       end
-      success_message(item.to_json)
+      render :json => item.to_json(:include => :subitem)
     else
       error_message("Wrong account credentials")
     end
