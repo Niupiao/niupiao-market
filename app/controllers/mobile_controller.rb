@@ -259,9 +259,11 @@ class MobileController < ApplicationController
     if authenticate
       name = params[:name]
       tags = params[:tags]
+      tags ||= ''
       price = params[:price]
       quantity = params[:quantity]
       desc = params[:desc]
+      desc ||= ''
       subcategory = params[:subcategory]
       item = Item.create(name: name, tags: tags, price: price, quantity: quantity,
                       desc: desc)
