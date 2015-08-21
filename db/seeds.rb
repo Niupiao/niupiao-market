@@ -29,7 +29,6 @@ Driver.create(name: 'Foo Bar', phone: '1234567890', bank_info: '0987654321', key
 Supercategory.create!(name: "Beauty") # 1
 Supercategory.create!(name: "Baby") # 2
 
-
 Category.create!(name: "Makeup") # 1
 Category.create!(name: "SkinCare") # 2
 Category.create!(name: "Fragrance") # 3 

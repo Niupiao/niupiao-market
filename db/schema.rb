@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806202855) do
+ActiveRecord::Schema.define(version: 20150821025954) do
 
   create_table "addresses", force: :cascade do |t|
     t.integer  "user_id"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(version: 20150806202855) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "eye_makeups", force: :cascade do |t|
+    t.text     "color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "face_makeups", force: :cascade do |t|
+    t.text     "color"
+    t.integer  "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "items", force: :cascade do |t|
     t.integer "user_id"
     t.text    "name"
@@ -58,8 +71,15 @@ ActiveRecord::Schema.define(version: 20150806202855) do
     t.float   "price"
     t.integer "quantity"
     t.text    "desc"
+    t.integer "supercategory_id"
+    t.integer "category_id"
     t.integer "subitem_id"
     t.text    "subitem_type"
+  end
+
+  create_table "lips", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payment_methods", force: :cascade do |t|
@@ -119,6 +139,12 @@ ActiveRecord::Schema.define(version: 20150806202855) do
     t.text     "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "supercategories", force: :cascade do |t|
+    t.text     "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
