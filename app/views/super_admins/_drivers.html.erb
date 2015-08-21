@@ -1,0 +1,54 @@
+<% if @results.count > 0 %>
+    <table WIDTH="99%" BORDER="2" ALIGN="CENTER" CELLSPACING="40">
+        <tr ALIGN="Center">
+            <td></td>
+            <td>ID</td>
+            <td>Key</td>
+            <td>Name</td>
+            <td>Phone</td>
+            <td>License</td>
+            <td>Bank Info</td>
+            <td>Amount Owed</td>
+            <td>Send Invoice</td>
+        </tr>
+        <% @results.each do |driver| %>
+            <tr>
+              <%= form_tag("admin/driver/update?driver=#{driver.id}", :method => "post", class: "navbar-form center") do %>
+                <td></td>
+                <td>
+                  <%= driver.id %>
+                </td>
+                <td>
+                  <%= text_field_tag "key", params[:key], class: "span2 center", value: driver.key %>
+                </td>
+                <td>
+                  <%= text_field_tag "name", params[:name], class: "span2 center", value: driver.name %>
+                </td>
+                <td>
+                  <%= text_field_tag "phone", params[:phone], class: "span2 center", value: driver.phone %>
+                </td>
+                <td>
+                  <%= text_field_tag "license", params[:license], class: "span2 center", value: driver.license %>
+                </td>
+                <td>
+                  <%= text_field_tag "bank_info", params[:bank_info], class: "span2 center", value: driver.bank_info %>
+                </td>
+                <td>
+                  <%= text_field_tag "amount_owed", params[:amount_owed], class: "span2 center", value: driver.amount_owed %>
+                </td>
+                <td>
+                  <button class="btn" type="submit">Update</button>
+                  <% end %>
+                </td>
+                <td>
+                  <%= form_tag("admin/driver/invoice?driver=#{driver.id}", :method => "post", class: "navbar-form center") do %>
+                  <%= text_field_tag :amount, params[:amount], class: "span2 center", placeholder: "Amount"%>
+                  <button class="btn" type="submit">Send</button>
+                  <% end %>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+<% else %>
+    <h3>No results found</h3>
+<% end %>

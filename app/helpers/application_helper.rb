@@ -17,5 +17,4 @@ module ApplicationHelper
   def user_exists?(user_id)
     !User.find_by?(id: user_id).nil?
   end
-
 end

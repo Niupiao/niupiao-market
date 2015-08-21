@@ -4,6 +4,15 @@ Rails.application.routes.draw do
   #    Mongolian versions.
   
   root 'static_pages#home'
+  
+  # SuperAdmin routes
+  get 'crunch' => 'super_admins#crunch'  # Fairly dangerous data crunching at its finest.
+  post 'admin/driver/update' => 'super_admins#update_driver'
+  post 'admin/driver/invoice' => 'super_admins#pay_driver'
+  get 'admin' => 'super_admins#admin'
+  post 'admin' => 'sessions#admin'
+  get 'admin/status' => 'super_admins#update_status'
+  post 'admin/update' => 'super_admins#update_receipt'
 
   get 'about' => 'static_pages#about'
 
@@ -40,10 +49,45 @@ Rails.application.routes.draw do
   patch 'delivery/status' => 'deliveries#update_status'
   get 'delivery/claimed' => 'deliveries#claimed_deliveries'
   
+  get 'driver/create' => 'drivers#create'
+  get 'driver/edit' => 'drivers#edit'
+  get 'driver/owed' => 'drivers#update_owed'
+  get 'driver/delete' => 'drivers#delete'
+  
   post 'items_review' => 'items#review'
   post 'users_review' => 'users#review'
   
   get 'auth/:provider/callback' => 'sessions#create'
   get 'auth/failure' => '/'
   get 'signout' => 'sessions#destroy'
+  
+  # mobile routes
+  get 'mobile/register' => 'mobile#register'
+  get 'mobile/login' => 'mobile#login'
+  get 'mobile/sell' => 'mobile#sell'
+  get 'mobile/items' => 'mobile#items'
+  get 'mobile/item' => 'mobile#item'
+  get 'mobile/user' => 'mobile#user'
+  
+  # Update routes
+  get 'mobile/updatefacebookid' => 'mobile#update_facebook_id'
+  get 'mobile/updateuser' => 'mobile#update_user'
+  get 'mobile/updatephone' => 'mobile#update_phone'
+  get 'mobile/renewtoken' => 'mobile#renew_token'
+  
+  # Email routes
+  get 'mobile/isemailconfirmed' => 'mobile#email_confirmed?'
+  get 'mobile/confirmemail' => 'mobile#email_confirm'
+  
+  # payment methods
+  get 'mobile/addpayment' => 'mobile#add_payment_method'
+  get 'mobile/updatepayment' => 'mobile#update_payment_method'
+  get 'mobile/getpaymentmethods' => 'mobile#get_payment_methods'
+  get 'mobile/deletepayment' => 'mobile#remove_payment_method'
+  
+  get 'mobile/selfreviews' => 'mobile#self_reviews'
+  get 'mobile/updateaddress' => 'mobile#update_address'
+  get 'mobile/receipts' => 'mobile#receipts'
+  get 'mobile/salereceipts' => 'mobile#sale_receipts'
+  get 'mobile/purchasereceipts' => 'mobile#purchase_receipts'
 end

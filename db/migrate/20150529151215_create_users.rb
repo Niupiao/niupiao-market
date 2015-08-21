@@ -5,14 +5,18 @@ class CreateUsers < ActiveRecord::Migration
       t.text :last_name
       t.text :email, unique: true
       t.text :password_digest
-      t.text :address
       t.text :cart
       t.string :phone
+      
+      t.integer :address_id
       
       t.text :provider
       t.text :uid, unique: true
       t.text :oauth_token
       t.text :oauth_expires_at
+      t.text :facebook_id
+      
+      t.integer :email_confirmed
       
       t.timestamps
     end
