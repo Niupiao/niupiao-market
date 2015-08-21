@@ -254,6 +254,9 @@ class MobileController < ApplicationController
     end
   end
   
+  def sell
+  end
+  
   # Returns a list of items, including sub details.
   def items
     params[:page_size] = 50
