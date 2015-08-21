@@ -259,7 +259,7 @@ class MobileController < ApplicationController
     if authenticate
       name = params[:name]
       tags = params[:tags]
-      tags ||= ''
+      tags ||= []
       price = params[:price]
       quantity = params[:quantity]
       desc = params[:desc]
